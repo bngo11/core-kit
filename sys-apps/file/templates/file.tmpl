@@ -36,16 +36,6 @@ src_prepare() {
 		sed -i -e "/ALLOW_RULE(writev)/s@\$@\n\tALLOW_RULE(getcwd);\t// Used by Gentoo's portage sandbox@" \
 			src/seccomp.c || die
 	fi
-	# Bug 784857
-	if ! $(grep fstatat64 src/seccomp.c) ; then
-		sed -i -e "/ALLOW_RULE(fstat64)/s@\$@\n#ifdef __NR_fstatat64\n\tALLOW_RULE(fstatat64);\n#endif@" \
-			src/seccomp.c || die
-	fi
-	# ARM64 new emulated access() syscall
-	if ! $(grep faccessat src/seccomp.c) ; then
-		sed -i -e "/ALLOW_RULE(exit_group)/s@\$@\n#ifdef __NR_faccessat\n\tALLOW_RULE(faccessat);\n#endif@" \
-			src/seccomp.c || die
-	fi
 	default
 	elibtoolize
 
@@ -129,7 +119,7 @@ multilib_src_install() {
 }
 
 multilib_src_install_all() {
-	dodoc ChangeLog MAINT README
+	dodoc ChangeLog MAINT README*
 
 	# Required for `file -C`
 	insinto /usr/share/misc/magic
