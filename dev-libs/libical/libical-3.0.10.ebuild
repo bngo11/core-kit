@@ -12,7 +12,7 @@ SRC_URI="https://github.com/${PN}/${PN}/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="|| ( MPL-2.0 LGPL-2.1 )"
 SLOT="0/3"
-KEYWORDS="*"
+KEYWORDS="next"
 IUSE="berkdb doc examples +introspection static-libs test +vala"
 REQUIRED_USE="vala? ( introspection )"
 
@@ -39,6 +39,11 @@ RDEPEND="${COMMON_DEPEND}
 DOCS=(
 	AUTHORS ReadMe.txt ReleaseNotes.txt TEST THANKS TODO
 	doc/{AddingOrModifyingComponents,UsingLibical}.txt
+)
+
+PATCHES=(
+	"${FILESDIR}/${PN}-3.0.4-tests.patch"
+	"${FILESDIR}/${PN}-3.0.5-pkgconfig-libdir.patch"
 )
 
 pkg_setup() {
