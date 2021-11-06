@@ -1,28 +1,25 @@
-# Copyright 2005-2021 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=6
 
 MY_PV=${PV/_/-}
 MY_P=${PN}-${MY_PV}
-inherit autotools flag-o-matic libtool multilib-minimal
+inherit autotools eutils libtool multilib-minimal
 
 DESCRIPTION="Portable and efficient API to determine the call-chain of a program"
 HOMEPAGE="https://savannah.nongnu.org/projects/libunwind"
 SRC_URI="mirror://nongnu/libunwind/${MY_P}.tar.gz"
 
 LICENSE="MIT"
-SLOT="0/8" # libunwind.so.8
-KEYWORDS="amd64 arm arm64 hppa ~ia64 ~mips ppc ppc64 -riscv -sparc x86 ~amd64-linux ~x86-linux"
-IUSE="debug debug-frame doc libatomic lzma static-libs zlib"
+SLOT="7"
+KEYWORDS="*"
+IUSE="debug debug-frame doc libatomic lzma +static-libs"
 
-RESTRICT="test" # some tests are broken (toolchain version dependent, rely on external binaries)
+RESTRICT="test" # half of tests are broken (toolchain version dependent)
 
 # We just use the header from libatomic.
-RDEPEND="
-	lzma? ( app-arch/xz-utils[static-libs?,${MULTILIB_USEDEP}] )
-	zlib? ( sys-libs/zlib[static-libs?,${MULTILIB_USEDEP}] )
-"
+RDEPEND="lzma? ( app-arch/xz-utils[${MULTILIB_USEDEP}] )"
 DEPEND="${RDEPEND}
 	libatomic? ( dev-libs/libatomic_ops[${MULTILIB_USEDEP}] )"
 
@@ -47,25 +44,24 @@ MULTILIB_WRAPPED_HEADERS=(
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.2-coredump-regs.patch #586092
+	"${FILESDIR}"/${PN}-1.2-ia64-undwarf.patch
 	"${FILESDIR}"/${PN}-1.2-ia64-ptrace-coredump.patch
 	"${FILESDIR}"/${PN}-1.2-ia64-missing.patch
-	# needs refresh:
-	#"${FILESDIR}"/${PN}-1.2.1-only-include-execinfo_h-if-avaliable.patch
+	"${FILESDIR}"/${PN}-1.2.1-fix_version_macros.patch
+	"${FILESDIR}"/${PN}-1.2.1-only-include-execinfo_h-if-avaliable.patch
+	"${FILESDIR}"/${PN}-1.2.1-no-PROTECTED.patch #659732
+	"${FILESDIR}"/${PN}-1.2.1-arm-__asm__.patch #635674
 )
 
 src_prepare() {
 	default
 	chmod +x src/ia64/mk_cursor_i || die
 	# Since we have tests disabled via RESTRICT, disable building in the subdir
-	# entirely.  This works around some build errors too. #484846
+	# entirely.  This worksaround some build errors too. #484846
 	sed -i -e '/^SUBDIRS/s:tests::' Makefile.in || die
 
 	elibtoolize
 	eautoreconf
-
-	# Let's wait for proper fix upstream in https://github.com/libunwind/libunwind/issues/154
-	# Meanwhile workaround for gcc-10 with -fcommon, bug #706560
-	append-cflags -fcommon
 }
 
 multilib_src_configure() {
@@ -86,7 +82,6 @@ multilib_src_configure() {
 		$(use_enable doc documentation) \
 		$(use_enable lzma minidebuginfo) \
 		$(use_enable static-libs static) \
-		$(use_enable zlib zlibdebuginfo) \
 		$(use_enable debug conservative_checks) \
 		$(use_enable debug)
 }
@@ -102,6 +97,9 @@ multilib_src_test() {
 	SANDBOX_ON=0 emake check
 }
 
-multilib_src_install_all() {
-	find "${D}" -name "*.la" -type f -delete || die
+multilib_src_install() {
+	default
+	# libunwind-ptrace.a (and libunwind-ptrace.h) is separate API and without
+	# shared library, so we keep it in any case
+	use static-libs || find "${ED}"usr '(' -name 'libunwind-generic.a' -o -name 'libunwind*.la' ')' -delete
 }
