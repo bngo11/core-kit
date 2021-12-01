@@ -11,10 +11,11 @@ SRC_URI="https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-5.14.0.
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="*"
-IUSE="icu libedit nls"
+IUSE="icu libedit nls selinux"
 
 RDEPEND=">=sys-apps/util-linux-2.17.2
 	dev-libs/inih
+	dev-libs/userspace-rcu
 	icu? ( dev-libs/icu:= )
 	libedit? ( dev-libs/libedit )
 "
@@ -22,6 +23,7 @@ DEPEND="${RDEPEND}"
 BDEPEND="
 	nls? ( sys-devel/gettext )
 "
+RDEPEND+=" selinux? ( sec-policy/selinux-xfs )"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-4.15.0-docdir.patch
