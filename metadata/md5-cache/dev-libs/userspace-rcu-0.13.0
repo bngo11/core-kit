@@ -1,0 +1,12 @@
+DEFINED_PHASES=configure install test
+DEPEND=test? ( sys-process/time )
+DESCRIPTION=userspace RCU (read-copy-update) library
+EAPI=7
+HOMEPAGE=https://liburcu.org/
+IUSE=static-libs regression-test test
+KEYWORDS=*
+LICENSE=LGPL-2.1
+RESTRICT=!test? ( test )
+SLOT=0/8
+SRC_URI=https://lttng.org/files/urcu/userspace-rcu-0.13.0.tar.bz2
+_md5_=19d4bc301b9248789218439d04faa96c
