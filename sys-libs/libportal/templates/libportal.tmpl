@@ -14,7 +14,11 @@ IUSE="gtk4 qt5"
 
 KEYWORDS="*"
 
-RDEPEND="dev-libs/glib:2"
+RDEPEND="
+	dev-libs/glib:2
+	gtk4? ( >=x11-libs/gtk-4.0 )
+	qt5? ( >=dev-qt/qtcore-5.15 )
+"
 
 DEPEND="${RDEPEND}
 	dev-util/gtk-doc"
