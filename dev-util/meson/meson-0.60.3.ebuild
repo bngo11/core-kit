@@ -4,7 +4,7 @@ EAPI=7
 PYTHON_COMPAT=( python3+ )
 DISTUTILS_USE_SETUPTOOLS="rdepend"
 
-SRC_URI="https://github.com/mesonbuild/meson/releases/download/0.61.0/meson-0.61.0.tar.gz -> meson-0.61.0.tar.gz"
+SRC_URI="https://github.com/mesonbuild/meson/releases/download/0.60.3/meson-0.60.3.tar.gz -> meson-0.60.3.tar.gz"
 KEYWORDS="*"
 
 inherit distutils-r1 toolchain-funcs

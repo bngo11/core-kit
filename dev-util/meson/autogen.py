@@ -13,6 +13,8 @@ async def generate(hub, **pkginfo):
 				continue
 
 			version = item["tag_name"]
+			if int(version.split(".")[1]) % 2:
+				continue
 
 			for asset in item['assets']:
 				asset_name = asset["name"]
