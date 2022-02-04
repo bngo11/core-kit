@@ -9,4 +9,5 @@ LICENSE=GPL-2
 RDEPEND=>=net-dns/avahi-0.6.31-r2[-mgorny(-)]
 SLOT=0
 SRC_URI=https://github.com/lathiat/nss-mdns/releases/download/v0.13/nss-mdns-0.13.tar.gz
+_eclasses_=multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=19f6ea41c36e0ac9f5458e651e9701a9
