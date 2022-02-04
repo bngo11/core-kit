@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile install postinst pretend setup unpack
+DESCRIPTION=Secure and fast microVMs for serverless computing (static build)
+EAPI=7
+HOMEPAGE=https://firecracker-microvm.github.io https://github.com/firecracker-microvm/firecracker
+IUSE=kernel_linux
+KEYWORDS=~amd64 ~aarch64
+LICENSE=|| ( Apache-2.0 BSD-3 )
+RDEPEND=!app-emulation/firecracker
+RESTRICT=test strip
+SLOT=0
+SRC_URI=amd64? ( https://github.com/firecracker-microvm/firecracker/releases/download/v1.0.0/firecracker-v1.0.0-x86_64.tgz.sha256.txt ) arm64? ( https://github.com/firecracker-microvm/firecracker/releases/download/v1.0.0/firecracker-v1.0.0-aarch64.tgz.sha256.txt )
+_md5_=c4b706eade27e12210000cccd08b2c9e
