@@ -18,8 +18,6 @@ async def generate(hub, **pkginfo):
 		url = tag["tarball_url"]
 		break
 	final_name = f'{pkginfo["name"]}-{version}.tar.gz'
-	print(version)
-	print(final_name)
 
 	ebuild = hub.pkgtools.ebuild.BreezyBuild(
 		**pkginfo,
