@@ -1,16 +1,15 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 DESCRIPTION="exFAT filesystem utilities"
 HOMEPAGE="https://github.com/relan/exfat"
-SRC_URI="https://github.com/relan/exfat/releases/download/v${PV}/${P}.tar.gz"
+SRC_URI="https://github.com/relan/exfat/releases/download/v1.3.0/exfat-utils-1.3.0.tar.gz -> exfat-utils-1.3.0.tar.gz"
 
 # COPYING is GPL-2 but ChangeLog says "Relicensed the project from GPLv3+ to GPLv2+"
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~x86-linux"
+KEYWORDS="*"
 
 src_install() {
 	default
