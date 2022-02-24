@@ -9,5 +9,5 @@ KEYWORDS=*
 LICENSE=GPL-2+
 RDEPEND=sys-fs/fuse
 SLOT=0
-SRC_URI=https://github.com/relan/exfat/releases/download/v1.3.0/exfat-utils-1.3.0.tar.gz -> fuse-exfat-1.3.0.tar.gz
-_md5_=370504af98123931ca33c83c9d705926
+SRC_URI=https://github.com/relan/exfat/releases/download/v1.3.0/fuse-exfat-1.3.0.tar.gz -> fuse-exfat-1.3.0.tar.gz
+_md5_=37c1477c141b9ff3f58fc560815d77a7
