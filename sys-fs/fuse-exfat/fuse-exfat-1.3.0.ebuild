@@ -12,7 +12,7 @@ SLOT="0"
 KEYWORDS="*"
 IUSE="suid"
 
-RDEPEND="sys-fs/fuse"
+RDEPEND="sys-fs/fuse:0"
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
