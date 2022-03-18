@@ -8,7 +8,7 @@ inherit bash-completion-r1 cmake-utils elisp-common flag-o-matic multiprocessing
 
 DESCRIPTION="Cross platform Make"
 HOMEPAGE="https://cmake.org/"
-SRC_URI="https://api.github.com/repos/Kitware/CMake/tarball/v3.19.7 -> cmake-3.19.7.tar.gz"
+SRC_URI="https://github.com/Kitware/CMake/releases/download/v3.22.3/cmake-3.22.3.tar.gz -> cmake-3.22.3.tar.gz"
 
 LICENSE="CMake"
 SLOT="0"
@@ -121,7 +121,7 @@ cmake_src_test() {
 
 src_unpack() {
 	unpack ${A}
-	mv "${WORKDIR}"/Kitware-CMake-* "${S}" || die
+	mv "${WORKDIR}"/--* "${S}" || die
 }
 
 src_prepare() {
