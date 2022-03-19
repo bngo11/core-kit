@@ -52,7 +52,8 @@ PATCHES=(
 
 	# handle gentoo packaging in find modules
 	"${FILESDIR}"/${PN}-3.17.0_rc1-FindBLAS.patch
-	"${FILESDIR}"/${PN}-3.19.0-FindLAPACK.patch
+	# Next patch needs to be reworked
+	# "${FILESDIR}"/${PN}-3.19.0-FindLAPACK.patch
 	"${FILESDIR}"/${PN}-3.5.2-FindQt4.patch
 
 	# respect python eclasses
@@ -117,11 +118,6 @@ cmake_src_test() {
 		|| die "Tests failed"
 
 	popd > /dev/null
-}
-
-src_unpack() {
-	unpack ${A}
-	mv "${WORKDIR}"/{{github_user}}-{{github_repo}}-* "${S}" || die
 }
 
 src_prepare() {
