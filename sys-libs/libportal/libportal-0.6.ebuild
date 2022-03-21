@@ -6,7 +6,7 @@ inherit meson vala
 
 DESCRIPTION="Flatpak portal library"
 HOMEPAGE="https://github.com/flatpak/libportal"
-SRC_URI="https://github.com/flatpak/libportal/releases/download/0.5/libportal-0.5.tar.xz -> libportal-0.5.tar.xz"
+SRC_URI="https://github.com/flatpak/libportal/releases/download/0.6/libportal-0.6.tar.xz -> libportal-0.6.tar.xz"
 
 LICENSE="LGPL-2"
 SLOT="0"
