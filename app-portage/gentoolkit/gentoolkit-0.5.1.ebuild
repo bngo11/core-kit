@@ -3,20 +3,19 @@
 EAPI=7
 
 DISTUTILS_USE_SETUPTOOLS=no
-PYTHON_COMPAT=( python3+ )
+PYTHON_COMPAT=( python3+ pypy3 )
 PYTHON_REQ_USE="xml(+),threads(+)"
 
-inherit distutils-r1
+inherit distutils-r1 tmpfiles
+
+SRC_URI="https://gitweb.gentoo.org/proj/gentoolkit.git/snapshot/${P}.tar.gz"
+KEYWORDS="*"
 
 DESCRIPTION="Collection of administration scripts for Gentoo"
 HOMEPAGE="https://wiki.gentoo.org/wiki/Project:Portage-Tools"
-SRC_URI="https://gitweb.gentoo.org/proj/gentoolkit.git/snapshot/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE=""
-
-KEYWORDS="*"
 
 DEPEND="
 	sys-apps/portage[${PYTHON_USEDEP}]"
@@ -40,24 +39,8 @@ python_prepare_all() {
 	fi
 }
 
-pkg_preinst() {
-	if has_version "<${CATEGORY}/${PN}-0.4.0"; then
-		SHOW_GENTOOKIT_DEV_DEPRECATED_MSG=1
-	fi
-}
-
 pkg_postinst() {
-	# Create cache directory for revdep-rebuild
-	mkdir -p -m 0755 "${EROOT}"/var/cache
-	mkdir -p -m 0700 "${EROOT}"/var/cache/revdep-rebuild
-
-	if [[ ${SHOW_GENTOOKIT_DEV_DEPRECATED_MSG} ]]; then
-		elog "Starting with version 0.4.0, ebump, ekeyword and imlate are now"
-		elog "part of the gentoolkit package."
-		elog "The gentoolkit-dev package is now deprecated in favor of a single"
-		elog "gentoolkit package.   The remaining tools from gentoolkit-dev"
-		elog "are now obsolete/unused with the git based tree."
-	fi
+	tmpfiles_process revdep-rebuild.conf
 
 	# Only show the elog information on a new install
 	if [[ ! ${REPLACING_VERSIONS} ]]; then
