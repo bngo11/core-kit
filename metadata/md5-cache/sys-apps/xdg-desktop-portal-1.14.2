@@ -1,0 +1,14 @@
+BDEPEND=dev-util/gdbus-codegen sys-devel/gettext virtual/pkgconfig virtual/pkgconfig
+DEFINED_PHASES=configure
+DEPEND=>=dev-libs/glib-2.66:2[dbus] dev-libs/json-glib >=sys-fs/fuse-3.10.0:3 x11-libs/gdk-pixbuf geolocation? ( >=app-misc/geoclue-2.5.3:2.0 ) screencast? ( >=media-video/pipewire-0.3:= )
+DESCRIPTION=Desktop integration portal
+EAPI=7
+HOMEPAGE=https://flatpak.org/ https://github.com/flatpak/xdg-desktop-portal
+IUSE=geolocation screencast systemd
+KEYWORDS=*
+LICENSE=LGPL-2.1
+RDEPEND=>=dev-libs/glib-2.66:2[dbus] dev-libs/json-glib >=sys-fs/fuse-3.10.0:3 x11-libs/gdk-pixbuf geolocation? ( >=app-misc/geoclue-2.5.3:2.0 ) screencast? ( >=media-video/pipewire-0.3:= ) sys-apps/dbus
+SLOT=0
+SRC_URI=https://github.com/flatpak/xdg-desktop-portal/releases/download/1.14.2/xdg-desktop-portal-1.14.2.tar.xz
+_eclasses_=multilib	d410501a125f99ffb560b0c523cd3d1e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=f756defeb302da6ab3571631a3bacb9c
