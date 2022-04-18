@@ -6,14 +6,13 @@ PYTHON_COMPAT=( python3+ )
 
 inherit autotools bash-completion-r1 multilib python-r1
 
-SRC_URI="https://www.kernel.org/pub/linux/utils/kernel/kmod/${P}.tar.xz"
-KEYWORDS="*"
-
 DESCRIPTION="library and tools for managing linux kernel modules"
 HOMEPAGE="https://git.kernel.org/?p=utils/kernel/kmod/kmod.git"
+SRC_URI="https://www.kernel.org/pub/linux/utils/kernel/kmod/${P}.tar.xz"
 
 LICENSE="LGPL-2"
 SLOT="0"
+KEYWORDS="*"
 IUSE="debug doc +lzma pkcs7 python static-libs +tools +zlib zstd"
 
 # Upstream does not support running the test suite with custom configure flags.
