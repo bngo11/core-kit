@@ -163,8 +163,8 @@ src_prepare() {
 	setno_config .config CONFIG_DEBUG
 
 	if use asus; then
-		setyes_config .config CONFIG_SENSORS_ASUS_WMI
-		setyes_config .config CONFIG_SENSORS_ASUS_WMI_EC
+		tweak_config .config CONFIG_SENSORS_ASUS_WMI m
+		tweak_config .config CONFIG_SENSORS_ASUS_WMI_EC m
 	fi
 
 	if use ec2; then
