@@ -1,42 +1,105 @@
-=app-admin/supervisor-3.1.4 python_single_target_python2_7
-=app-admin/supervisor-3.3.5 python_single_target_python2_7
-=app-admin/syslog-ng-3.13.2 python_single_target_python2_7
-=app-admin/syslog-ng-3.7.3 python_single_target_python2_7
-=app-portage/elogv-0.7.6.1-r1 python_single_target_python2_7
-=app-portage/elogv-0.7.6.2 python_single_target_python2_7
-=app-portage/elogv-0.7.6.3 python_single_target_python2_7
-=app-portage/elogv-0.7.6.4 python_single_target_python2_7
-=app-portage/elogv-0.7.6.5 python_single_target_python2_7
-=app-portage/elogv-0.7.6.6 python_single_target_python2_7
-=net-wireless/crda-3.18-r3 python_single_target_python2_7
-=sys-fs/udiskie-1.1.1 python_single_target_python2_7
-=sys-libs/openipmi-2.0.22 python_single_target_python2_7
-=sys-libs/openipmi-2.0.26 python_single_target_python2_7
-=sys-libs/openipmi-2.0.27 python_single_target_python2_7
-app-admin/packagekit-base python_single_target_python2_7
-app-emulation/xen-tools python_single_target_python2_7
-app-misc/byobu python_single_target_python2_7
-app-portage/cpuid2cpuflags python_single_target_python2_7
-sys-apps/etckeeper python_single_target_python2_7
-sys-apps/pacman python_single_target_python2_7
-sys-boot/udk python_single_target_python2_7
-sys-devel/automake python_single_target_python2_7
-sys-fs/ecryptfs-utils python_single_target_python2_7
-sys-fs/owfs python_single_target_python2_7
-sys-fs/pysize python_single_target_python2_7
-sys-fs/pytagsfs python_single_target_python2_7
-sys-fs/rarfs python_single_target_python2_7
-sys-fs/traydevice python_single_target_python2_7
-sys-kernel/aufs-sources python_single_target_python2_7
-sys-kernel/ck-sources python_single_target_python2_7
-sys-kernel/gentoo-sources python_single_target_python2_7
-sys-kernel/git-sources python_single_target_python2_7
-sys-kernel/linux-headers python_single_target_python2_7
-sys-kernel/mips-sources python_single_target_python2_7
-sys-kernel/pf-sources python_single_target_python2_7
-sys-kernel/raspberrypi-sources python_single_target_python2_7
-sys-kernel/rt-sources python_single_target_python2_7
-sys-kernel/vanilla-sources python_single_target_python2_7
-sys-kernel/xbox-sources python_single_target_python2_7
-sys-kernel/zen-sources python_single_target_python2_7
-sys-libs/libieee1284 python_single_target_python2_7
+=app-admin/supervisor-3.1.4 python_single_target_python2_7 python_targets_python2_7
+=app-admin/supervisor-3.3.5 python_single_target_python2_7 python_targets_python2_7
+=app-admin/syslog-ng-3.13.2 python_single_target_python2_7 python_targets_python2_7
+=app-admin/syslog-ng-3.7.3 python_single_target_python2_7 python_targets_python2_7
+=app-portage/elogv-0.7.6.1-r1 python_single_target_python2_7 python_targets_python2_7
+=app-portage/elogv-0.7.6.2 python_single_target_python2_7 python_targets_python2_7
+=app-portage/elogv-0.7.6.3 python_single_target_python2_7 python_targets_python2_7
+=app-portage/elogv-0.7.6.4 python_single_target_python2_7 python_targets_python2_7
+=app-portage/elogv-0.7.6.5 python_single_target_python2_7 python_targets_python2_7
+=app-portage/elogv-0.7.6.6 python_single_target_python2_7 python_targets_python2_7
+=net-wireless/crda-3.18-r3 python_single_target_python2_7 python_targets_python2_7
+=net-wireless/crda-4.14 python_single_target_python3_7
+=sys-fs/udiskie-1.1.1 python_single_target_python2_7 python_targets_python2_7
+=sys-libs/openipmi-2.0.22 python_single_target_python2_7 python_targets_python2_7
+=sys-libs/openipmi-2.0.26 python_single_target_python2_7 python_targets_python2_7
+=sys-libs/openipmi-2.0.27 python_single_target_python2_7 python_targets_python2_7
+app-admin/ego python_single_target_python3_7
+app-admin/packagekit-base python_single_target_python2_7 python_targets_python2_7
+app-arch/p7zip python_single_target_python3_7
+app-arch/rpm python_single_target_python3_7
+app-doc/doxygen python_single_target_python3_7
+app-emulation/docker-compose python_single_target_python3_7
+app-emulation/libvirt python_single_target_python3_7
+app-emulation/qemu python_single_target_python3_7
+app-emulation/virt-manager python_single_target_python3_7
+app-emulation/virtualbox-bin python_single_target_python3_7
+app-emulation/xen-tools python_single_target_python2_7 python_targets_python2_7
+app-eselect/eselect-repository python_single_target_python3_7
+app-misc/byobu python_single_target_python2_7 python_targets_python2_7
+app-misc/pax-utils python_single_target_python3_7
+app-portage/cpuid2cpuflags python_single_target_pypy python_targets_pypy
+app-portage/flaggie python_single_target_python3_7
+app-portage/gentoolkit python_single_target_python3_7
+app-portage/layman python_single_target_python3_7
+app-portage/pfl python_single_target_python3_7
+dev-libs/boost python_single_target_python3_7
+dev-libs/icu python_single_target_python3_7
+dev-libs/jsoncpp python_single_target_python3_7
+dev-libs/libical python_single_target_python3_7
+dev-libs/libxml2 python_single_target_python3_7
+dev-python/appi python_single_target_python3_7
+dev-python/libvirt-python python_single_target_python3_7
+dev-python/pyalsa python_single_target_python3_7
+dev-python/subpop python_single_target_python3_7
+dev-util/meson python_single_target_python3_7
+dev-vcs/git python_single_target_python3_7
+media-libs/alsa-lib python_single_target_python3_7
+net-dns/avahi python_single_target_python3_7
+net-libs/libproxy python_single_target_python3_7
+net-misc/rsync python_single_target_python3_7
+net-misc/wget python_single_target_python3_7
+net-wireless/bluez python_single_target_python3_7
+sys-apps/coreutils python_single_target_python3_7
+sys-apps/dbus python_single_target_python3_7
+sys-apps/etckeeper python_single_target_python2_7 python_targets_python2_7
+sys-apps/fchroot python_single_target_python3_7
+sys-apps/file python_single_target_python3_7
+sys-apps/findutils python_single_target_python3_7
+sys-apps/flatpak python_single_target_python3_7
+sys-apps/hwids python_single_target_python3_7
+sys-apps/kmod python_single_target_python3_7
+sys-apps/metatools python_single_target_python3_7
+sys-apps/pacman python_single_target_python2_7 python_targets_python2_7
+sys-apps/portage python_single_target_python3_7
+sys-apps/systemd-tmpfiles python_single_target_python3_7
+sys-apps/usbutils python_single_target_python3_7
+sys-apps/util-linux python_single_target_python3_7
+sys-boot/grub python_single_target_python3_7
+sys-boot/udk python_single_target_python2_7 python_targets_python2_7
+sys-cluster/glusterfs python_single_target_python3_7
+sys-devel/automake python_single_target_python2_7 python_targets_python2_7
+sys-devel/distcc python_single_target_python3_7
+sys-devel/gdb python_single_target_python3_7
+sys-fs/btrfs-progs python_single_target_python3_7
+sys-fs/cryfs python_single_target_python3_7
+sys-fs/ecryptfs-utils python_single_target_python2_7 python_targets_python2_7
+sys-fs/fuse python_single_target_python3_7
+sys-fs/owfs python_single_target_python2_7 python_targets_python2_7
+sys-fs/pysize python_single_target_pypy python_targets_pypy
+sys-fs/pytagsfs python_single_target_python2_7 python_targets_python2_7
+sys-fs/rarfs python_single_target_python2_7 python_targets_python2_7
+sys-fs/traydevice python_single_target_python2_7 python_targets_python2_7
+sys-fs/zfs python_single_target_python3_7
+sys-kernel/aufs-sources python_single_target_python2_7 python_targets_python2_7
+sys-kernel/ck-sources python_single_target_python2_7 python_targets_python2_7
+sys-kernel/gentoo-sources python_single_target_python2_7 python_targets_python2_7
+sys-kernel/git-sources python_single_target_python2_7 python_targets_python2_7
+sys-kernel/linux-headers python_single_target_python2_7 python_targets_python2_7
+sys-kernel/mips-sources python_single_target_python2_7 python_targets_python2_7
+sys-kernel/pf-sources python_single_target_python2_7 python_targets_python2_7
+sys-kernel/raspberrypi-sources python_single_target_python2_7 python_targets_python2_7
+sys-kernel/rt-sources python_single_target_python2_7 python_targets_python2_7
+sys-kernel/vanilla-sources python_single_target_python2_7 python_targets_python2_7
+sys-kernel/xbox-sources python_single_target_python2_7 python_targets_python2_7
+sys-kernel/zen-sources python_single_target_python2_7 python_targets_python2_7
+sys-libs/cracklib python_single_target_python3_7
+sys-libs/glibc python_single_target_python3_7
+sys-libs/libblockdev python_single_target_python3_7
+sys-libs/libieee1284 python_single_target_python2_7 python_targets_python2_7
+sys-libs/libseccomp python_single_target_python3_7
+sys-libs/pam_wrapper python_single_target_python3_7
+sys-power/powerbus python_single_target_python3_7
+sys-process/criu python_single_target_python3_7
+sys-process/glances python_single_target_python3_7
+sys-process/htop python_single_target_python3_7
