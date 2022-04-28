@@ -1,0 +1,57 @@
+From 83efc6ce009021f27b602c1dfcf65338f761b095 Mon Sep 17 00:00:00 2001
+From: Sam James <sam@gentoo.org>
+Date: Tue, 28 Dec 2021 03:42:53 +0000
+Subject: [PATCH] Enable CET (-fcf-protection=full) by default
+
+Needs:
+- CET to be enabled for GCC
+- -DEXTRA_OPTIONS_CF to be passed during build (via toolchain.eclass).
+
+  Only supported on amd64.
+
+---
+ gcc/config/i386/i386-options.c |  3 +++
+ gcc/defaults.h                 | 13 +++++++++++++
+ 2 files changed, 16 insertions(+)
+
+diff --git a/gcc/config/i386/i386-options.c b/gcc/config/i386/i386-options.c
+index 19632b5..fac61af 100644
+--- a/gcc/config/i386/i386-options.c
++++ b/gcc/config/i386/i386-options.c
+@@ -3049,6 +3049,9 @@ ix86_option_override_internal (bool main_args_p,
+         = build_target_option_node (opts, opts_set);
+     }
+ 
++  if (TARGET_64BIT && TARGET_CMOV)
++    SET_OPTION_IF_UNSET (opts, opts_set, flag_cf_protection, DEFAULT_FLAG_CF);
++
+   if (opts->x_flag_cf_protection != CF_NONE)
+     {
+       if ((opts->x_flag_cf_protection & CF_BRANCH) == CF_BRANCH
+diff --git a/gcc/defaults.h b/gcc/defaults.h
+index 0f6cd78..5694412 100644
+--- a/gcc/defaults.h
++++ b/gcc/defaults.h
+@@ -1463,6 +1463,19 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
+ #define DEFAULT_FLAG_SCP 0
+ #endif
+ 
++/* Default value for flag_cf_protection when flag_cf_protection is
++   initialized to CF_FULL.
++
++   We use a new option (EXTRA_OPTIONS_CF) here to avoid turning
++   this on accidentally for other arches. */
++#ifdef EXTRA_OPTIONS_CF
++#define DEFAULT_FLAG_CF CF_FULL
++#endif
++#ifndef DEFAULT_FLAG_CF
++#define DEFAULT_FLAG_CF CF_NONE
++#endif
++
++
+ /* By default, the C++ compiler will use function addresses in the
+    vtable entries.  Setting this nonzero tells the compiler to use
+    function descriptors instead.  The value of this macro says how
+-- 
+2.34.1
+

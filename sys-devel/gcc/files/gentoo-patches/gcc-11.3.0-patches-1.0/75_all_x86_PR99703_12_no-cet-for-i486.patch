@@ -1,0 +1,389 @@
+https://bugs.gentoo.org/777117
+https://gcc.gnu.org/bugzilla/show_bug.cgi?id=99703
+
+From: "H.J. Lu" <hjl.tools@gmail.com>
+Date: Fri, 12 Feb 2021 16:30:23 -0800
+Subject: GCC_CET_HOST_FLAGS: Check if host supports multi-byte NOPs
+
+Backport of fd7eb4bc94cafa745eba75c64fa483a1689a5aad to GCC 11
+
+Sync with binutils for PR binutils/27397.  Check if host supports
+multi-byte NOPs before enabling CET on host.
+
+config/
+
+	PR bootstrap/99703
+	* cet.m4 (GCC_CET_HOST_FLAGS): Check if host supports multi-byte
+	NOPs.
+
+All applicable configure scripts have been regenerated. Patch hunks
+which only updated line numbers have been excluded to reduce conflicts.
+
+diff --git a/config/cet.m4 b/config/cet.m4
+index c67fb4f35b6..7718be1afe8 100644
+--- a/config/cet.m4
++++ b/config/cet.m4
+@@ -130,6 +130,18 @@ fi
+ if test x$may_have_cet = xyes; then
+   if test x$cross_compiling = xno; then
+     AC_TRY_RUN([
++int
++main ()
++{
++  asm ("endbr32");
++  return 0;
++}
++    ],
++    [have_multi_byte_nop=yes],
++    [have_multi_byte_nop=no])
++    have_cet=no
++    if test x$have_multi_byte_nop = xyes; then
++      AC_TRY_RUN([
+ static void
+ foo (void)
+ {
+@@ -155,9 +167,10 @@ main ()
+   bar ();
+   return 0;
+ }
+-    ],
+-    [have_cet=no],
+-    [have_cet=yes])
++      ],
++      [have_cet=no],
++      [have_cet=yes])
++    fi
+     if test x$enable_cet = xno -a x$have_cet = xyes; then
+       AC_MSG_ERROR([Intel CET must be enabled on Intel CET enabled host])
+     fi
+diff --git a/gcc/configure b/gcc/configure
+index 708328e1670..e6e4d9e270e 100755
+--- a/gcc/configure
++++ b/gcc/configure
+@@ -32416,6 +32416,34 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++int
++main ()
++{
++  asm ("endbr32");
++  return 0;
++}
++
++_ACEOF
++if ac_fn_cxx_try_run "$LINENO"; then :
++  have_multi_byte_nop=yes
++else
++  have_multi_byte_nop=no
++fi
++rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
++  conftest.$ac_objext conftest.beam conftest.$ac_ext
++fi
++
++    have_cet=no
++    if test x$have_multi_byte_nop = xyes; then
++      if test "$cross_compiling" = yes; then :
++  { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
++$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
++as_fn_error $? "cannot run test program while cross compiling
++See \`config.log' for more details" "$LINENO" 5; }
++else
++  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++
+ static void
+ foo (void)
+ {
+@@ -32452,6 +32480,7 @@ rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+   conftest.$ac_objext conftest.beam conftest.$ac_ext
+ fi
+ 
++    fi
+     if test x$enable_cet = xno -a x$have_cet = xyes; then
+       as_fn_error $? "Intel CET must be enabled on Intel CET enabled host" "$LINENO" 5
+     fi
+diff --git a/libbacktrace/configure b/libbacktrace/configure
+index 9b66bf5563a..a2f33c0f35d 100755
+--- a/libbacktrace/configure
++++ b/libbacktrace/configure
+@@ -12517,6 +12517,34 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++int
++main ()
++{
++  asm ("endbr32");
++  return 0;
++}
++
++_ACEOF
++if ac_fn_c_try_run "$LINENO"; then :
++  have_multi_byte_nop=yes
++else
++  have_multi_byte_nop=no
++fi
++rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
++  conftest.$ac_objext conftest.beam conftest.$ac_ext
++fi
++
++    have_cet=no
++    if test x$have_multi_byte_nop = xyes; then
++      if test "$cross_compiling" = yes; then :
++  { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
++$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
++as_fn_error $? "cannot run test program while cross compiling
++See \`config.log' for more details" "$LINENO" 5; }
++else
++  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++
+ static void
+ foo (void)
+ {
+@@ -12553,6 +12581,7 @@ rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+   conftest.$ac_objext conftest.beam conftest.$ac_ext
+ fi
+ 
++    fi
+     if test x$enable_cet = xno -a x$have_cet = xyes; then
+       as_fn_error $? "Intel CET must be enabled on Intel CET enabled host" "$LINENO" 5
+     fi
+diff --git a/libcc1/configure b/libcc1/configure
+index 600e41cf5ea..b198b0b9074 100755
+--- a/libcc1/configure
++++ b/libcc1/configure
+@@ -14653,6 +14653,34 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++int
++main ()
++{
++  asm ("endbr32");
++  return 0;
++}
++
++_ACEOF
++if ac_fn_c_try_run "$LINENO"; then :
++  have_multi_byte_nop=yes
++else
++  have_multi_byte_nop=no
++fi
++rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
++  conftest.$ac_objext conftest.beam conftest.$ac_ext
++fi
++
++    have_cet=no
++    if test x$have_multi_byte_nop = xyes; then
++      if test "$cross_compiling" = yes; then :
++  { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
++$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
++as_fn_error $? "cannot run test program while cross compiling
++See \`config.log' for more details" "$LINENO" 5; }
++else
++  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++
+ static void
+ foo (void)
+ {
+@@ -14689,6 +14717,7 @@ rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+   conftest.$ac_objext conftest.beam conftest.$ac_ext
+ fi
+ 
++    fi
+     if test x$enable_cet = xno -a x$have_cet = xyes; then
+       as_fn_error $? "Intel CET must be enabled on Intel CET enabled host" "$LINENO" 5
+     fi
+diff --git a/libcpp/configure b/libcpp/configure
+index 7e28606f605..9674cd9c7a7 100755
+--- a/libcpp/configure
++++ b/libcpp/configure
+@@ -7668,6 +7668,34 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++int
++main ()
++{
++  asm ("endbr32");
++  return 0;
++}
++
++_ACEOF
++if ac_fn_c_try_run "$LINENO"; then :
++  have_multi_byte_nop=yes
++else
++  have_multi_byte_nop=no
++fi
++rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
++  conftest.$ac_objext conftest.beam conftest.$ac_ext
++fi
++
++    have_cet=no
++    if test x$have_multi_byte_nop = xyes; then
++      if test "$cross_compiling" = yes; then :
++  { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
++$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
++as_fn_error $? "cannot run test program while cross compiling
++See \`config.log' for more details" "$LINENO" 5; }
++else
++  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++
+ static void
+ foo (void)
+ {
+@@ -7704,6 +7732,7 @@ rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+   conftest.$ac_objext conftest.beam conftest.$ac_ext
+ fi
+ 
++    fi
+     if test x$enable_cet = xno -a x$have_cet = xyes; then
+       as_fn_error $? "Intel CET must be enabled on Intel CET enabled host" "$LINENO" 5
+     fi
+diff --git a/libdecnumber/configure b/libdecnumber/configure
+index 6b62f8ba665..da5302f9315 100755
+--- a/libdecnumber/configure
++++ b/libdecnumber/configure
+@@ -5321,6 +5321,34 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++int
++main ()
++{
++  asm ("endbr32");
++  return 0;
++}
++
++_ACEOF
++if ac_fn_c_try_run "$LINENO"; then :
++  have_multi_byte_nop=yes
++else
++  have_multi_byte_nop=no
++fi
++rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
++  conftest.$ac_objext conftest.beam conftest.$ac_ext
++fi
++
++    have_cet=no
++    if test x$have_multi_byte_nop = xyes; then
++      if test "$cross_compiling" = yes; then :
++  { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
++$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
++as_fn_error $? "cannot run test program while cross compiling
++See \`config.log' for more details" "$LINENO" 5; }
++else
++  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++
+ static void
+ foo (void)
+ {
+@@ -5357,6 +5385,7 @@ rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+   conftest.$ac_objext conftest.beam conftest.$ac_ext
+ fi
+ 
++    fi
+     if test x$enable_cet = xno -a x$have_cet = xyes; then
+       as_fn_error $? "Intel CET must be enabled on Intel CET enabled host" "$LINENO" 5
+     fi
+diff --git a/libiberty/configure b/libiberty/configure
+index 61c62a33b3a..14a555c4ed6 100755
+--- a/libiberty/configure
++++ b/libiberty/configure
+@@ -5396,6 +5396,34 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++int
++main ()
++{
++  asm ("endbr32");
++  return 0;
++}
++
++_ACEOF
++if ac_fn_c_try_run "$LINENO"; then :
++  have_multi_byte_nop=yes
++else
++  have_multi_byte_nop=no
++fi
++rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
++  conftest.$ac_objext conftest.beam conftest.$ac_ext
++fi
++
++    have_cet=no
++    if test x$have_multi_byte_nop = xyes; then
++      if test "$cross_compiling" = yes; then :
++  { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
++$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
++as_fn_error $? "cannot run test program while cross compiling
++See \`config.log' for more details" "$LINENO" 5; }
++else
++  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++
+ static void
+ foo (void)
+ {
+@@ -5432,6 +5460,7 @@ rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+   conftest.$ac_objext conftest.beam conftest.$ac_ext
+ fi
+ 
++    fi
+     if test x$enable_cet = xno -a x$have_cet = xyes; then
+       as_fn_error $? "Intel CET must be enabled on Intel CET enabled host" "$LINENO" 5
+     fi
+diff --git a/lto-plugin/configure b/lto-plugin/configure
+index 22a4357a58e..26aad9dd699 100755
+--- a/lto-plugin/configure
++++ b/lto-plugin/configure
+@@ -5791,6 +5791,34 @@ else
+   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
++int
++main ()
++{
++  asm ("endbr32");
++  return 0;
++}
++
++_ACEOF
++if ac_fn_c_try_run "$LINENO"; then :
++  have_multi_byte_nop=yes
++else
++  have_multi_byte_nop=no
++fi
++rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
++  conftest.$ac_objext conftest.beam conftest.$ac_ext
++fi
++
++    have_cet=no
++    if test x$have_multi_byte_nop = xyes; then
++      if test "$cross_compiling" = yes; then :
++  { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
++$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
++as_fn_error $? "cannot run test program while cross compiling
++See \`config.log' for more details" "$LINENO" 5; }
++else
++  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++
+ static void
+ foo (void)
+ {
+@@ -5827,6 +5855,7 @@ rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+   conftest.$ac_objext conftest.beam conftest.$ac_ext
+ fi
+ 
++    fi
+     if test x$enable_cet = xno -a x$have_cet = xyes; then
+       as_fn_error $? "Intel CET must be enabled on Intel CET enabled host" "$LINENO" 5
+     fi
+-- 
+2.34.1

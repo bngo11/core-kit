@@ -1,0 +1,25 @@
+libitm does not respect --disable-werror
+
+https://bugs.gentoo.org/475350
+--- a/libitm/configure.ac
++++ b/libitm/configure.ac
+@@ -263,7 +263,7 @@
+ 
+ # Add -Wall -Werror if we are using GCC.
+ if test "x$GCC" = "xyes"; then
+-  XCFLAGS="$XCFLAGS -Wall -Werror"
++  XCFLAGS="$XCFLAGS -Wall"
+ fi
+ 
+ XCFLAGS="$XCFLAGS $XPCFLAGS"
+--- a/libitm/configure
++++ b/libitm/configure
+@@ -17854,7 +17854,7 @@
+ 
+ # Add -Wall -Werror if we are using GCC.
+ if test "x$GCC" = "xyes"; then
+-  XCFLAGS="$XCFLAGS -Wall -Werror"
++  XCFLAGS="$XCFLAGS -Wall"
+ fi
+ 
+ XCFLAGS="$XCFLAGS $XPCFLAGS"
