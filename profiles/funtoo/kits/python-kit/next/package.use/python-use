@@ -2,14 +2,21 @@
 =app-admin/supervisor-3.3.5 python_single_target_python2_7 python_targets_python2_7
 =app-admin/syslog-ng-3.13.2 python_single_target_python2_7 python_targets_python2_7
 =app-admin/syslog-ng-3.7.3 python_single_target_python2_7 python_targets_python2_7
+=app-arch/rpm-4.17.0 python_single_target_python3_7
 =app-portage/elogv-0.7.6.1-r1 python_single_target_python2_7 python_targets_python2_7
 =app-portage/elogv-0.7.6.2 python_single_target_python2_7 python_targets_python2_7
 =app-portage/elogv-0.7.6.3 python_single_target_python2_7 python_targets_python2_7
 =app-portage/elogv-0.7.6.4 python_single_target_python2_7 python_targets_python2_7
 =app-portage/elogv-0.7.6.5 python_single_target_python2_7 python_targets_python2_7
 =app-portage/elogv-0.7.6.6 python_single_target_python2_7 python_targets_python2_7
+=app-portage/gentoolkit-0.5.0-r2 python_single_target_python3_7
+=app-portage/gentoolkit-0.5.1 python_single_target_python3_7
+=net-misc/wget-1.21.3 python_single_target_python3_7
 =net-wireless/crda-3.18-r3 python_single_target_python2_7 python_targets_python2_7
 =net-wireless/crda-4.14 python_single_target_python3_7
+=sys-apps/coreutils-9.1 python_single_target_python3_7
+=sys-apps/kmod-29 python_single_target_python3_7
+=sys-fs/cryfs-0.10.4 python_single_target_python3_7
 =sys-fs/udiskie-1.1.1 python_single_target_python2_7 python_targets_python2_7
 =sys-libs/openipmi-2.0.22 python_single_target_python2_7 python_targets_python2_7
 =sys-libs/openipmi-2.0.26 python_single_target_python2_7 python_targets_python2_7
@@ -17,7 +24,6 @@
 app-admin/ego python_single_target_python3_7
 app-admin/packagekit-base python_single_target_python2_7 python_targets_python2_7
 app-arch/p7zip python_single_target_python3_7
-app-arch/rpm python_single_target_python3_7
 app-doc/doxygen python_single_target_python3_7
 app-emulation/docker-compose python_single_target_python3_7
 app-emulation/libvirt python_single_target_python3_7
@@ -30,9 +36,9 @@ app-misc/byobu python_single_target_python2_7 python_targets_python2_7
 app-misc/pax-utils python_single_target_python3_7
 app-portage/cpuid2cpuflags python_single_target_python2_7 python_targets_python2_7
 app-portage/flaggie python_single_target_python3_7
-app-portage/gentoolkit python_single_target_python3_7
 app-portage/layman python_single_target_python3_7
 app-portage/pfl python_single_target_python3_7
+app-portage/porthole python_single_target_python2_7 python_targets_python2_7
 dev-libs/boost python_single_target_python3_7
 dev-libs/icu python_single_target_python3_7
 dev-libs/jsoncpp python_single_target_python3_7
@@ -49,9 +55,7 @@ media-libs/alsa-lib python_single_target_python3_7
 net-dns/avahi python_single_target_python3_7
 net-libs/libproxy python_single_target_python3_7
 net-misc/rsync python_single_target_python3_7
-net-misc/wget python_single_target_python3_7
 net-wireless/bluez python_single_target_python3_7
-sys-apps/coreutils python_single_target_python3_7
 sys-apps/dbus python_single_target_python3_7
 sys-apps/etckeeper python_single_target_python2_7 python_targets_python2_7
 sys-apps/fchroot python_single_target_python3_7
@@ -59,7 +63,6 @@ sys-apps/file python_single_target_python3_7
 sys-apps/findutils python_single_target_python3_7
 sys-apps/flatpak python_single_target_python3_7
 sys-apps/hwids python_single_target_python3_7
-sys-apps/kmod python_single_target_python3_7
 sys-apps/metatools python_single_target_python3_7
 sys-apps/pacman python_single_target_python2_7 python_targets_python2_7
 sys-apps/portage python_single_target_python3_7
@@ -73,7 +76,6 @@ sys-devel/automake python_single_target_python2_7 python_targets_python2_7
 sys-devel/distcc python_single_target_python3_7
 sys-devel/gdb python_single_target_python3_7
 sys-fs/btrfs-progs python_single_target_python3_7
-sys-fs/cryfs python_single_target_python3_7
 sys-fs/ecryptfs-utils python_single_target_python2_7 python_targets_python2_7
 sys-fs/fuse python_single_target_python3_7
 sys-fs/owfs python_single_target_python2_7 python_targets_python2_7
