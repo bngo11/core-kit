@@ -23,6 +23,8 @@ PDEPEND=">=dev-python/appi-0.2[${PYTHON_USEDEP}]
 dev-python/mwparserfromhell[${PYTHON_USEDEP}]
 dev-python/requests[${PYTHON_USEDEP}]"
 
+PATCHES=( "${FILESDIR}/ego-2.8.6-python3.10-fix.patch" )
+
 src_unpack() {
 	unpack ${A}
 	mv "${WORKDIR}/${GITHUB_USER}-${PN}"-??????? "${S}" || die

@@ -1,0 +1,21 @@
+--- a/python/third_party/tabulate_color.py	2022-05-04 18:27:37.261584710 -0500
++++ b/python/third_party/tabulate_color.py	2022-05-04 18:27:05.666357523 -0500
+@@ -7,7 +7,8 @@
+ 
+ from __future__ import print_function
+ from __future__ import unicode_literals
+-from collections import namedtuple, Iterable
++from collections import namedtuple
++from collections.abc import Iterable
+ from platform import python_version_tuple
+ import re
+ 
+@@ -225,7 +226,7 @@
+ 
+ def _rst_escape_first_column(rows, headers):
+ 	def escape_empty(val):
+-		if isinstance(val, (_text_type, _binary_type)) and val.strip() is "":
++		if isinstance(val, (_text_type, _binary_type)) and val.strip() == "":
+ 			return ".."
+ 		else:
+ 			return val
