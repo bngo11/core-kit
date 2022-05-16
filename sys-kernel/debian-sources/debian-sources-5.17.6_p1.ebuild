@@ -16,11 +16,11 @@ MODULE_EXT=${PVR}-${PN}
 
 # install sources to /usr/src/$LINUX_SRCDIR
 LINUX_SRCDIR=linux-${PF}
-DEB_PV="5.17.3-${DEB_EXTRAVERSION}"
+DEB_PV="5.17.6-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
 KEYWORDS="next"
-IUSE="asus binary btrfs custom-cflags ec2 luks lvm sign-modules zfs"
+IUSE="asus binary btrfs custom-cflags ec2 +logo luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
 	binary? ( >=sys-kernel/genkernel-4 )
@@ -30,6 +30,7 @@ DEPEND="
 REQUIRED_USE="
 btrfs? ( binary )
 custom-cflags? ( binary )
+logo? ( binary )
 luks? ( binary )
 lvm? ( binary )
 sign-modules? ( binary )
@@ -38,8 +39,8 @@ zfs? ( binary )
 DESCRIPTION="Debian Sources (and optional binary kernel)"
 DEB_UPSTREAM="http://http.debian.net/debian/pool/main/l/linux"
 HOMEPAGE="https://packages.debian.org/unstable/kernel/"
-SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.17.3.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.17.3-1.debian.tar.xz"
-S="$WORKDIR/linux-5.17.3"
+SRC_URI="https://deb.debian.org/debian/pool/main/l/linux/linux_5.17.6.orig.tar.xz https://deb.debian.org/debian/pool/main/l/linux/linux_5.17.6-1.debian.tar.xz"
+S="$WORKDIR/linux-5.17.6"
 
 get_patch_list() {
 	[[ -z "${1}" ]] && die "No patch series file specified"
@@ -121,23 +122,23 @@ src_prepare() {
 	#make -s include/linux/version.h || die "make include/linux/version.h failed"
 	cd "${S}"
 	cp -aR "${WORKDIR}"/debian "${S}"/debian
-	if [ -e "${FILESDIR}/5.17.3/xfs-libcrc32c-fix.patch" ]; then
-	    epatch "${FILESDIR}"/5.17.3/xfs-libcrc32c-fix.patch || die
+	if [ -e "${FILESDIR}/5.17.6/xfs-libcrc32c-fix.patch" ]; then
+	    epatch "${FILESDIR}"/5.17.6/xfs-libcrc32c-fix.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/xfs-libcrc32c-fix.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.17.3/mcelog.patch" ]; then
-	    epatch "${FILESDIR}"/5.17.3/mcelog.patch || die
+	if [ -e "${FILESDIR}/5.17.6/mcelog.patch" ]; then
+	    epatch "${FILESDIR}"/5.17.6/mcelog.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/mcelog.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.17.3/ikconfig.patch" ]; then
-	    epatch "${FILESDIR}"/5.17.3/ikconfig.patch || die
+	if [ -e "${FILESDIR}/5.17.6/ikconfig.patch" ]; then
+	    epatch "${FILESDIR}"/5.17.6/ikconfig.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/ikconfig.patch || die
 	fi
-	if [ -e "${FILESDIR}/5.17.3/extra_cpu_optimizations.patch" ]; then
-	    epatch "${FILESDIR}"/5.17.3/extra_cpu_optimizations.patch || die
+	if [ -e "${FILESDIR}/5.17.6/extra_cpu_optimizations.patch" ]; then
+	    epatch "${FILESDIR}"/5.17.6/extra_cpu_optimizations.patch || die
 	else
 	    epatch "${FILESDIR}"/latest/extra_cpu_optimizations.patch || die
 	fi
@@ -168,6 +169,15 @@ src_prepare() {
 		setyes_config .config CONFIG_XEN_BLKDEV_BACKEND
 		setyes_config .config CONFIG_IXGBEVF
 	fi
+	if use logo; then
+		epatch "${FILESDIR}"/latest/funtoo_logo.patch || die
+		tweak_config .config CONFIG_LOGO y
+		ewarn "Linux kernel frame buffer boot logo is now enabled with a custom Funtoo pixmap."
+		ewarn "The new logo can be viewed at /usr/src/linux/drivers/video/logo/logo_linux_clut224.ppm"
+		ewarn "Remove the quiet kernel parameter (from params in /etc/boot.conf, and re-run boot-update.)"
+		ewarn "This will ensure the custom kernel logo is displayed during boot over frame buffer."
+		ewarn ""
+	fi
 	if use sign-modules; then
 		certs_dir=$(get_certs_dir)
 		echo
@@ -194,7 +204,7 @@ src_prepare() {
 		ewarn "This kernel will ALLOW non-signed modules to be loaded with a WARNING."
 		ewarn "To enable strict enforcement, YOU MUST add module.sig_enforce=1 as a kernel boot"
 		ewarn "parameter (to params in /etc/boot.conf, and re-run boot-update.)"
-		echo
+		ewarn ""
 	fi
 	if use custom-cflags; then
 		MARCH="$(python3 -c "import portage; print(portage.settings[\"CFLAGS\"])" | sed 's/ /\n/g' | grep "march")"

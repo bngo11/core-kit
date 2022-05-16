@@ -1,0 +1,58 @@
+#!/bin/bash
+# ============ ENV VARS ================================
+cd /root
+export LANG=en_US.UTF-8
+export HOME=/root
+export SHELL=/bin/bash
+export PATH=/sbin:/bin:/usr/sbin:/usr/bin
+export MAIL=/var/mail/root
+export USER=root
+
+source /etc/profile
+
+# ============ PRINT MESSAGE ===========================
+# Colors
+BLACK=$'\033[30;01m'
+RED=$'\033[31;01m'
+GREEN=$'\033[32;01m'
+YELW=$'\033[33;01m'
+BLUE=$'\033[34;01m'
+PURP=$'\033[35;01m'
+CYAN=$'\033[36;01m'
+WHITE=$'\033[37;01m'
+GREY=$'\033[37;00m'
+OFF=$'\033[0m'
+
+# fix broken console with utf8 in the alternative-kernels
+echo -n -e '\033%G'
+kbd_mode -u
+
+LINES=$(stty size|cut -d" " -f1)
+fbecho(){
+  [ $LINES -ge 28 ] && echo
+}
+
+VERSION="7.0"
+OS_LOGO="/etc/funtoo.ascii"
+
+fbecho
+cat <<BANNER
+${RED} =============== ${PURP}Funtoo LiveCD (64bit)${RED} ========= ${PURP} version ${VERSION} ${RED} =========== ${WHITE}tty $(basename $(tty))${GREY}/6 ${RED}==${OFF}
+                 ${WHITE}Created by the Funtoo Core Team${OFF}
+                 ${PURP}https://www.funtoo.org${OFF}
+$(cat $OS_LOGO)
+${PURP}*${RED} Configure network${GREY}: ${WHITE}nmtui${GREY}
+${PURP}*${RED} Available Text Editors${WHITE}: vim${GREY}, ${WHITE}vi${GREY}, ${WHITE}nano${GREY}, ${WHITE}zile${GREY}, ${WHITE}joe
+${PURP}*${RED} Available HEX Editors: ${WHITE}hexcurse${GREY}, ${WHITE}hexedit
+${PURP}*${RED} Web browsers CLI: ${WHITE}elinks${GREY}, ${WHITE}w3m${GREY}, ${WHITE}links
+${PURP}*${RED} Tools${GREY}:
+    ${PURP}-${GREY} Partition manager: ${WHITE}parted${GREY}, ${WHITE}fdisk${GREY}, ${WHITE}cfdisk${GREY}
+    ${PURP}-${GREY} Diagnostic: ${WHITE}htop${GREY}, ${WHITE}whdd${GREY}, ${WHITE}hdparm${GREY}, ${WHITE}iostat${GREY}, ${WHITE}iotop${GREY}, ${WHITE}lsof${GREY}
+    ${PURP}-${GREY} Forensic / Recover: ${WHITE}photorec${GREY}, ${WHITE}foremost${GREY}, ${WHITE}dcfldd${GREY}, ${WHITE}ddrescue${GREY}
+    ${PURP}-${GREY} Mount NTFS disk using ntfs-3g: ${WHITE}ntfs-3g /dev/sda1 /mnt/windows${GREY}
+
+ ${GREY}Default password for root is ${WHITE}root${GREY}. To change the root password, type: ${WHITE}passwd
+
+${RED} ==================================================================================${OFF}
+
+BANNER
