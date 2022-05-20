@@ -1,7 +1,8 @@
-distrobox:
+containerd:
   generator: github-1
   packages:
-    - distrobox:
+    - containerd:
+        version: 1.5.11
         github:
-          user: 89luca89
           query: tags
+
