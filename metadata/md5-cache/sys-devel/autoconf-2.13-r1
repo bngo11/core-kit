@@ -9,4 +9,5 @@ LICENSE=GPL-2
 RDEPEND=>=sys-apps/texinfo-4.3 =sys-devel/m4-1.4* dev-lang/perl >=sys-devel/autoconf-wrapper-13
 SLOT=2.1
 SRC_URI=mirror://gnu/autoconf/autoconf-2.13.tar.gz
+_eclasses_=toolchain-autoconf	030c94515d35f2a4ae476066dd7bb59a
 _md5_=4d6377716da1284a28c26b14ad17d291
