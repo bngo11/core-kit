@@ -26,7 +26,7 @@ BDEPEND="
 RDEPEND+=" selinux? ( sec-policy/selinux-xfs )"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-4.15.0-docdir.patch
+	"${FILESDIR}"/${PN}-5.18.0-docdir.patch
 	"${FILESDIR}"/${PN}-5.3.0-libdir.patch
 )
 
