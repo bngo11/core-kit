@@ -161,6 +161,7 @@ src_prepare() {
 	if use asus; then
 		tweak_config .config CONFIG_SENSORS_ASUS_WMI m
 		tweak_config .config CONFIG_SENSORS_ASUS_WMI_EC m
+		epatch "${FILESDIR}"/nct6775.patch || die
 	fi
 
 	if use ec2; then
