@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="Paging program that displays, one windowful at a time, the contents of a file"
 HOMEPAGE="https://www.jedsoft.org/most/"
-SRC_URI="https://www.jedsoft.org/releases/most/most-5.1.0.tar.gz -> most-5.1.0.tar.gz"
+SRC_URI="https://www.jedsoft.org/releases/most/most-5.2.0.tar.gz -> most-5.2.0.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
