@@ -15,9 +15,8 @@
 #  * scrollkeeper (old Gnome help system) management
 
 [[ ${EAPI:-0} == [012345] ]] && inherit multilib
-# eutils.eclass: emktemp
-# xdg-utils.eclass: xdg_environment_reset, xdg_icon_cache_update
-inherit eutils xdg-utils
+[[ ${EAPI:-0} == [0123456] ]] && inherit eutils
+inherit xdg-utils
 
 case "${EAPI:-0}" in
 	0|1|2|3|4|5|6|7) ;;
@@ -123,7 +122,7 @@ gnome3_gconf_savelist() {
 # This function should be called from pkg_postinst.
 gnome3_gconf_install() {
 	has ${EAPI:-0} 0 1 2 && ! use prefix && EROOT="${ROOT}"
-	local updater="${EROOT%/}${GCONFTOOL_BIN}"
+	local updater="${EROOT}${GCONFTOOL_BIN}"
 
 	if [[ ! -x "${updater}" ]]; then
 		debug-print "${updater} is not executable"
@@ -137,15 +136,15 @@ gnome3_gconf_install() {
 
 	# We are ready to install the GCONF Scheme now
 	unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
-	export GCONF_CONFIG_SOURCE="$("${updater}" --get-default-source | sed "s;:/;:${ROOT%/}/;")"
+	export GCONF_CONFIG_SOURCE="$("${updater}" --get-default-source | sed "s;:/;:${ROOT};")"
 
 	einfo "Installing GNOME 2 GConf schemas"
 
 	local F
 	for F in ${GNOME3_ECLASS_SCHEMAS}; do
-		if [[ -e "${EROOT%/}/${F}" ]]; then
+		if [[ -e "${EROOT}${F}" ]]; then
 			debug-print "Installing schema: ${F}"
-			"${updater}" --makefile-install-rule "${EROOT%/}/${F}" 1>/dev/null
+			"${updater}" --makefile-install-rule "${EROOT}${F}" 1>/dev/null
 		fi
 	done
 
@@ -164,7 +163,7 @@ gnome3_gconf_install() {
 # database.
 gnome3_gconf_uninstall() {
 	has ${EAPI:-0} 0 1 2 && ! use prefix && EROOT="${ROOT}"
-	local updater="${EROOT%/}${GCONFTOOL_BIN}"
+	local updater="${EROOT}${GCONFTOOL_BIN}"
 
 	if [[ ! -x "${updater}" ]]; then
 		debug-print "${updater} is not executable"
@@ -177,15 +176,15 @@ gnome3_gconf_uninstall() {
 	fi
 
 	unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
-	export GCONF_CONFIG_SOURCE="$("${updater}" --get-default-source | sed "s;:/;:${ROOT%/}/;")"
+	export GCONF_CONFIG_SOURCE="$("${updater}" --get-default-source | sed "s;:/;:${ROOT};")"
 
 	einfo "Uninstalling GNOME 2 GConf schemas"
 
 	local F
 	for F in ${GNOME3_ECLASS_SCHEMAS}; do
-		if [[ -e "${EROOT%/}/${F}" ]]; then
+		if [[ -e "${EROOT}${F}" ]]; then
 			debug-print "Uninstalling gconf schema: ${F}"
-			"${updater}" --makefile-uninstall-rule "${EROOT%/}/${F}" 1>/dev/null
+			"${updater}" --makefile-uninstall-rule "${EROOT}${F}" 1>/dev/null
 		fi
 	done
 
@@ -267,7 +266,7 @@ gnome3_scrollkeeper_savelist() {
 # This function should be called from pkg_postinst and pkg_postrm.
 gnome3_scrollkeeper_update() {
 	has ${EAPI:-0} 0 1 2 && ! use prefix && EROOT="${ROOT}"
-	local updater="${EROOT%/}${SCROLLKEEPER_UPDATE_BIN}"
+	local updater="${EROOT}${SCROLLKEEPER_UPDATE_BIN}"
 
 	if [[ ! -x "${updater}" ]] ; then
 		debug-print "${updater} is not executable"
@@ -280,7 +279,7 @@ gnome3_scrollkeeper_update() {
 	fi
 
 	ebegin "Updating scrollkeeper database ..."
-	"${updater}" -q -p "${EROOT%/}${SCROLLKEEPER_DIR}"
+	"${updater}" -q -p "${EROOT}${SCROLLKEEPER_DIR}"
 	eend $?
 }
 
@@ -304,7 +303,7 @@ gnome3_schemas_savelist() {
 # This function should be called from pkg_postinst and pkg_postrm.
 gnome3_schemas_update() {
 	has ${EAPI:-0} 0 1 2 && ! use prefix && EROOT="${ROOT}"
-	local updater="${EROOT%/}${GLIB_COMPILE_SCHEMAS}"
+	local updater="${EROOT}${GLIB_COMPILE_SCHEMAS}"
 
 	if [[ ! -x ${updater} ]]; then
 		debug-print "${updater} is not executable"
@@ -335,10 +334,10 @@ gnome3_gdk_pixbuf_savelist() {
 # This function should be called from pkg_postinst and pkg_postrm.
 gnome3_gdk_pixbuf_update() {
 	has ${EAPI:-0} 0 1 2 && ! use prefix && EROOT="${ROOT}"
-	local updater="${EROOT%/}/usr/bin/${CHOST}-gdk-pixbuf-query-loaders"
+	local updater="${EROOT}/usr/bin/${CHOST}-gdk-pixbuf-query-loaders"
 
 	if [[ ! -x ${updater} ]]; then
-		updater="${EROOT%/}/usr/bin/gdk-pixbuf-query-loaders"
+		updater="${EROOT}/usr/bin/gdk-pixbuf-query-loaders"
 	fi
 
 	if [[ ! -x ${updater} ]]; then
@@ -355,7 +354,7 @@ gnome3_gdk_pixbuf_update() {
 	local tmp_file=$(emktemp)
 	${updater} 1> "${tmp_file}" &&
 	chmod 0644 "${tmp_file}" &&
-	cp -f "${tmp_file}" "${EROOT%/}/usr/$(get_libdir)/gdk-pixbuf-2.0/2.10.0/loaders.cache" &&
+	cp -f "${tmp_file}" "${EROOT}/usr/$(get_libdir)/gdk-pixbuf-2.0/2.10.0/loaders.cache" &&
 	rm "${tmp_file}" # don't replace this with mv, required for SELinux support
 	eend $?
 }
@@ -369,7 +368,7 @@ gnome3_query_immodules_gtk2() {
 	[[ ! -x ${updater} ]] && updater=${EPREFIX}/usr/bin/gtk-query-immodules-2.0
 
 	ebegin "Updating gtk2 input method module cache"
-	GTK_IM_MODULE_FILE="${EROOT%/}/usr/$(get_libdir)/gtk-2.0/2.10.0/immodules.cache" \
+	GTK_IM_MODULE_FILE="${EROOT}/usr/$(get_libdir)/gtk-2.0/2.10.0/immodules.cache" \
 		"${updater}" --update-cache
 	eend $?
 }
@@ -386,7 +385,7 @@ gnome3_update_immodules_cache_gtk3() {
 	einfo "updater: ${updater}"
 	einfo "GTK_IM_MODULE_FILE: $GTK_IM_MODULE_FILE"
 	echo "Directory contents: "
-	ls -l "${EROOT%/}/usr/$(get_libdir)/gtk-3.0/3.0.0/immodules"
+	ls -l "${EROOT}/usr/$(get_libdir)/gtk-3.0/3.0.0/immodules"
 	"${updater}" --update-cache
 	output="$(${updater} --update-cache 2>&1)"
 	if [ $? -ne 0 ]; then
@@ -404,10 +403,10 @@ gnome3_update_immodules_cache_gtk3() {
 # This function should be called from pkg_postinst and pkg_postrm.
 gnome3_giomodule_cache_update() {
 	has ${EAPI:-0} 0 1 2 && ! use prefix && EROOT="${ROOT}"
-	local updater="${EROOT%/}/usr/bin/${CHOST}-gio-querymodules"
+	local updater="${EROOT}/usr/bin/${CHOST}-gio-querymodules"
 
 	if [[ ! -x ${updater} ]]; then
-		updater="${EROOT%/}/usr/bin/gio-querymodules"
+		updater="${EROOT}/usr/bin/gio-querymodules"
 	fi
 
 	if [[ ! -x ${updater} ]]; then
