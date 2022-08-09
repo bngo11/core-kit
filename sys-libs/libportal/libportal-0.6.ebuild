@@ -23,7 +23,7 @@ RDEPEND="
 	introspection? ( dev-libs/gobject-introspection:= )
 	gtk? (
 		x11-libs/gtk+:3
-		gui-libs/gtk:4
+		x11-libs/gtk:4
 	)
 	qt5? (
 		dev-qt/qtcore:=
