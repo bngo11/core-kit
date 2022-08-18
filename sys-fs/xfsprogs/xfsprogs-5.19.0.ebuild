@@ -6,7 +6,7 @@ inherit flag-o-matic toolchain-funcs systemd usr-ldscript
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="https://xfs.wiki.kernel.org/"
-SRC_URI="https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-5.18.0.tar.xz -> xfsprogs-5.18.0.tar.xz"
+SRC_URI="https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-5.19.0.tar.xz -> xfsprogs-5.19.0.tar.xz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
