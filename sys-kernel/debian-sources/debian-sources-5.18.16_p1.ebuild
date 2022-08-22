@@ -21,7 +21,7 @@ LINUX_SRCDIR=linux-${PF}
 DEB_PV="5.18.16-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
-KEYWORDS="next"
+KEYWORDS="*"
 IUSE="acpi-ec asus binary btrfs custom-cflags ec2 +logo luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
@@ -166,7 +166,7 @@ src_prepare() {
 		epatch "${FILESDIR}"/nct6775.patch || die
 	fi
 
-	if acpi-ec; then
+	if use acpi-ec; then
 		# most fan control tools require this
 		tweak_config .config CONFIG_ACPI_EC_DEBUGFS m
 	fi

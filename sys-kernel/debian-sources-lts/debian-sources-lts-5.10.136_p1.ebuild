@@ -171,7 +171,7 @@ src_prepare() {
 		epatch "${FILESDIR}"/nct6775.patch || die
 	fi
 
-	if acpi-ec; then
+	if use acpi-ec; then
 		# most fan control tools require this
 		tweak_config .config CONFIG_ACPI_EC_DEBUGFS m
 	fi
