@@ -8,8 +8,7 @@ inherit flag-o-matic savedconfig toolchain-funcs
 
 DESCRIPTION="Utilities for rescue and embedded systems"
 HOMEPAGE="https://www.busybox.net/"
-MY_P=${PN}-${PV/_/-}
-SRC_URI="https://www.busybox.net/downloads/${MY_P}.tar.bz2"
+SRC_URI="https://github.com/mirror/busybox/tarball/e512aeb0fb3c585948ae6517cfdf4a53cf99774d -> busybox-1.35.0-e512aeb.tar.gz"
 KEYWORDS="*"
 
 LICENSE="GPL-2" # GPL-2 only
@@ -26,7 +25,11 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	mdev? ( !<sys-apps/openrc-0.13 )"
 
-S=${WORKDIR}/${MY_P}
+post_src_unpack() {
+	if [ ! -d "${S}" ]; then
+		mv "${WORKDIR}"/* ${S} || die
+	fi
+}
 
 busybox_config_option() {
 	local flag=$1 ; shift
