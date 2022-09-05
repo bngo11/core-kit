@@ -6,8 +6,6 @@ PYTHON_COMPAT=( {{python_compat}} )
 
 inherit bash-completion-r1 linux-info meson python-any-r1 readme.gentoo-r1 user
 
-SRC_URI="https://libvirt.org/sources/${P}.tar.xz"
-
 DESCRIPTION="C toolkit to manipulate virtual machines"
 HOMEPAGE="https://www.libvirt.org/"
 SRC_URI="{{artifacts[0].src_uri}}"
@@ -79,7 +77,7 @@ RDEPEND="
 	pcap? ( >=net-libs/libpcap-1.0.0 )
 	policykit? ( >=sys-auth/polkit-0.9 )
 	qemu? (
-		>=app-emulation/qemu-1.5.0
+		>=app-emulation/qemu-4.2
 		dev-libs/yajl
 	)
 	rbd? ( sys-cluster/ceph )

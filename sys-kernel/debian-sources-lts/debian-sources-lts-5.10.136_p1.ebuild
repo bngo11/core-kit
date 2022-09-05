@@ -22,7 +22,7 @@ DEB_PV="5.10.136-${DEB_EXTRAVERSION}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
 KEYWORDS="*"
-IUSE="acpi-ec asus binary btrfs custom-cflags ec2 +logo luks lvm sign-modules zfs"
+IUSE="acpi-ec binary btrfs custom-cflags ec2 +logo luks lvm sign-modules zfs"
 DEPEND="
 	virtual/libelf
 	binary? ( >=sys-kernel/genkernel-4 )
@@ -164,13 +164,6 @@ src_prepare() {
 	chmod +x config-extract || die
 	./config-extract ${arch} ${featureset} ${subarch} || die
 	setno_config .config CONFIG_DEBUG
-
-	if use asus; then
-		tweak_config .config CONFIG_SENSORS_ASUS_WMI m
-		tweak_config .config CONFIG_SENSORS_ASUS_WMI_EC m
-		epatch "${FILESDIR}"/nct6775.patch || die
-	fi
-
 	if use acpi-ec; then
 		# most fan control tools require this
 		tweak_config .config CONFIG_ACPI_EC_DEBUGFS m
