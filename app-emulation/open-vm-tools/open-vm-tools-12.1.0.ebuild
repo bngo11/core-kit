@@ -7,16 +7,20 @@ inherit autotools linux-info pam systemd toolchain-funcs
 DESCRIPTION="Opensourced tools for VMware guests"
 HOMEPAGE="https://github.com/vmware/open-vm-tools"
 MY_P="${PN}-${PV/_p/-}"
-SRC_URI="https://github.com/vmware/open-vm-tools/releases/download/stable-${PV%_p*}/${MY_P}.tar.gz"
+SRC_URI="https://github.com/vmware/open-vm-tools/tarball/6f5e4b13647b40a45c196dad76b1cb39cc6690b9 -> open-vm-tools-12.1.0-6f5e4b1.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="X +deploypkg +dnet doc +fuse gtkmm +icu multimon pam +resolutionkms +ssl static-libs +vgauth"
+IUSE="X +deploypkg +dnet doc +fuse gtkmm +icu multimon pam +resolutionkms +ssl static-libs +vgauth systemd"
 REQUIRED_USE="
 	multimon? ( X )
 	vgauth? ( ssl )
 "
+
+PATCHES=(
+	"${FILESDIR}/11.3.5-icu.patch"
+)
 
 RDEPEND="
 	dev-libs/glib
@@ -66,10 +70,10 @@ BDEPEND="
 
 S="${WORKDIR}/${MY_P}"
 
-PATCHES=(
-	"${FILESDIR}/10.1.0-mount.vmhgfs.patch"
-	"${FILESDIR}/10.1.0-Werror.patch"
-)
+src_unpack() {
+	unpack ${A}
+	mv "${WORKDIR}"/vmware-*/open-vm-tools/ "${S}"
+}
 
 pkg_setup() {
 	local CONFIG_CHECK="~VMWARE_BALLOON ~VMWARE_PVSCSI ~VMXNET3"
@@ -83,11 +87,16 @@ pkg_setup() {
 src_prepare() {
 	eapply -p2 "${PATCHES[@]}"
 	eapply_user
+
+	# Drop -Werror
+	sed -e 's|^CFLAGS="$CFLAGS -Werror"||g' -i configure.ac
+
 	eautoreconf
 }
 
 src_configure() {
 	local myeconfargs=(
+		--disable-glibc-check
 		--without-root-privileges
 		$(use_enable multimon)
 		$(use_with X x)
@@ -118,19 +127,18 @@ src_install() {
 		pamd_mimic_system vmtoolsd auth account
 	fi
 
-	newinitd "${FILESDIR}/open-vm-tools.initd" vmware-tools
 	newconfd "${FILESDIR}/open-vm-tools.confd" vmware-tools
 
-	if use vgauth; then
-		systemd_newunit "${FILESDIR}"/vmtoolsd.vgauth.service vmtoolsd.service
-		systemd_dounit "${FILESDIR}"/vgauthd.service
+	if use systemd ; then
+		if use vgauth; then
+			systemd_newunit "${FILESDIR}"/vmtoolsd.vgauth.service vmtoolsd.service
+			systemd_dounit "${FILESDIR}"/vgauthd.service
+		else
+			systemd_dounit "${FILESDIR}"/vmtoolsd.service
+		fi
 	else
-		systemd_dounit "${FILESDIR}"/vmtoolsd.service
+		newinitd "${FILESDIR}/open-vm-tools.initd" vmware-tools
 	fi
-
-	# Replace mount.vmhgfs with a wrapper
-	mv "${ED}"/usr/sbin/{mount.vmhgfs,hgfsmounter} || die
-	dosbin "${FILESDIR}/mount.vmhgfs"
 
 	# Make fstype = vmhgfs-fuse work in fstab
 	dosym vmhgfs-fuse /usr/bin/mount.vmhgfs-fuse
