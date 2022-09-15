@@ -9,7 +9,7 @@ DESCRIPTION="A library for manipulating block devices"
 HOMEPAGE="https://github.com/storaged-project/libblockdev"
 
 MY_PV="${PV}-1"
-SRC_URI="https://github.com/storaged-project/libblockdev/releases/download/2.27-1/libblockdev-2.27.tar.gz -> libblockdev-2.27.tar.gz"
+SRC_URI="https://github.com/storaged-project/libblockdev/releases/download/2.28-1/libblockdev-2.28.tar.gz -> libblockdev-2.28.tar.gz"
 KEYWORDS="*"
 
 LICENSE="LGPL-2+"
