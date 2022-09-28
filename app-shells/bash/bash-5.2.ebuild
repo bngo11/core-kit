@@ -9,19 +9,16 @@ MY_P="${PN}-${PV/_/-}"
 S="${WORKDIR}/${MY_P}"
 DESCRIPTION="The standard GNU Bourne again shell"
 HOMEPAGE="http://tiswww.case.edu/php/chet/bash/bashtop.html"
-SRC_URI="https://ftp.gnu.org/gnu/bash/bash-5.2-rc4.tar.gz -> bash-5.2-rc4.tar.gz"
+SRC_URI="https://ftp.gnu.org/gnu/bash/bash-5.2.tar.gz -> bash-5.2.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="*"
 IUSE="afs bashlogger examples mem-scramble +net nls plugins +readline"
-
-READLINE_VER="8.2" # The version of readline this bash normally ships with.
 
 DEPEND="
 	>=sys-libs/ncurses-5.2-r2:0=
 	nls? ( virtual/libintl )
-	readline? ( >=sys-libs/readline-${READLINE_VER}:0= )
 "
 RDEPEND="
 	${DEPEND}
@@ -53,9 +50,6 @@ src_unpack() {
 src_prepare() {
 	# Include official patches
 	[[ ${PLEVEL} -gt 0 ]] && eapply -p0 $(patches -s)
-
-	# Clean out local libs so we know we use system ones w/releases.
-	
 
 	# Prefixify hardcoded path names. No-op for non-prefix.
 	hprefixify pathnames.h.in
@@ -103,17 +97,6 @@ src_configure() {
 	# don't come crying to us with bugs ;).
 	#use static && export LDFLAGS="${LDFLAGS} -static"
 	use nls || myconf+=( --disable-nls )
-
-	# Historically, we always used the builtin readline, but since
-	# our handling of SONAME upgrades has gotten much more stable
-	# in the PM (and the readline ebuild itself preserves the old
-	# libs during upgrades), linking against the system copy should
-	# be safe.
-	# Exact cached version here doesn't really matter as long as it
-	# is at least what's in the DEPEND up above.
-	export ac_cv_rl_version=${READLINE_VER%%_*}
-
-	
 
 	if use plugins ; then
 		append-ldflags -Wl,-rpath,"${EPREFIX}"/usr/$(get_libdir)/bash
