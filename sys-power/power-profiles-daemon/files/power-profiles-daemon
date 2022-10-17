@@ -1,0 +1,12 @@
+#!/sbin/openrc-run
+# Distributed under the terms of the GNU General Public License v2
+
+name="Power Profiles Daemon"
+description="Makes power profiles handling available over D-Bus."
+command="/usr/libexec/power-profiles-daemon"
+command_background="true"
+pidfile="/var/run/power-profiles-daemon.pid"
+
+depend() {
+	need dbus
+}
