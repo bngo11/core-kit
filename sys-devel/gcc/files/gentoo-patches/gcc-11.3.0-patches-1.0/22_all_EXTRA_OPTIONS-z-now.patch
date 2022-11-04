@@ -1,8 +1,8 @@
 On Hardened we add some options like -z now
 
---- a/gcc/gcc.c
-+++ b/gcc/gcc.c
-@@ -994,6 +994,12 @@
+--- a/gcc/gcc.c	2016-02-19 23:18:38.000000000 +0100
++++ b/gcc/gcc.c	2016-05-02 22:56:10.185721270 +0200
+@@ -868,6 +868,12 @@ proper position among the other output f
  #endif
  #endif
  
@@ -13,9 +13,9 @@ On Hardened we add some options like -z now
 +#endif
 +
  #ifdef ENABLE_DEFAULT_PIE
- #define PIE_SPEC		"!no-pie"
- #define NO_FPIE1_SPEC		"fno-pie"
-@@ -1154,7 +1160,7 @@
+ #define NO_PIE_SPEC		"no-pie|static"
+ #define PIE_SPEC		NO_PIE_SPEC "|r|shared:;"
+@@ -1013,7 +1020,7 @@ proper position among the other output f
      %(linker) " \
      LINK_PLUGIN_SPEC \
     "%{flto|flto=*:%<fcompare-debug*} \
@@ -23,4 +23,4 @@ On Hardened we add some options like -z now
 +    %{flto} %{fno-lto} %{flto=*} %l " LINK_PIE_SPEC LINK_NOW_SPEC \
     "%{fuse-ld=*:-fuse-ld=%*} " LINK_COMPRESS_DEBUG_SPEC \
     "%X %{o*} %{e*} %{N} %{n} %{r}\
-     %{s} %{t} %{u*} %{z} %{Z} %{!nostdlib:%{!r:%{!nostartfiles:%S}}} \
+     %{s} %{t} %{u*} %{z} %{Z} %{!nostdlib:%{!nostartfiles:%S}} \

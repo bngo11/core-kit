@@ -4,7 +4,7 @@
 
 --- a/include/libiberty.h
 +++ b/include/libiberty.h
-@@ -652,8 +652,11 @@
+@@ -609,8 +609,11 @@ extern int pwait (int, int *, int);
  /* Like sprintf but provides a pointer to malloc'd storage, which must
     be freed by the caller.  */
  
@@ -14,5 +14,5 @@
  #endif
 +#endif
  
- /* Like asprintf but allocates memory without fail. This works like
-    xmalloc.  */
+ #if !HAVE_DECL_VASPRINTF
+ /* Like vsprintf but provides a pointer to malloc'd storage, which

@@ -1,16 +1,4 @@
-4		8 January 2022
-	+ 76_all_all_PR103910_12_ICE-on-PCH.patch
-
-3		28 December 2021
-	U 26_all_enable-cet.patch
-
-2		18 December 2021
-	+ 75_all_x86_PR99703_12_no-cet-for-i486.patch
-
-1		7 December 2021
-	U 26_all_enable-cet.patch
-
-0		27 November 2021
+1		28 July 2021
 	+ 01_all_default-fortify-source.patch
 	+ 02_all_default-warn-format-security.patch
 	+ 03_all_default-warn-trampolines.patch
@@ -36,4 +24,3 @@
 	+ 23_all_EXTRA_OPTIONS-fstack-clash-protection.patch
 	+ 24_all_lto-intl-workaround-PR95194.patch
 	+ 25_all_plugin-objdump.patch
-	+ 26_all_enable-cet.patch
