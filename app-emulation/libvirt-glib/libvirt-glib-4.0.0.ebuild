@@ -37,6 +37,5 @@ src_configure() {
 		$(meson_feature introspection)
 		$(meson_feature vala vapi)
 	)
-
 	meson_src_configure
 }

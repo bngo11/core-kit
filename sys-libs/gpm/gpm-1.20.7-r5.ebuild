@@ -23,18 +23,15 @@ DEPEND="app-arch/xz-utils
 	sys-apps/texinfo
 	virtual/yacc"
 
-PATCHES=(
-	# QA-460: fix gcc inlude path, so it able to find own headers during build, like gpm.h.
-	"${FILESDIR}"/${P}-gcc-include-fix.patch
-	"${FILESDIR}"/${P}-sysmacros.patch #fix build on newer glibc
-	"${FILESDIR}"/${P}-glibc-2.26.patch #fix build specifically with glibc-2.26
-	"${FILESDIR}"/${P}-gcc-10.patch
-	"${WORKDIR}"/${P}-docs.patch
-)
-
 src_prepare() {
-	default
+	# QA-460: fix gcc inlude path, so it able to find own headers during build, like gpm.h.
+	eapply "${FILESDIR}"/${P}-gcc-include-fix.patch
+	eapply "${FILESDIR}"/${P}-sysmacros.patch #fix build on newer glibc
+	eapply "${FILESDIR}"/${P}-glibc-2.26.patch #fix build specifically with glibc-2.26
+	eapply "${FILESDIR}"/${P}-gcc-10.patch
+	eapply "${WORKDIR}"/${P}-docs.patch
 	touch -r . doc/* || die
+	eapply_user
 
 	# fix ABI values
 	sed -i \

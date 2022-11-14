@@ -14,9 +14,9 @@ SLOT="0/${PV}"
 LICENSE="LGPL-2.1"
 KEYWORDS="*"
 IUSE="
-	apparmor audit +caps dtrace firewalld fuse glusterfs iscsi
-	iscsi-direct +libvirtd lvm libssh lxc nfs nls numa openvz
-	parted pcap policykit +qemu rbd sasl selinux +udev
+	apparmor audit +caps +dbus dtrace firewalld fuse glusterfs iscsi
+	iscsi-direct +libvirtd lvm libssh lxc +macvtap nfs nls numa openvz
+	parted pcap policykit +qemu rbd sasl selinux +udev +vepa
 	virtualbox virt-network wireshark-plugins xen zfs
 "
 
@@ -25,7 +25,9 @@ REQUIRED_USE="
 	libvirtd? ( || ( lxc openvz qemu virtualbox xen ) )
 	lxc? ( caps libvirtd )
 	openvz? ( libvirtd )
+	policykit? ( dbus )
 	qemu? ( libvirtd )
+	vepa? ( macvtap )
 	virt-network? ( libvirtd )
 	virtualbox? ( libvirtd )
 	xen? ( libvirtd )"
@@ -56,7 +58,7 @@ RDEPEND="
 	apparmor? ( sys-libs/libapparmor )
 	audit? ( sys-process/audit )
 	caps? ( sys-libs/libcap-ng )
-	sys-apps/dbus
+	dbus? ( sys-apps/dbus )
 	dtrace? ( dev-util/systemtap )
 	firewalld? ( >=net-firewall/firewalld-0.6.3 )
 	fuse? ( sys-fs/fuse:0= )
@@ -121,8 +123,6 @@ pkg_setup() {
 
 	# Check kernel configuration:
 	CONFIG_CHECK=""
-	CONFIG_CHECK+="~MACVTAP"
-
 	use fuse && CONFIG_CHECK+="
 		~FUSE_FS"
 
@@ -160,6 +160,9 @@ pkg_setup() {
 
 	kernel_is lt 4 7 && use lxc && CONFIG_CHECK+="
 		~DEVPTS_MULTIPLE_INSTANCES"
+
+	use macvtap && CONFIG_CHECK+="
+		~MACVTAP"
 
 	use virt-network && CONFIG_CHECK+="
 		~BRIDGE_EBT_MARK_T

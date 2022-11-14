@@ -150,13 +150,6 @@ pkg_postinst() {
 		ewarn "else losetup may be confused when looking for unused devices."
 	fi
 
-	# https://cgit.freedesktop.org/systemd/systemd/commit/rules/50-udev-default.rules?id=3dff3e00e044e2d53c76fa842b9a4759d4a50e69
-	# https://bugs.gentoo.org/246847
-	# https://bugs.gentoo.org/514174
-	enewgroup input
-	enewgroup kvm 78
-	enewgroup render
-
 	# REPLACING_VERSIONS should only ever have zero or 1 values but in case it doesn't,
 	# process it as a list.  We only care about the zero case (new install) or the case where
 	# the same version is being re-emerged.  If there is a second version, allow it to abort.

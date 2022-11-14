@@ -43,7 +43,6 @@ RDEPEND="
 		x11-libs/libSM
 		x11-libs/libXcomposite
 		x11-libs/gdk-pixbuf:2
-		x11-libs/gdk-pixbuf-xlib:0
 		x11-libs/gtk+:3
 		gtkmm? (
 			dev-cpp/gtkmm:3.0
