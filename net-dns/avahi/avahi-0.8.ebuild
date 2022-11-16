@@ -54,7 +54,6 @@ RDEPEND="
 "
 
 BDEPEND="
-	dev-util/glib-utils
 	doc? ( app-doc/doxygen )
 	app-doc/xmltoman
 	sys-devel/gettext
