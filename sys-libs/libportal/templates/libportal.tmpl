@@ -39,7 +39,6 @@ DEPEND="${RDEPEND}
 	)
 "
 BDEPEND="
-	dev-util/glib-utils
 	virtual/pkgconfig
 	gtk-doc? ( dev-util/gi-docgen )
 	qt5? (
