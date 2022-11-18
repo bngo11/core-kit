@@ -1,5 +1,5 @@
---- a/drivers/hwmon/nct6775.c	2022-11-13 14:27:55.518861692 -0600
-+++ b/drivers/hwmon/nct6775.c	2022-11-13 14:29:05.685331457 -0600
+--- a/drivers/hwmon/nct6775-platform.c	2022-11-13 14:27:55.518861692 -0600
++++ b/drivers/hwmon/nct6775-platform.c	2022-11-13 14:29:05.685331457 -0600
 @@ -5106,6 +5106,7 @@
  	"Pro WS X570-ACE",
  	"PRIME B360-PLUS",
