@@ -16,6 +16,8 @@ IUSE="cpu_flags_x86_rdrand doc static-libs threads"
 
 BDEPEND="doc? ( >=app-doc/doxygen-1.8.13 )"
 
+PATCHES=( "${FILESDIR}/json-c-0.16-pc-file.patch" )
+
 MULTILIB_WRAPPED_HEADERS=(
 	/usr/include/json-c/config.h
 )
