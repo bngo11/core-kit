@@ -8,7 +8,7 @@ inherit eutils toolchain-funcs python-single-r1
 
 DESCRIPTION="Port of 7-Zip archiver for Unix"
 HOMEPAGE="http://p7zip.sourceforge.net/"
-SRC_URI="https://api.github.com/repos/flyfishzy/p7zip/tarball/v17.04 -> p7zip-17.04.tar.gz"
+SRC_URI="https://api.github.com/repos/p7zip-project/p7zip/tarball/v17.04 -> p7zip-17.04.tar.gz"
 
 LICENSE="LGPL-2.1 rar? ( unRAR )"
 SLOT="0"
@@ -21,7 +21,7 @@ DEPEND="dev-lang/yasm"
 DOCS=( ChangeLog README TODO )
 
 post_src_unpack() {
-	mv "${WORKDIR}"/jinfeihan57-p7zip-* "${S}" || die
+	mv "${WORKDIR}"/p7zip-* "${S}" || die
 }
 
 src_prepare() {
