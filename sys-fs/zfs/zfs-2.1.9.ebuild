@@ -11,7 +11,7 @@ DESCRIPTION="OpenZFS on Linux and FreeBSD"
 HOMEPAGE="https://github.com/openzfs/zfs"
 
 MY_P="${P/_rc/-rc}"
-SRC_URI="https://github.com/openzfs/zfs/releases/download/zfs-2.1.8/zfs-2.1.8.tar.gz -> zfs-2.1.8.tar.gz"
+SRC_URI="https://github.com/openzfs/zfs/releases/download/zfs-2.1.9/zfs-2.1.9.tar.gz -> zfs-2.1.9.tar.gz"
 KEYWORDS="*"
 
 LICENSE="BSD-2 CDDL MIT"
@@ -69,10 +69,6 @@ REQUIRED_USE="
 "
 
 RESTRICT="test"
-
-PATCHES=(
-	"${FILESDIR}"/zfs-LegacyVersion-ax_python_dev.patch
-)
 
 pkg_setup() {
 	if use kernel_linux && use test-suite; then
