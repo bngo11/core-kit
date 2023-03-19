@@ -10,7 +10,7 @@ inherit autotools lua-single perl-module python-single-r1 toolchain-funcs
 DESCRIPTION="Red Hat Package Management Utils"
 HOMEPAGE="https://rpm.org
 	https://github.com/rpm-software-management/rpm"
-SRC_URI="http://ftp.rpm.org/releases/rpm-4.18.x/rpm-4.18.0.tar.bz2 -> rpm-4.18.0.tar.bz2"
+SRC_URI="http://ftp.rpm.org/releases/rpm-4.18.x/rpm-4.18.1.tar.bz2 -> rpm-4.18.1.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2"
 SLOT="0"
@@ -76,6 +76,8 @@ src_prepare() {
 	sed -i 's:%{_var}/tmp:/var/tmp:' macros.in || die "Fixing tmppath failed"
 	# fix #492642
 	sed -i "s:@__PYTHON@:${PYTHON}:" macros.in || die "Fixing %__python failed"
+	# fix label followed by declaration FL-11111
+	sed -i 's|setmeta:|setmeta: ;|g' lib/fsm.c
 
 	eapply_user
 	eautoreconf
