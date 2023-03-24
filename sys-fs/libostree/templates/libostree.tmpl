@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/ostreedev/ostree"
 LICENSE="LGPL-2"
 SLOT="0"
 
-IUSE="avahi curl gnutls +gpg +http2 introspection doc +libmount man openssl sodium +soup"
+IUSE="avahi curl gnutls +gpg +http2 introspection doc +libmount man openssl +soup"
 
 KEYWORDS="*"
 
@@ -32,7 +32,6 @@ RDEPEND="
 	gpg? ( >=app-crypt/gpgme-1.1.8
 		dev-libs/libgpg-error )
 	openssl? ( >=dev-libs/openssl-1.0.1 )
-	sodium? ( >=dev-libs/libsodium-1.0.14 )
 	soup? ( >=net-libs/libsoup-2.40 )
 	libmount? ( >=sys-apps/util-linux-2.23 )
 "
@@ -81,7 +80,6 @@ src_configure() {
 		$(use_with avahi) \
 		$(use_with gpg gpgme) \
 		$(use_with libmount) \
-		$(use_with sodium ed25519-sodium) \
 		--without-libsystemd \
 		"${myconf[@]}"
 
