@@ -1,14 +1,14 @@
-BDEPEND=dev-util/gdbus-codegen sys-devel/gettext virtual/pkgconfig virtual/pkgconfig
-DEFINED_PHASES=configure
+BDEPEND=dev-util/gdbus-codegen sys-devel/gettext virtual/pkgconfig virtual/pkgconfig >=dev-util/meson-0.48.2 >=dev-util/ninja-1.7.2
+DEFINED_PHASES=compile configure install test
 DEPEND=>=dev-libs/glib-2.66:2[dbus] dev-libs/json-glib >=sys-fs/fuse-3.10.0:3 x11-libs/gdk-pixbuf geolocation? ( >=app-misc/geoclue-2.5.3:2.0 ) screencast? ( >=media-video/pipewire-0.3:= ) >=sys-libs/libportal-0.6 >=sys-apps/bubblewrap-0.6 >=sys-apps/flatpak-1.14
 DESCRIPTION=Desktop integration portal
 EAPI=7
 HOMEPAGE=https://flatpak.org/ https://github.com/flatpak/xdg-desktop-portal
-IUSE=geolocation screencast systemd
+IUSE=geolocation screencast
 KEYWORDS=*
 LICENSE=LGPL-2.1
 RDEPEND=>=dev-libs/glib-2.66:2[dbus] dev-libs/json-glib >=sys-fs/fuse-3.10.0:3 x11-libs/gdk-pixbuf geolocation? ( >=app-misc/geoclue-2.5.3:2.0 ) screencast? ( >=media-video/pipewire-0.3:= ) >=sys-libs/libportal-0.6 >=sys-apps/bubblewrap-0.6 >=sys-apps/flatpak-1.14 sys-apps/dbus
 SLOT=0
 SRC_URI=https://github.com/flatpak/xdg-desktop-portal/releases/download/1.16.0/xdg-desktop-portal-1.16.0.tar.xz
-_eclasses_=multilib	d410501a125f99ffb560b0c523cd3d1e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=eea7fe037a97ac3d2b58bdf91b65faf4
+_eclasses_=eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	meson	2fbe03e3b496f82fd941bcdb9d351c91	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	python-utils-r1	d3f9ec72badd0291b655682d67876adc	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=beeb87618187777ee4e6bf7ba84cd028
