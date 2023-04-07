@@ -31,7 +31,7 @@ CDEPEND="dbus? ( sys-apps/dbus )
 		sys-libs/ncurses:0=
 		sys-libs/readline:0=
 	)
-	!libressl? ( >=dev-libs/openssl-1.0.2k:0=[bindist=] )
+	!libressl? ( >=dev-libs/openssl-1.0.2k:0= )
 	libressl? ( dev-libs/libressl:0= )
 "
 DEPEND="${CDEPEND}
