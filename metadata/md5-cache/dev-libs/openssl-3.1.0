@@ -11,6 +11,6 @@ PDEPEND=app-misc/ca-certificates
 RDEPEND=!<net-misc/openssh-9.2_p1-r3 !<dev-libs/openssl-1.1.1q tls-compression? ( >=sys-libs/zlib-1.2.8-r1[static-libs(+)?,-mgorny(-)] )
 RESTRICT=!test? ( test )
 SLOT=0/3
-SRC_URI=mirror://openssl/source/openssl-3.1.0.tar.gz
+SRC_URI=https://www.openssl.org/source/openssl-3.1.0.tar.gz -> openssl-3.1.0.tar.gz
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	multiprocessing	cac3169468f893670dac3e7cb940e045	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=a4110f8035a65b0d9a1513cfefacb78b
+_md5_=4db750a887e689714587f06d403a3dfd

@@ -6,3 +6,8 @@ openssl:
         versions:
           1.1.1q:
             unmasked: True
+    - openssl:
+        template: openssl_3.1.tmpl
+        versions:
+          3.1.0:
+            unmasked: True
