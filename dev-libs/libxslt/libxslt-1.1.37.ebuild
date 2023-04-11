@@ -31,7 +31,7 @@ MULTILIB_WRAPPED_HEADERS=(
 src_prepare() {
 	default
 
-	DOCS=( AUTHORS ChangeLog FEATURES NEWS README TODO )
+	DOCS=( AUTHORS FEATURES NEWS README TODO )
 
 	# Prefix always needs elibtoolize if not eautoreconf'd.
 	elibtoolize
