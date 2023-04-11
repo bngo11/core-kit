@@ -6,7 +6,7 @@ DISTUTILS_USE_SETUPTOOLS="rdepend"
 
 inherit bash-completion-r1 distutils-r1 toolchain-funcs
 
-SRC_URI="https://github.com/mesonbuild/meson/tarball/f341097c7e7914c250133bd58feb4985d1fbdcd6 -> meson-1.0.1-f341097.tar.gz"
+SRC_URI="https://github.com/mesonbuild/meson/tarball/ae163a3f3e0ccdcbea97c8ad0e78f087925646b9 -> meson-1.1.0-ae163a3.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="Open source build system"

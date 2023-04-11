@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=MIT
 RDEPEND=>=dev-libs/libxml2-2.9.11:2[-mgorny(-)] crypt? ( >=dev-libs/libgcrypt-1.5.3:0=[-mgorny(-)] )
 SLOT=0
-SRC_URI=mirror://gnome/sources/libxslt/1.1/libxslt-1.1.35.tar.xz
+SRC_URI=mirror://gnome/sources/libxslt/1.1/libxslt-1.1.37.tar.xz
 _eclasses_=gnome.org	37cf7031fe78d4b4438194c334767600	libtool	f143db5a74ccd9ca28c1234deffede96	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=e67bcd2c264392bbf064d1b757ecf7bb
