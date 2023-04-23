@@ -1,9 +1,0 @@
---- a/json-c.pc.in	2022-04-13 20:12:43.000000000 -0500
-+++ b/json-c.pc.in	2022-12-05 19:57:03.795924336 -0600
-@@ -8,5 +8,5 @@
- Version: @VERSION@
- Requires:
- Libs.private: @LIBS@
--Libs: -L${libdir} -ljson-c
-+Libs: -L${libdir} -ljson-c -lbsd -lmd
- Cflags: -I${includedir} -I${includedir}/json-c
