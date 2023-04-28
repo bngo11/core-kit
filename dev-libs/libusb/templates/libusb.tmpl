@@ -4,9 +4,9 @@ EAPI=7
 
 inherit autotools multilib-minimal usr-ldscript
 
-DESCRIPTION="A cross-platform library to access USB devices "
+DESCRIPTION="{{ description }}"
 HOMEPAGE="https://libusb.info/ https://github.com/libusb/libusb"
-SRC_URI="https://github.com/libusb/libusb/tarball/4239bc3a50014b8e6a5a2a59df1fff3b7469543b -> libusb-1.0.26-4239bc3.tar.gz"
+SRC_URI="{{ artifacts[0].src_uri }}"
 KEYWORDS="*"
 
 LICENSE="LGPL-2.1"
@@ -23,7 +23,7 @@ BDEPEND="doc? ( app-doc/doxygen )"
 
 post_src_unpack() {
 	if [ ! -d "${S}" ] ; then
-		mv libusb-libusb-* "${S}" || die
+		mv {{ github_user }}-{{ github_repo }}-* "${S}" || die
 	fi
 }
 
