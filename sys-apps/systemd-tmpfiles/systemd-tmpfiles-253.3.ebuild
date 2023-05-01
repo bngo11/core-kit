@@ -163,10 +163,8 @@ src_configure() {
 		-Dp11kit=false
 		-Dpam=false
 		-Dpcre2=false
-		-Dpkgconfig.relocatable=false
 		-Dpolkit=false
 		-Dportabled=false
-		-Dprefer_static=false
 		-Dpstore=false
 		-Dpwquality=false
 		-Dqrencode=false
@@ -204,7 +202,6 @@ src_configure() {
 		-Dutmp=false
 		-Dvalgrind=false
 		-Dvconsole=false
-		-Dvsenv=false
 		-Dwerror=false
 		-Dwheel-group=false
 		-Dxdg-autostart=false
