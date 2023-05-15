@@ -9,7 +9,8 @@ inherit autotools python-any-r1 readme.gentoo-r1 xdg-utils
 
 DESCRIPTION="SPICE server"
 HOMEPAGE="https://www.spice-space.org/"
-SRC_URI="https://gitlab.freedesktop.org/spice/spice/-/archive/v0.15.2/spice-v0.15.2.tar.gz -> spice-v0.15.2.tar.gz"
+SRC_URI="https://direct.funtoo.org/2b/a3/25/2ba3254864c6703b70375218037dcca4015b4ad11021f1ddab0d73ae860ea23e9219ce0d0001c60d8bcedbcad74461b85bad676cba469b3fc9273ffc54368d3a -> spice-0.15.2-with-submodules.tar.xz"
+S="${WORKDIR}/${PN}-v0.15.2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -56,7 +57,8 @@ pkg_setup() {
 
 src_prepare() {
 	default
-
+	eautoreconf
+	cd ${S}/subprojects/spice-common
 	eautoreconf
 }
 
@@ -74,6 +76,7 @@ src_configure() {
 		$(use_with sasl)
 		$(use_enable smartcard)
 		$(use_enable test tests)
+		--enable-manual=no
 		--enable-gstreamer=$(usex gstreamer "1.0" "no")
 		--disable-celt051
 	)
