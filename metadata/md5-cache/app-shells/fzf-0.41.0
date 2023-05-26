@@ -1,0 +1,12 @@
+BDEPEND=>=dev-lang/go-1.12 app-arch/unzip
+DEFINED_PHASES=compile install postinst prepare unpack
+DESCRIPTION=A general-purpose command-line fuzzy finder, written in GoLang
+EAPI=7
+HOMEPAGE=https://github.com/junegunn/fzf
+KEYWORDS=*
+LICENSE=MIT BSD-with-disclosure
+RESTRICT=strip
+SLOT=0
+SRC_URI=https://github.com/junegunn/fzf/tarball/098ef4d7cfb5465e15b29fc087f9db0b81733eec -> fzf-0.41.0-098ef4d.tar.gz https://direct.funtoo.org/f2/31/fe/f231feaecc32b303fcb10d7dc921703a6a3028ca5221ec0f0f59eafbd7054d71ea8403b2dcacc05831e5ed4fa5f911f784a9568d92539ff4396e2b487bf53caa -> fzf-0.41.0-funtoo-go-bundle-614c5888869c490a04f0294d0f214ee5b6257f47a71de2572649dfe88109206fff9ae91a10fbb9f3972ba4d2c9174681cc73c86f7d296d3e02317d3d0c9ac0c8.tar.gz
+_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	go-module	cb10a443c46556a15ed035d7a99128e8	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
+_md5_=053cef0331b375b8a83ca304490de961

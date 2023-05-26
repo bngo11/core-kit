@@ -6,7 +6,7 @@ inherit autotools eutils prefix multilib-minimal
 
 DESCRIPTION="A Client that groks URLs"
 HOMEPAGE="https://curl.haxx.se/"
-SRC_URI="{{src_uri}}"
+SRC_URI="https://github.com/curl/curl/releases/download/curl-8_1_1/curl-8.1.1.tar.gz -> curl-8.1.1.tar.gz"
 
 LICENSE="curl"
 SLOT="0"
@@ -84,7 +84,7 @@ MULTILIB_CHOST_TOOLS=(
 
 post_src_unpack() {
 	if [ ! -e "${S}" ]; then
-		mv "{{github_user}}-{{github_repo}}-{{commit_sha1}}" "${S}" || die
+		mv "curl-curl-" "${S}" || die
 	fi
 }
 
