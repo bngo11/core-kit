@@ -61,8 +61,8 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/junegunn/fzf/tarball/098ef4d7cfb5465e15b29fc087f9db0b81733eec -> fzf-0.41.0-098ef4d.tar.gz
-https://direct.funtoo.org/f2/31/fe/f231feaecc32b303fcb10d7dc921703a6a3028ca5221ec0f0f59eafbd7054d71ea8403b2dcacc05831e5ed4fa5f911f784a9568d92539ff4396e2b487bf53caa -> fzf-0.41.0-funtoo-go-bundle-614c5888869c490a04f0294d0f214ee5b6257f47a71de2572649dfe88109206fff9ae91a10fbb9f3972ba4d2c9174681cc73c86f7d296d3e02317d3d0c9ac0c8.tar.gz"
+SRC_URI="https://github.com/junegunn/fzf/tarball/6eb1874c5a919b63bfebeb9b41f6f004a03df0d7 -> fzf-0.41.1-6eb1874.tar.gz
+https://direct.funtoo.org/12/b8/dc/12b8dc498230817ddc6786a7f15f28bef6f0d57fc1ffabcffbda5155584389dce2650fab74028e7f147be77e36fbc72948bb9b8fd32f19a6e4d6a7c7de19cb82 -> fzf-0.41.1-funtoo-go-bundle-614c5888869c490a04f0294d0f214ee5b6257f47a71de2572649dfe88109206fff9ae91a10fbb9f3972ba4d2c9174681cc73c86f7d296d3e02317d3d0c9ac0c8.tar.gz"
 
 LICENSE="MIT BSD-with-disclosure"
 SLOT="0"
