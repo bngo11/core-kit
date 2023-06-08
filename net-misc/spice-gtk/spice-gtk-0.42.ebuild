@@ -8,7 +8,7 @@ inherit desktop meson optfeature python-any-r1 readme.gentoo-r1 xdg
 
 DESCRIPTION="Set of GObject and Gtk objects for connecting to Spice servers and a client GUI"
 HOMEPAGE="https://www.spice-space.org https://cgit.freedesktop.org/spice/spice-gtk/"
-SRC_URI="https://gitlab.freedesktop.org/spice/spice-gtk/-/archive/v0.42/spice-gtk-v0.42.tar.gz -> spice-gtk-v0.42.tar.gz"
+SRC_URI="https://direct.funtoo.org/0c/b3/04/0cb3049b347fcf3ef29ccdd79658a7f6862ede7b2b33be0a1eb57936581a459fabe6957747b8c748b63cef2f80af614919e4c0080be7b236d14df1ce14001038 -> spice-gtk-0.42-with-submodules.tar.xz"
 KEYWORDS="*"
 S="${WORKDIR}/${PN}-v0.42"
 
