@@ -10,12 +10,3 @@
  from platform import python_version_tuple
  import re
  
-@@ -225,7 +226,7 @@
- 
- def _rst_escape_first_column(rows, headers):
- 	def escape_empty(val):
--		if isinstance(val, (_text_type, _binary_type)) and val.strip() is "":
-+		if isinstance(val, (_text_type, _binary_type)) and val.strip() == "":
- 			return ".."
- 		else:
- 			return val
