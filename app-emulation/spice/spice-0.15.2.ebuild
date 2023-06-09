@@ -9,7 +9,7 @@ inherit autotools python-any-r1 readme.gentoo-r1 xdg-utils
 
 DESCRIPTION="SPICE server"
 HOMEPAGE="https://www.spice-space.org/"
-SRC_URI="https://direct.funtoo.org/2b/a3/25/2ba3254864c6703b70375218037dcca4015b4ad11021f1ddab0d73ae860ea23e9219ce0d0001c60d8bcedbcad74461b85bad676cba469b3fc9273ffc54368d3a -> spice-0.15.2-with-submodules.tar.xz"
+SRC_URI="https://direct.funtoo.org/2b/fb/b7/2bfbb7d3ca6ffd6bf8ddb619be90c0e6197861b73350c71202ca19ef5ea4769d7ccc68e7a0f6ad963a027e0b26d64b0fd99bc6cbc22ca832426463c1ba6545a4 -> spice-0.15.2-with-submodules.tar.xz"
 S="${WORKDIR}/${PN}-v0.15.2"
 
 LICENSE="LGPL-2.1"

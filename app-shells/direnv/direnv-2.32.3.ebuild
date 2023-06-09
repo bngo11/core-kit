@@ -32,7 +32,7 @@ go-module_set_globals
 DESCRIPTION="Direnv is an environment switcher for the shell"
 HOMEPAGE="https://direnv.net"
 SRC_URI="https://github.com/direnv/direnv/tarball/66225ccf94e923268c46c10be666cd281d916601 -> direnv-2.32.3-66225cc.tar.gz
-https://direct.funtoo.org/17/f2/03/17f2034231e64b69a85251e4c02f4a1b200ef851fd6e9de942bbff0b836752131d71c106ecb8a5dd700c6447c49146d0b30dd195212247c3e7951ecc08d371d2 -> direnv-2.32.3-funtoo-go-bundle-88d17fb7238febb9164af104584deabe10ca0b0b32db328a9d1e789bf9c67b153d4f1a83e4857c545e5627f44ee9c496a1dc821645a1fde6c9a821e867f9f036.tar.gz"
+https://direct.funtoo.org/96/0d/7a/960d7ac8873715d474cc2f6ae2354b8edffd9ffd83a29c7556f5d3f06a867fe4db6f63656ca607450a615bf58a7d2b20cf816519bd27009704c1ba27e4e1a93a -> direnv-2.32.3-funtoo-go-bundle-88d17fb7238febb9164af104584deabe10ca0b0b32db328a9d1e789bf9c67b153d4f1a83e4857c545e5627f44ee9c496a1dc821645a1fde6c9a821e867f9f036.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
