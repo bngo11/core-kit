@@ -51,8 +51,8 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/kubernetes-sigs/kind/tarball/b7bc6bb5650119dedf082137a21ae422cd1a9ce7 -> kind-0.19.0-b7bc6bb.tar.gz
-https://direct.funtoo.org/5f/e4/99/5fe4993e5541ad5879d2cd545bb4b311082e325df057a3fe1d5ddcc36974b88aafe5c568f2cb9e5eb1d7694df1a8354de48e5901036cf20aa3227ee58bd5c365 -> kind-0.19.0-funtoo-go-bundle-b59322c751ee5eb5a878014e028fa3e653265c4f6993ab90d4ecbb6ff9ec4f98c1bc8e59c64ba71a7476b13d7cfcc08b45ae19e2fb9e0c0dac0e717a18f77f47.tar.gz"
+SRC_URI="https://github.com/kubernetes-sigs/kind/tarball/715a5d163739ec398afe8f7361c5e0fc346c83b0 -> kind-0.20.0-715a5d1.tar.gz
+https://direct.funtoo.org/a0/00/42/a00042e38c2c77f125ea859049487791e477a28d407b7060a33220594275420ff03d510b5f570341a83a9093949281d7d79f4259b820711b6d7515f141691892 -> kind-0.20.0-funtoo-go-bundle-b59322c751ee5eb5a878014e028fa3e653265c4f6993ab90d4ecbb6ff9ec4f98c1bc8e59c64ba71a7476b13d7cfcc08b45ae19e2fb9e0c0dac0e717a18f77f47.tar.gz"
 
 DESCRIPTION="Tool for running local Kubernetes clusters using Docker container nodes"
 HOMEPAGE="https://kind.sigs.k8s.io/ https://github.com/kubernetes-sigs/kind"
