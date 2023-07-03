@@ -14,7 +14,7 @@ KEYWORDS="*"
 
 LICENSE="LGPL-2+"
 SLOT="0"
-IUSE="bcache +cryptsetup device-mapper dmraid escrow gtk-doc introspection lvm kbd test +tools vdo"
+IUSE="+cryptsetup device-mapper escrow gtk-doc introspection lvm +nvme test +tools"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
@@ -31,15 +31,11 @@ RDEPEND="
 		>=sys-fs/cryptsetup-2.2.0:=
 	)
 	device-mapper? ( sys-fs/lvm2 )
-	dmraid? (
-		sys-fs/dmraid
-		sys-fs/lvm2
-	)
 	lvm? (
 		sys-fs/lvm2
 		virtual/udev
 	)
-	vdo? ( dev-libs/libyaml )
+	nvme? ( sys-libs/libnvme )
 	${PYTHON_DEPS}
 "
 
@@ -63,7 +59,12 @@ pkg_setup() {
 src_prepare() {
 	xdg_environment_reset #623992
 	default
-	[[ "${PV}" == *9999 ]] && eautoreconf
+
+	# https://bugs.gentoo.org/744289
+	find -type f \( -name "Makefile.am" -o -name "configure.ac" \) -print0 \
+		| xargs --null sed "s@ -Werror@@" -i || die
+
+	eautoreconf
 }
 
 src_configure() {
@@ -71,33 +72,20 @@ src_configure() {
 		--with-btrfs
 		--with-fs
 		--with-part
+		--with-python3
 		--without-mpath
 		--without-nvdimm
 		$(use_enable introspection)
 		$(use_enable test tests)
-		$(use_with bcache)
 		$(use_with cryptsetup crypto)
 		$(use_with device-mapper dm)
-		$(use_with dmraid)
 		$(use_with escrow)
 		$(use_with gtk-doc)
-		$(use_with kbd)
 		$(use_with lvm lvm)
 		$(use_with lvm lvm-dbus)
+		$(use_with nvme)
 		$(use_with tools)
-		$(use_with vdo)
 	)
-	if python_is_python3 ; then
-		myeconfargs+=(
-			--without-python2
-			--with-python3
-		)
-	else
-		myeconfargs+=(
-			--with-python2
-			--without-python3
-		)
-	fi
 	econf "${myeconfargs[@]}"
 }
 
