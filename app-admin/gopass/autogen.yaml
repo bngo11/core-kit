@@ -2,8 +2,6 @@ gopass:
   generator: github-1
   packages:
     - gopass:
-        extensions:
-          - golang
         github:
           user: gopasspw
           query: releases
