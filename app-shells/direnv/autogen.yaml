@@ -2,5 +2,7 @@ direnv:
   generator: github-1
   packages:
     - direnv:
+        extensions:
+          - golang
         github:
           query: releases

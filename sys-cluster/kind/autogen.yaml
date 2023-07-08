@@ -2,6 +2,8 @@ kind:
   generator: github-1
   packages:
     - kind:
+        extensions:
+          - golang
         github:
           user: kubernetes-sigs
           query: releases
