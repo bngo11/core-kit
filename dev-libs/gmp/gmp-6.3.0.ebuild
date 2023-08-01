@@ -6,7 +6,7 @@ inherit gnuconfig libtool multilib-minimal toolchain-funcs
 
 DESCRIPTION="Library for arbitrary-precision arithmetic on different type of numbers"
 HOMEPAGE="https://gmplib.org/"
-SRC_URI="{{src_uri}}"
+SRC_URI="https://gmplib.org/download/gmp/gmp-6.3.0.tar.xz -> gmp-6.3.0.tar.xz"
 LICENSE="|| ( LGPL-3+ GPL-2+ )"
 # The subslot reflects the C & C++ SONAMEs.
 SLOT="0/10.4"
