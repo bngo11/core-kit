@@ -1,0 +1,13 @@
+BDEPEND=>=dev-lang/go-1.12 app-arch/unzip
+DEFINED_PHASES=compile install postinst prepare test unpack
+DESCRIPTION=Define and run multi-container applications with Docker
+EAPI=7
+HOMEPAGE=https://github.com/docker/compose
+KEYWORDS=*
+LICENSE=Apache-2.0
+RDEPEND=>=app-emulation/docker-cli-23.0.0
+RESTRICT=test
+SLOT=2
+SRC_URI=https://github.com/docker/compose/tarball/47bb4f966066d79f5f1cb88cff57c8df43b87137 -> compose-2.21.0-47bb4f9.tar.gz https://direct.funtoo.org/ba/39/da/ba39da64b2678968bd8bf62dc0bf7123f2f397b50421b4673a8816c694a7a64df218f5364442431b701713a70ac355997c4f14ce796b8cb8d3970219faa1635d -> docker-compose-2.21.0-funtoo-go-bundle-fde9fbd24f7587a011cd17022e88190ee79c86b4f4eb57e328abd20fbbbef500cefe85d010aea4645e92b75afbe725bd617360c3c56b300f193a864519aa79f5.tar.gz
+_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	go-module	cb10a443c46556a15ed035d7a99128e8	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
+_md5_=0298d5cffa54fe5644ea70cdd4e3bf44

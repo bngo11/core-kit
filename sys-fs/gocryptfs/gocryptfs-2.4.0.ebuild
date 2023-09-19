@@ -7,7 +7,7 @@ inherit go-module
 DESCRIPTION="Encrypted overlay filesystem written in Go"
 HOMEPAGE="https://nuetzlich.net/gocryptfs https://github.com/rfjakob/gocryptfs/releases"
 
-SRC_URI="https://github.com/rfjakob/gocryptfs/tarball/8979cca43ea2ed15cf6ff577619298b9473d2882 -> gocryptfs-2.4.0-8979cca.tar.gz
+SRC_URI="https://github.com/rfjakob/gocryptfs/tarball/7d4fb1fd0667d1fed945a519de86919cb90f4edb -> gocryptfs-2.4.0-7d4fb1f.tar.gz
 https://direct.funtoo.org/a1/2b/6c/a12b6c064f2807b76e2a4a9a9e54aa24ff65b0b1cf03c89f05b3eae6771a9f04f387e6848de8de58db6c30d725066d459051f1ebbdbae42519fa9a6afec5a36e -> gocryptfs-2.4.0-funtoo-go-bundle-ec772957817fbb0ce5f170cf32cd78d77aade9b5eab92c16ddb66f301f1546c2a0e25e35f6506d58de0e254b7b440dd902eea217760614b4b285de9978a869e9.tar.gz"
 
 LICENSE="Apache-2.0 BSD BSD-2 MIT"
@@ -22,7 +22,7 @@ RDEPEND="
 	ssl? ( dev-libs/openssl:0= )
 "
 
-S="${WORKDIR}/rfjakob-gocryptfs-8979cca"
+S="${WORKDIR}/rfjakob-gocryptfs-7d4fb1f"
 
 # We omit debug symbols which looks like pre-stripping to portage.
 QA_PRESTRIPPED="
