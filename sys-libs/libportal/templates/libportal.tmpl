@@ -59,8 +59,10 @@ src_configure() {
 	use qt5 && backends+="qt5,"
 
 	local emesonargs=(
-		-Dbackends=${backends%,}
 		-Dportal-tests=false
+		$(meson_feature gtk backend-gtk3)
+		$(meson_feature gtk backend-gtk4)
+		$(meson_feature qt5 backend-qt5)
 		$(meson_use introspection)
 		$(meson_use vala vapi)
 		$(meson_use gtk-doc docs)
