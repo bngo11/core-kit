@@ -6,7 +6,7 @@ KV_min=2.6.39
 
 inherit autotools linux-info toolchain-funcs user
 
-SRC_URI="https://github.com/eudev-project/eudev/releases/download/v3.2.12/eudev-3.2.12.tar.gz -> eudev-3.2.12.tar.gz"
+SRC_URI="https://github.com/eudev-project/eudev/releases/download/v3.2.14/eudev-3.2.14.tar.gz -> eudev-3.2.14.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="Linux dynamic and persistent device naming support (aka userspace devfs)"
