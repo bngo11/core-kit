@@ -19,9 +19,12 @@ async def generate(hub, **pkginfo):
 			continue
 
 	if version:
+		dep_ver = version.split(".")
+		dep_ver[-1] = "0"
+		dep_ver = ".".join(dep_ver)
 		final_name=f'fzf-{version}.tar.gz'
 		url=f"https://github.com/junegunn/fzf/archive/{version}.tar.gz"
-		depurl=f'https://dev.gentoo.org/~sam/distfiles/app-shells/fzf/fzf-{version}-deps.tar.xz'
+		depurl=f'https://dev.gentoo.org/~sam/distfiles/app-shells/fzf/fzf-{dep_ver}-deps.tar.xz'
 		ebuild = hub.pkgtools.ebuild.BreezyBuild(
 			**pkginfo,
 			version=version,
