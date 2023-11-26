@@ -89,8 +89,8 @@ EGO_SUM=(
 	"github.com/google/go-querystring v1.0.0/go.mod"
 	"github.com/google/go-querystring v1.1.0"
 	"github.com/google/go-querystring v1.1.0/go.mod"
-	"github.com/gopasspw/gopass-hibp v1.15.8"
-	"github.com/gopasspw/gopass-hibp v1.15.8/go.mod"
+	"github.com/gopasspw/gopass-hibp v1.15.9"
+	"github.com/gopasspw/gopass-hibp v1.15.9/go.mod"
 	"github.com/hashicorp/golang-lru v1.0.2"
 	"github.com/hashicorp/golang-lru v1.0.2/go.mod"
 	"github.com/hashicorp/golang-lru/v2 v2.0.7"
@@ -131,8 +131,8 @@ EGO_SUM=(
 	"github.com/lxn/win v0.0.0-20210218163916-a377121e959e/go.mod"
 	"github.com/makiuchi-d/gozxing v0.1.1"
 	"github.com/makiuchi-d/gozxing v0.1.1/go.mod"
-	"github.com/martinhoefling/goxkcdpwgen v0.1.2-0.20221205222637-737661b92a0e"
-	"github.com/martinhoefling/goxkcdpwgen v0.1.2-0.20221205222637-737661b92a0e/go.mod"
+	"github.com/martinhoefling/goxkcdpwgen v0.1.2-0.20231122080842-e51aa57005ca"
+	"github.com/martinhoefling/goxkcdpwgen v0.1.2-0.20231122080842-e51aa57005ca/go.mod"
 	"github.com/mattn/go-colorable v0.1.4/go.mod"
 	"github.com/mattn/go-colorable v0.1.13"
 	"github.com/mattn/go-colorable v0.1.13/go.mod"
@@ -317,8 +317,8 @@ go-module_set_globals
 
 DESCRIPTION="a simple but powerful password manager for the terminal"
 HOMEPAGE="https://www.gopass.pw/"
-SRC_URI="https://github.com/gopasspw/gopass/tarball/c267dd64e0e3f5d45d85bef9e1e645548ac7909e -> gopass-1.15.9-c267dd6.tar.gz
-https://direct.funtoo.org/44/cf/40/44cf408d0de55e7ab52a9c14cfe83354a7ae502fa90d92cde556f9b3973e964fae4525a69f531b97839fe8f81c1e941256f7a36bb509589df26fdbf617cd55af -> gopass-1.15.9-funtoo-go-bundle-50b60d52409e02c1879397c6591b76e87be3b0a8b7c5e82df4456cf0b5d6b41e3b4f5ec4a84e821e90256427c7828750e59193502016f47712df8999b3c2e156.tar.gz"
+SRC_URI="https://github.com/gopasspw/gopass/tarball/453d8df10a5dd26c03131d397ab51a2963ea125c -> gopass-1.15.10-453d8df.tar.gz
+https://direct.funtoo.org/79/d6/03/79d603dcbb5142a99ec8e6b0534c8ce12c3771cc986c219cd5392a8bb8b0f01ec65c67706c3d5d3ee8be895cb87fdd631231a8d8f3dbb341d154ab8c1f5f6aa6 -> gopass-1.15.10-funtoo-go-bundle-58188000f42c9e705b7aaacd097de6e2889dbd051c37d76c84489531bfead56d77dabb93f9358620e76ea88882a5c6628ff1dcdc50c8020b8fd8b1697703ab3e.tar.gz"
 
 LICENSE="MIT Apache-2.0 BSD MPL-2.0 BSD-2"
 SLOT="0"
