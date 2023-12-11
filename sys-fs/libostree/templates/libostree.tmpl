@@ -11,14 +11,14 @@ HOMEPAGE="https://github.com/ostreedev/ostree"
 LICENSE="LGPL-2"
 SLOT="0"
 
-IUSE="avahi curl gnutls +gpg +http2 introspection doc +libmount man openssl +soup"
+IUSE="avahi curl gnutls +gpg +http2 introspection doc +libmount man openssl +soup3"
 
 KEYWORDS="*"
 
-# NOTE: soup/curl is optional, but not if you want to use flatpaks in a meaningful way,
+# NOTE: soup3/curl is optional, but not if you want to use flatpaks in a meaningful way,
 # so we force it.
-REQUIRED_USE="|| ( soup curl )"
-# NOTE2: curl needs soup for tests right now (17 Feb 2017)
+REQUIRED_USE="|| ( soup3 curl )"
+# NOTE2: curl needs soup3 for tests right now (17 Feb 2017)
 
 RDEPEND="
 	>=dev-libs/glib-2.40:2
@@ -32,14 +32,14 @@ RDEPEND="
 	gpg? ( >=app-crypt/gpgme-1.1.8
 		dev-libs/libgpg-error )
 	openssl? ( >=dev-libs/openssl-1.0.1 )
-	soup? ( >=net-libs/libsoup-2.40 )
+	soup3? ( >=net-libs/libsoup-3.4 )
 	libmount? ( >=sys-apps/util-linux-2.23 )
 "
 DEPEND="${RDEPEND}
 	sys-devel/bison
 	virtual/pkgconfig
 	sys-fs/e2fsprogs
-	curl? ( >=net-libs/libsoup-2.40 )
+	curl? ( >=net-libs/libsoup-3.4 )
 	introspection? ( >=dev-libs/gobject-introspection-1.34 )
 	doc? ( >=dev-util/gtk-doc-1.15 )
 	man? ( dev-libs/libxslt )
@@ -49,12 +49,12 @@ src_configure() {
 
 	local myconf=()
 
-	if ! use soup && use curl; then
+	if ! use soup3 && use curl; then
 		myconf+=( $(use_with curl) )
 	fi
 
-	if use soup; then
-		myconf+=( $(use_with soup) )
+	if use soup3; then
+		myconf+=( $(use_with soup3) )
 	fi
 
 	# Crypto for checksums:
