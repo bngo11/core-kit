@@ -320,7 +320,7 @@ go-module_set_globals
 DESCRIPTION="a simple but powerful password manager for the terminal"
 HOMEPAGE="https://www.gopass.pw/"
 SRC_URI="https://github.com/gopasspw/gopass/tarball/035581c3d23deecc8c750b683b48aa79e1a004c8 -> gopass-1.15.11-035581c.tar.gz
-https://direct.funtoo.org/22/c8/db/22c8db28f3bd54aa4979a352fc1f63cf88d92d9d21e5b002b164d13ba1e7470d8ee2eea27c415d85d7d9e97f57e1f3414479282d7c2952b4f2d7998176a4ca84 -> gopass-1.15.11-funtoo-go-bundle-fa2abce7dadfe1f248078976900aa80cf3d4858edc9017b539561ca65ec0e26ec6b22fb0478ce1514efcd19343efd6f92a4dd34a70460bcfde079a07a4ff18f4.tar.gz"
+https://direct.funtoo.org/64/50/8d/64508da980f73a02c8af4c23f9cf0a1517db0ec82e795f17674eca2ae74e59e949ba5288190b710c32ca5b342e283a79a13909c327f18a31062ec6315142c35c -> gopass-1.15.11-funtoo-go-bundle-fa2abce7dadfe1f248078976900aa80cf3d4858edc9017b539561ca65ec0e26ec6b22fb0478ce1514efcd19343efd6f92a4dd34a70460bcfde079a07a4ff18f4.tar.gz"
 
 LICENSE="MIT Apache-2.0 BSD MPL-2.0 BSD-2"
 SLOT="0"

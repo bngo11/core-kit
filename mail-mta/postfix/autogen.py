@@ -5,7 +5,8 @@ from bs4 import BeautifulSoup
 
 
 async def generate(hub, **pkginfo):
-	url = f"http://cdn.postfix.johnriley.me/mirrors/postfix-release/"
+	# url = f"http://cdn.postfix.johnriley.me/mirrors/postfix-release/"
+	url = f"https://ghostarchive.org/postfix/postfix-release/"
 	html_data = await hub.pkgtools.fetch.get_page(url)
 	soup = BeautifulSoup(html_data, "html.parser")
 	archives = {}
