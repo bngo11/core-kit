@@ -31,7 +31,6 @@ RDEPEND="${PYTHON_DEPS}
 	>=sys-libs/libosinfo-0.2.10[introspection]
 	gtk? (
 		gnome-base/dconf
-		>=net-libs/gtk-vnc-0.3.8[gtk3(+),introspection]
 		net-misc/spice-gtk[usbredir,gtk3,introspection,sasl?]
 		policykit? ( sys-auth/polkit[introspection] )
 		sys-apps/dbus[X]
