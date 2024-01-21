@@ -5,7 +5,7 @@ EAPI=7
 inherit autotools golang-base bash-completion-r1 linux-info user
 
 DESCRIPTION="Fast, dense and secure container management"
-HOMEPAGE="https://linuxcontainers.org/lxd/introduction/ https://github.com/lxc/lxd"
+HOMEPAGE="https://documentation.ubuntu.com/lxd/en/latest/ https://github.com/canonical/lxd"
 SRC_URI="https://github.com/canonical/lxd/releases/download/lxd-5.6/lxd-5.6.tar.gz -> lxd-5.6.tar.gz"
 
 # Needs to include licenses for all bundled programs and libraries.
