@@ -23,7 +23,7 @@ DEB_PV="${KERNEL_TRIPLET}-${DEB_PATCHLEVEL}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
 KEYWORDS="*"
-IUSE="acpi-ec binary btrfs custom-cflags ec2 +logo luks lvm savedconfig sign-modules zfs"
+IUSE="acpi-ec asus binary btrfs custom-cflags ec2 +logo luks lvm savedconfig sign-modules zfs"
 RDEPEND="
 	|| (
 		<sys-apps/gawk-5.2.0
@@ -166,6 +166,13 @@ src_prepare() {
 		./config-extract ${DEB_ARCH} ${FEATURESET} ${DEB_SUBARCH} || die
 	fi
 	setno_config .config CONFIG_DEBUG
+
+	if use asus; then
+		tweak_config .config CONFIG_SENSORS_ASUS_WMI m
+		tweak_config .config CONFIG_SENSORS_ASUS_WMI_EC m
+		epatch "${FILESDIR}"/nct6775.patch || die
+	fi
+
 	if use acpi-ec; then
 		# most fan control tools require this
 		tweak_config .config CONFIG_ACPI_EC_DEBUGFS m
