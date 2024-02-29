@@ -26,7 +26,7 @@ async def generate(hub, **pkginfo):
 				break
 			break
 
-		except (IndexError, ValueError, KeyError):
+		except (IndexError, ValueError, KeyError, TypeError):
 			continue
 	else:
 		version = None
