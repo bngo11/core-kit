@@ -3,8 +3,9 @@
 
 EAPI=7
 PYTHON_COMPAT=( python3+ )
+VALA_USE_DEPEND="vapigen"
 
-inherit desktop meson optfeature python-any-r1 readme.gentoo-r1 xdg
+inherit desktop meson optfeature python-any-r1 readme.gentoo-r1 vala xdg
 
 DESCRIPTION="Set of GObject and Gtk objects for connecting to Spice servers and a client GUI"
 HOMEPAGE="https://www.spice-space.org https://cgit.freedesktop.org/spice/spice-gtk/"
@@ -13,11 +14,10 @@ KEYWORDS="*"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-IUSE="+gtk3 +introspection lz4 mjpeg policykit sasl smartcard usbredir wayland webdav"
+IUSE="+gtk3 +introspection lz4 mjpeg policykit sasl smartcard usbredir vala wayland webdav"
 
 # TODO:
 # * use external pnp.ids as soon as that means not pulling in gnome-desktop
-# * re-enable 'vala' USE based dependency currently, this fails to find vapigen
 RDEPEND="
 	dev-libs/glib:2
 	dev-libs/json-glib:0=
@@ -66,11 +66,20 @@ BDEPEND="
 		dev-python/six[${PYTHON_USEDEP}]
 		dev-python/pyparsing[${PYTHON_USEDEP}]
 	')
+	vala? ( $(vala_depend) )
 "
 
 python_check_deps() {
 	python_has_version "dev-python/six[${PYTHON_USEDEP}]" &&
 	python_has_version "dev-python/pyparsing[${PYTHON_USEDEP}]"
+}
+
+src_prepare() {
+	default
+
+	python_fix_shebang subprojects/keycodemapdb/tools/keymap-gen
+
+	use vala && vala_src_prepare
 }
 
 src_configure() {
@@ -83,6 +92,7 @@ src_configure() {
 		$(meson_feature sasl)
 		$(meson_feature smartcard)
 		$(meson_feature usbredir)
+		$(meson_feature vala vapi)
 		$(meson_feature webdav)
 		$(meson_feature wayland wayland-protocols)
 	)
@@ -96,7 +106,7 @@ src_configure() {
 	if use usbredir; then
 		emesonargs+=(
 			-Dusb-acl-helper-dir=/usr/libexec
-			-Dusb-ids-path="${EPREFIX}"/usr/share/misc/usb.ids
+			-Dusb-ids-path="${EPREFIX}"/usr/share/hwdata/usb.ids
 		)
 	fi
 
