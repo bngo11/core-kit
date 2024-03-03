@@ -1,4 +1,4 @@
-BDEPEND=>=dev-lang/go-1.19 >=dev-lang/go-1.12 app-arch/unzip
+BDEPEND=>=dev-lang/go-1.21 >=dev-lang/go-1.12 app-arch/unzip
 DEFINED_PHASES=compile install postinst prepare unpack
 DEPEND=!sys-cluster/kubernetes
 DESCRIPTION=CLI to run commands against Kubernetes clusters
@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=Apache-2.0
 RESTRICT=strip test
 SLOT=0
-SRC_URI=https://api.github.com/repos/kubernetes/kubernetes/tarball/v1.29.2 -> kubernetes-1.29.2.tar.gz
+SRC_URI=https://github.com/kubernetes/kubernetes/tarball/949ad4c99a1c5b5dc6871a8785f4f1a55b20c1ef -> kubernetes-1.29.2-949ad4c.tar.gz https://direct.funtoo.org/c3/32/50/c33250233c0f20af357d743699513f251025451a58c17518de5f315db453ac13d8a649e1934104637bec52e6ca5b61e255f82abd9b0ed7eb38f85fabeeee95cd -> kubectl-1.29.2-funtoo-go-bundle-68c8d6e1e1945bb4acccddf4ab2a14da67715e866056cc16747e0c0c3341868a5ed882100e3e3f2f9db07530e9f3ceb3a694a1caede8bf3143f9c452bb20d382.tar.gz
 _eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	go-module	cb10a443c46556a15ed035d7a99128e8	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=0f714147af9df8ca19b81daf2c8d9607
+_md5_=546b3c7260f6419c87a1382916ccb8f1
