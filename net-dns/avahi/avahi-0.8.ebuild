@@ -14,6 +14,7 @@ LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="*"
 IUSE="autoipd bookmarks +dbus doc gdbm gtk howl-compat +introspection ipv6 kernel_linux +mdnsresponder-compat mono nls python qt5 selinux systemd test"
+S="${WORKDIR}/avahi-avahi-f060abe"
 
 REQUIRED_USE="
 	python? ( dbus gdbm ${PYTHON_REQUIRED_USE} )
@@ -59,13 +60,6 @@ BDEPEND="
 	sys-devel/gettext
 	virtual/pkgconfig
 "
-
-post_src_unpack() {
-	if [ ! -d "${S}" ]; then
-		mv avahi-avahi* "${S}" || die
-	fi
-}
-
 
 pkg_preinst() {
 	enewgroup netdev
