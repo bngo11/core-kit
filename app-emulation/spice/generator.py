@@ -16,11 +16,9 @@ async def generate(hub, **pkginfo):
 			list(map(int, version.split('.')))
 			desc = item['release']['description'].split('\n')
 			for d in desc:
-				print(d)
 				if not d.startswith('['):
 					continue
 				final_name = d.split('](')[0].strip('[')
-				print(d, final_name)
 				if final_name.endswith('sig') or final_name.endswith('sum'):
 					continue
 				break

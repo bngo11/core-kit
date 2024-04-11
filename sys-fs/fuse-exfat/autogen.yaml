@@ -1,0 +1,6 @@
+fuse-exfat_rule:
+  defaults:
+    cat: 'sys-fs'
+  packages:
+    - fuse-exfat
+    - exfat-utils
