@@ -20,6 +20,7 @@ RDEPEND="
 	${PYTHON_DEPS}
 	>=dev-libs/libgudev-237
 	>=sys-auth/polkit-0.120[introspection]
+	>=dev-python/shtab-1.7
 "
 DEPEND="${RDEPEND}
 	doc? ( >=dev-util/gtk-doc-1.33 )
@@ -29,7 +30,7 @@ src_configure() {
 	local emesonargs=(
 		-Dsystemdsystemunitdir=/usr/lib/systemd/user/
 		$(meson_use doc gtk_doc)
-		$(meson_use pylint)
+		$(meson_feature pylint)
 		$(meson_use tests)
 	)
 
