@@ -8,12 +8,12 @@ MY_PV="${PV:0:3}"
 MY_P="${PN}-${MY_PV}"
 DESCRIPTION="console display library"
 HOMEPAGE="https://www.gnu.org/software/ncurses/ https://invisible-island.net/ncurses/"
-SRC_URI="{{ src_uri }}
+SRC_URI="https://invisible-mirror.net/archives/ncurses/ncurses-6.4.tar.gz -> ncurses-6.4.tar.gz
 "
 
 LICENSE="MIT"
 SLOT="0" # The subslot reflects the SONAME.
-KEYWORDS="{% if stable %}*{% else %}next{% endif %}"
+KEYWORDS="next"
 IUSE="ada +cxx debug doc gpm minimal profile static-libs test tinfo trace unicode"
 RESTRICT="!test? ( test )"
 
