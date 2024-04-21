@@ -20,7 +20,7 @@ IUSE=""
 SLOT="0"
 LICENSE="Apache-2.0"
 KEYWORDS="*"
-S="${WORKDIR}/funtoo-ramdisk-1.1.12"
+S="${WORKDIR}/funtoo_ramdisk-1.1.12"
 
 python_install_all() {
 	doman ${S}/doc/ramdisk.8
