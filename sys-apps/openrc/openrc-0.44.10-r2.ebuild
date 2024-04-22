@@ -51,6 +51,7 @@ PATCHES=(
 	"${FILESDIR}"/openrc-0.44.10-integer-expression-expected.patch # FL-6510
 	"${FILESDIR}"/openrc-0.44.10-cgroups.patch # FL-10036
 	"${FILESDIR}"/openrc-0.44.10-hwclock-grep.patch
+	"${FILESDIR}"/openrc-0.44-glibc-strlcat.patch
 )
 
 src_prepare() {

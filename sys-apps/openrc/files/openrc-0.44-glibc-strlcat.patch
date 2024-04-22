@@ -1,0 +1,51 @@
+diff --git a/meson.build b/meson.build
+--- a/meson.build	2024-04-22 15:32:34.449361776 -0500
++++ b/meson.build	2024-04-22 15:33:53.191637935 -0500
+@@ -166,6 +166,10 @@
+ cc_flags = [cc_debug_flags, cc_os_flags, cc_warning_flags]
+ add_project_arguments(cc_flags, language : 'c')
+ 
++if cc.has_function('strlcpy', prefix: '#define _GNU_SOURCE\n#include <string.h>')
++  add_project_arguments('-DHAVE_STRLCPY', language: 'c')
++endif
++
+ incdir = include_directories('src/includes')
+ einfo_incdir = include_directories('src/libeinfo')
+ rc_incdir = include_directories('src/librc')
+diff --git a/src/libeinfo/libeinfo.c b/src/libeinfo/libeinfo.c
+--- a/src/libeinfo/libeinfo.c	2024-04-22 15:37:27.694941934 -0500
++++ b/src/libeinfo/libeinfo.c	2024-04-22 15:39:13.452624501 -0500
+@@ -152,9 +152,7 @@
+ };
+ #endif
+ 
+-/* strlcat and strlcpy are nice, shame glibc does not define them */
+-#ifdef __GLIBC__
+-#  if ! defined (__UCLIBC__) && ! defined (__dietlibc__)
++#ifndef HAVE_STRLCPY
+ static size_t
+ strlcat(char *dst, const char *src, size_t size)
+ {
+@@ -182,7 +180,6 @@
+ 
+ 	return dst_n + (s - src);
+ }
+-#  endif
+ #endif
+ 
+ static bool
+diff --git a/src/shared/helpers.h b/src/shared/helpers.h
+--- a/src/includes/helpers.h	2024-04-22 15:38:28.277614656 -0500
++++ b/src/includes/helpers.h	2024-04-22 15:39:56.927671676 -0500
+@@ -37,10 +37,8 @@
+ 
+ #define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
+ 
+-#ifdef __GLIBC__
+-#  if ! defined (__UCLIBC__) && ! defined (__dietlibc__)
++#ifndef HAVE_STRLCPY
+ #    define strlcpy(dst, src, size) snprintf(dst, size, "%s", src)
+-#  endif
+ #endif
+ 
+ #ifndef timespecsub
