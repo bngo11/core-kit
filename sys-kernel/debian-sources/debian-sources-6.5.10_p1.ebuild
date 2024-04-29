@@ -23,7 +23,7 @@ DEB_PV="${KERNEL_TRIPLET}-${DEB_PATCHLEVEL}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
 KEYWORDS="*"
-IUSE="acpi-ec asus binary btrfs custom-cflags ec2 +logo luks lvm savedconfig sign-modules zfs"
+IUSE="acpi-ec asus binary btrfs custom-cflags ec2 lenovo +logo luks lvm savedconfig sign-modules zfs"
 RDEPEND="
 	|| (
 		<sys-apps/gawk-5.2.0
@@ -171,6 +171,18 @@ src_prepare() {
 		tweak_config .config CONFIG_SENSORS_ASUS_WMI m
 		tweak_config .config CONFIG_SENSORS_ASUS_WMI_EC m
 		epatch "${FILESDIR}"/nct6775.patch || die
+	fi
+
+	if use lenovo; then
+		tweak_config .config CONFIG_SND_SOC_SOF_AMD_TOPLEVEL m
+		tweak_config .config CONFIG_SND_SOC_SOF_AMD_RENOIR m
+		tweak_config .config CONFIG_SND_SOC_SOF_AMD_REMBRANDT m
+		tweak_config .config CONFIG_SND_SOC_SOF_ACPI m
+		tweak_config .config CONFIG_SND_SOC_AMD_RPL_ACP6x m
+		tweak_config .config CONFIG_SND_SOC_AMD_PS m
+		tweak_config .config CONFIG_SND_SOC_AMD_PS_MACH m
+		tweak_config .config CONFIG_SND_DMAENGINE_PCM m
+		tweak_config .config CONFIG_SND_SOC_GENERIC_DMAENGINE_PCM y
 	fi
 
 	if use acpi-ec; then
