@@ -27,7 +27,7 @@ IUSE="debug test custom-cflags"
 DEPEND="dev-lang/perl"
 RDEPEND="${DEPEND}"
 
-KS="${WORKDIR}/linux-6.8"
+KS="${WORKDIR}/linux-"
 
 # Klibc has no PT_GNU_STACK support, so scanning for execstacks is moot
 QA_EXECSTACK="*"
