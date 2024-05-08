@@ -1,55 +1,40 @@
-from packaging.specifiers import SpecifierSet
-from packaging.version import Version
+#!/usr/bin/env python3
+
+import json
 
 async def generate(hub, **pkginfo):
-	supported_releases = {
-		'lts': '>=6.0.0',
-		'feature': '<1.0.0',
-	}
-	github_user = "lxc"
-	github_repo = "incus"
-	json_list = await hub.pkgtools.fetch.get_page(
-		f"https://api.github.com/repos/{github_user}/{github_repo}/releases", is_json=True
-	)
+	json_data = await hub.pkgtools.fetch.get_page("https://api.github.com/repos/lxc/incus/releases", is_json=True)
+	version = None
+	url = None
 
-	handled_releases=[]
+	for item in json_data:
+		try:
+			if item["prerelease"] or item["draft"]:
+				continue
 
-	for rel in json_list:
-		selectedVersion = None
-		version = rel["tag_name"][1:]
+			version = item["tag_name"].strip('v')
+			list(map(int, version.split(".")))
 
-		if len(supported_releases) == 0:
-			break
+			for asset in item['assets']:
+				asset_name = asset["name"]
 
-		v1 = Version(version)
-		for k, v in supported_releases.items():
-			selector = SpecifierSet(v)
-			if v1 in selector:
-				selectedVersion = k
+				if asset_name.endswith("tar.xz"):
+					url = asset["browser_download_url"]
+					break
+
+			if url:
 				break
 
-		if selectedVersion:
-			handled_releases.append(version)
-			del supported_releases[k]
+		except (KeyError, IndexError, ValueError):
 			continue
 
-	artifacts = []
-	for pv in handled_releases:
-
-		# Version with patch version zero is generated with only major and minor version.
-		# So, version 0.4.0 for example will be 0.4 as tarball.
-		v = Version(pv)
-		tar_version = pv
-		if v.major < 6 and v.micro == 0:
-			tar_version = "%s.%s" % (v.major, v.minor)
-
-		url=f"https://github.com/lxc/incus/releases/download/v{pv}/incus-{tar_version}.tar.xz"
+	if version and url:
 		ebuild = hub.pkgtools.ebuild.BreezyBuild(
 			**pkginfo,
-			version=pv,
-			tar_version=tar_version,
-			github_user=github_user,
-			github_repo=github_repo,
-			artifacts=[hub.pkgtools.ebuild.Artifact(url=url)],
+			version=version,
+			tar_version=asset_name.split('-')[-1].rsplit('.', 2)[0],
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=asset_name)]
 		)
 		ebuild.push()
+
+# vim: ts=4 sw=4 noet
