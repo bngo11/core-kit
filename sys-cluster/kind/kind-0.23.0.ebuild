@@ -10,6 +10,7 @@ EGO_SUM=(
 	"github.com/alessio/shellescape v1.4.1"
 	"github.com/alessio/shellescape v1.4.1/go.mod"
 	"github.com/cpuguy83/go-md2man/v2 v2.0.1/go.mod"
+	"github.com/creack/pty v1.1.9/go.mod"
 	"github.com/davecgh/go-spew v1.1.1"
 	"github.com/davecgh/go-spew v1.1.1/go.mod"
 	"github.com/evanphx/json-patch/v5 v5.6.0"
@@ -20,8 +21,9 @@ EGO_SUM=(
 	"github.com/inconshreveable/mousetrap v1.0.0/go.mod"
 	"github.com/jessevdk/go-flags v1.4.0/go.mod"
 	"github.com/kr/pty v1.1.1/go.mod"
-	"github.com/kr/text v0.1.0"
 	"github.com/kr/text v0.1.0/go.mod"
+	"github.com/kr/text v0.2.0"
+	"github.com/kr/text v0.2.0/go.mod"
 	"github.com/mattn/go-isatty v0.0.14"
 	"github.com/mattn/go-isatty v0.0.14/go.mod"
 	"github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e"
@@ -51,8 +53,8 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/kubernetes-sigs/kind/tarball/2b248e7df157d4f1a44ecea114be3d58c9232930 -> kind-0.22.0-2b248e7.tar.gz
-https://direct.funtoo.org/12/8f/83/128f835ea7ff9bdda54dc7a4cc31294db3d818fbfb00fd3b68811b4b30c9221520f33cb457d9aab999bf28b12be607ca2bd301e7526e2f6529f599becb457020 -> kind-0.22.0-funtoo-go-bundle-b59322c751ee5eb5a878014e028fa3e653265c4f6993ab90d4ecbb6ff9ec4f98c1bc8e59c64ba71a7476b13d7cfcc08b45ae19e2fb9e0c0dac0e717a18f77f47.tar.gz"
+SRC_URI="https://github.com/kubernetes-sigs/kind/tarball/0296c52b38a6bb5ccdcbcf4e57f0ba79415e6ff2 -> kind-0.23.0-0296c52.tar.gz
+https://direct.funtoo.org/b0/cc/09/b0cc09694e250dc5d1b2923d807598f7d518467cce07b57f088254f162aebde7c120d0f3d4394eb10f76e669187473448fdf6b309949cf6f0e363e802c16b2ea -> kind-0.23.0-funtoo-go-bundle-db8518754d1e638fe192cccde4cd9c8baca418c8936f901d6d2db1e6009b8fa11f36d0b9b408145c7e40589ef57a913145ee061c9553745746ed550b1abef7fc.tar.gz"
 
 DESCRIPTION="Tool for running local Kubernetes clusters using Docker container nodes"
 HOMEPAGE="https://kind.sigs.k8s.io/ https://github.com/kubernetes-sigs/kind"
