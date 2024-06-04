@@ -2,9 +2,10 @@
 
 EAPI=7
 
+DISTUTILS_SINGLE_IMPL=1
 PYTHON_COMPAT=( python3+ )
 PYTHON_REQ_USE="ncurses"
-DISTUTILS_USE_SETUPTOOLS=rdepend
+DISTUTILS_USE_PEP517=setuptools
 
 inherit distutils-r1 eutils linux-info
 
@@ -34,53 +35,21 @@ distutils_enable_sphinx docs --no-autodoc
 
 pkg_setup() {
 	linux-info_pkg_setup
+	python-single-r1_pkg_setup
 }
 
-python_prepare_all() {
-	# Remove duplicate entries of a prebuilt doc build and
-	# ensure install of the file glances.conf in /etc/${PN}
-	sed \
-		-e '/share\/doc\/glances/d' \
-		-e "s/'CONTRIBUTING.md',//" \
-		-e "s:'conf/glances.conf':('${EPREFIX}/etc/glances', ['conf/glances.conf':g" \
-		-i setup.py || die
-	sed -i "s/, 'irq']/]/" unitest.py || die
-	distutils-r1_python_prepare_all
-}
-
-python_install_all() {
-	# add an intended file from original data set from setup.py to DOCS
-	local DOCS=( README.rst CONTRIBUTING.md conf/glances.conf )
-	distutils-r1_python_install_all
+python_test() {
+	"${EPYTHON}" unittest-core.py || echo "tests failed with ${EPYTHON}"
 }
 
 pkg_postinst() {
-	#optfeature "Action script feature" dev-python/pystache
 	optfeature "Autodiscover mode" dev-python/zeroconf
 	optfeature "Cloud support" dev-python/requests
-	optfeature "Quicklook CPU info" dev-python/py-cpuinfo
-	optfeature "Docker monitoring support" dev-python/docker-py
-	#optfeature "Export module" \
-	#	unpackaged/bernhard \
-	#	unpackaged/cassandra-driver \
-	#	unpackaged/potsdb \
-	#	dev-python/couchdb-python \
-	#	dev-python/elasticsearch-py \
-	#	dev-python/influxdb \
-	#	dev-python/kafka-python \
-	#	dev-python/pika \
-	#	dev-python/paho-mqtt \
-	#	dev-python/prometheus_client \
-	#	dev-python/pyzmq \
-	#	dev-python/statsd
-	#optfeature "Nvidia GPU monitoring" unpackaged/nvidia-ml-py3
+	optfeature "Docker monitoring support" dev-python/docker
 	optfeature "SVG graph support" dev-python/pygal
 	optfeature "IP plugin" dev-python/netifaces
 	optfeature "RAID monitoring" dev-python/pymdstat
-	#optfeature "SMART support" unpackaged/pySMART.smartx
 	optfeature "RAID support" dev-python/pymdstat
 	optfeature "SNMP support" dev-python/pysnmp
-	#optfeature "sparklines plugin" unpackaged/sparklines
-	optfeature "Web server mode" dev-python/bottle dev-python/requests
 	optfeature "WIFI plugin" net-wireless/python-wifi
 }
