@@ -23,6 +23,7 @@ RDEPEND="
 	dev-python/packaging[${PYTHON_USEDEP}]
 	>=dev-python/psutil-5.6.7[${PYTHON_USEDEP}]
 	>=dev-python/ujson-5.4.0[${PYTHON_USEDEP}]
+	>=dev-python/orjson-3.10.4[${PYTHON_USEDEP}]
 "
 
 # PYTHON_USEDEP omitted on purpose
