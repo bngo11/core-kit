@@ -69,6 +69,7 @@ src_prepare() {
 
 src_configure() {
 	local emesonargs=(
+		-Dauto_features=disabled
 		-Dadm-group=false
 		-Danalyze=false
 		-Db_asneeded=false
@@ -170,7 +171,7 @@ src_configure() {
 		-Dwheel-group=false
 		-Dxdg-autostart=false
 		-Drootprefix="${EPREFIX:-/}"
-		-Dacl=true
+		-Dacl=enabled
 		-Db_staticpic=true
 		-Dtmpfiles=true
 		-Dstandalone-binaries=true # this and below option does the magic
