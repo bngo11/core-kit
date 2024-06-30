@@ -7,7 +7,7 @@ inherit cargo
 DESCRIPTION="The minimal, blazing-fast, and infinitely customizable prompt for any shell"
 HOMEPAGE="https://github.com/starship/starship"
 SRC_URI="https://github.com/starship/starship/tarball/de2c4a63553568adcba95432acfbe36080cc6be8 -> starship-1.19.0-de2c4a6.tar.gz
-https://direct.funtoo.org/43/33/a2/4333a20cef2172cdbef1bda92020ce1e7903d363d4b61f61eaf33eebe64eb1e85eb10b997376e76346672b0ac3eb65d329e69d9eb90981b9a5a435452fd5e682 -> starship-1.19.0-funtoo-crates-bundle-412f8695ad90d8e49450c122eda782b0cda8c1b6c342139738870eadbab392e0cf0fb8aec862f22dbd98f8907535e988fb6c7760c94578011b43c1b74f38caec.tar.gz"
+https://direct.funtoo.org/12/37/80/12378067613798788fb571cc562e233c4a44eb24d34409b5f59f7426806800e9b8919b60c04cd53be421df2e937a3055932912c883f48da0729c29a089a3a969 -> starship-1.19.0-funtoo-crates-bundle-412f8695ad90d8e49450c122eda782b0cda8c1b6c342139738870eadbab392e0cf0fb8aec862f22dbd98f8907535e988fb6c7760c94578011b43c1b74f38caec.tar.gz"
 LICENSE="ISC"
 SLOT="0"
 KEYWORDS="*"
