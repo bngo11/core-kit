@@ -16,8 +16,6 @@ SLOT="0"
 KEYWORDS="*"
 IUSE="+lvm readline sanlock selinux static static-libs thin +udev valgrind"
 REQUIRED_USE="
-	static? ( !udev )
-	static-libs? ( static )
 	thin? ( lvm )
 "
 

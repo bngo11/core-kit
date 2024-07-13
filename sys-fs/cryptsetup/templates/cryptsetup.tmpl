@@ -18,7 +18,6 @@ CRYPTO_BACKENDS="gcrypt kernel nettle +openssl"
 IUSE="${CRYPTO_BACKENDS} doc fips nls pwquality +reencrypt ssh static static-libs test +udev urandom"
 RESTRICT="!test? ( test )"
 REQUIRED_USE="^^ ( ${CRYPTO_BACKENDS//+/} )
-	static? ( !gcrypt !openssl !udev !fips )
 	fips? ( !kernel !nettle )
 " # 496612, 832711, 843863. See FL-10620 about static vs udev.
 
