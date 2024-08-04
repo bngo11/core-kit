@@ -4,7 +4,6 @@ EAPI=7
 
 inherit flag-o-matic multilib multilib-minimal preserve-libs toolchain-funcs usr-ldscript
 
-S="${WORKDIR}"/${PN}-{{ base_version }}
 DESCRIPTION="Another cute console display library"
 HOMEPAGE="https://tiswww.case.edu/php/chet/readline/rltop.html"
 SRC_URI="{%- for artifact in artifacts %}
