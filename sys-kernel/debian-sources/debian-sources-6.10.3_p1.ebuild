@@ -22,19 +22,27 @@ DEB_PV="${KERNEL_TRIPLET}-${DEB_PATCHLEVEL}"
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
 KEYWORDS="*"
-IUSE="acpi-ec asus binary btrfs custom-cflags ec2 +logo luks lvm savedconfig sign-modules zfs"
+IUSE="acpi-ec asus binary btrfs custom-cflags ec2 lenovo +logo luks lvm savedconfig sign-modules zfs"
 RDEPEND="
 	|| (
 		<sys-apps/gawk-5.2.0
 		>=sys-apps/gawk-5.2.1
 	)
-	binary? ( >=sys-apps/ramdisk-1.1.16 )
+	binary? ( >=sys-apps/ramdisk-1.1.17 )
 "
 DEPEND="
 	virtual/libelf
 	btrfs? ( sys-fs/btrfs-progs )
 	zfs? ( sys-fs/zfs )
-	luks? ( sys-fs/cryptsetup )
+	luks? ( sys-fs/cryptsetup )"
+REQUIRED_USE="
+btrfs? ( binary )
+custom-cflags? ( binary )
+logo? ( binary )
+luks? ( binary )
+lvm? ( binary )
+sign-modules? ( binary )
+zfs? ( binary )
 "
 
 DESCRIPTION="Debian Sources (and optional binary kernel)"
@@ -162,6 +170,18 @@ src_prepare() {
 		epatch "${FILESDIR}"/nct6775.patch || die
 	fi
 
+	if use lenovo; then
+		tweak_config .config CONFIG_SND_SOC_SOF_AMD_TOPLEVEL m
+		tweak_config .config CONFIG_SND_SOC_SOF_AMD_RENOIR m
+		tweak_config .config CONFIG_SND_SOC_SOF_AMD_REMBRANDT m
+		tweak_config .config CONFIG_SND_SOC_SOF_ACPI m
+		tweak_config .config CONFIG_SND_SOC_AMD_RPL_ACP6x m
+		tweak_config .config CONFIG_SND_SOC_AMD_PS m
+		tweak_config .config CONFIG_SND_SOC_AMD_PS_MACH m
+		tweak_config .config CONFIG_SND_DMAENGINE_PCM m
+		tweak_config .config CONFIG_SND_SOC_GENERIC_DMAENGINE_PCM y
+	fi
+
 	if use acpi-ec; then
 		# most fan control tools require this
 		tweak_config .config CONFIG_ACPI_EC_DEBUGFS m
@@ -228,8 +248,7 @@ src_prepare() {
 	# (cannot mount ext4 filesystem in initramfs if created with recent e2fsprogs version)
 	tweak_config .config CONFIG_CRYPTO_CRC32C y
 	# get config into good state:
-	# yes "" | make oldconfig >/dev/null 2>&1 || die
-	yes "" | make oldconfig || die
+	yes "" | make oldconfig >/dev/null 2>&1 || die
 	cp .config "${T}"/config || die
 	make -s mrproper || die "make mrproper failed"
 }
