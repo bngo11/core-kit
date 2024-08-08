@@ -6,8 +6,8 @@ inherit check-reqs eutils ego savedconfig
 
 SLOT=$PF
 
-DEB_PATCHLEVEL="2"
-KERNEL_TRIPLET="6.6.15"
+DEB_PATCHLEVEL="1"
+KERNEL_TRIPLET="6.10.3"
 VERSION_SUFFIX="_p${DEB_PATCHLEVEL}"
 if [ ${PR} != "r0" ]; then
 	VERSION_SUFFIX+="-${PR}"
@@ -21,14 +21,14 @@ DEB_PV="${KERNEL_TRIPLET}-${DEB_PATCHLEVEL}"
 
 RESTRICT="binchecks strip"
 LICENSE="GPL-2"
-KEYWORDS=""
+KEYWORDS="*"
 IUSE="acpi-ec asus binary btrfs custom-cflags ec2 +logo luks lvm savedconfig sign-modules zfs"
 RDEPEND="
 	|| (
 		<sys-apps/gawk-5.2.0
 		>=sys-apps/gawk-5.2.1
 	)
-	binary? ( >=sys-apps/ramdisk-1.1.9 )
+	binary? ( >=sys-apps/ramdisk-1.1.16 )
 "
 DEPEND="
 	virtual/libelf
@@ -79,9 +79,6 @@ pkg_pretend() {
 	if use binary ; then
 		CHECKREQS_DISK_BUILD="6G"
 		check-reqs_pkg_setup
-		for unsupported in btrfs luks lvm zfs; do
-			use $unsupported && die "Currently, $unsupported is unsupported in our binary kernel/initramfs."
-		done
 	fi
 }
 
@@ -137,7 +134,7 @@ src_prepare() {
 		einfo Restoring saved .config ...
 		restore_config .config
 	else
-		cp "${FILESDIR}"/config-extract-6.6 ./config-extract || die
+		cp "${FILESDIR}"/config-extract-6.10 ./config-extract || die
 		chmod +x config-extract || die
 	fi
 	# Set up arch-specific variables and this will fail if run in pkg_setup() since ARCH can be unset there:
@@ -231,7 +228,8 @@ src_prepare() {
 	# (cannot mount ext4 filesystem in initramfs if created with recent e2fsprogs version)
 	tweak_config .config CONFIG_CRYPTO_CRC32C y
 	# get config into good state:
-	yes "" | make oldconfig >/dev/null 2>&1 || die
+	# yes "" | make oldconfig >/dev/null 2>&1 || die
+	yes "" | make oldconfig || die
 	cp .config "${T}"/config || die
 	make -s mrproper || die "make mrproper failed"
 }
@@ -283,11 +281,22 @@ src_install() {
 		exeinto /usr/src/${LINUX_SRCDIR}/scripts
 		doexe ${WORKDIR}/build/scripts/sign-file
 	fi
+	local plugins='core'
+	if use luks; then
+		plugins+=',luks'
+	fi
+	if use lvm; then
+		plugins+=',lvm'
+	fi
+	if use btrfs; then
+		plugins+=',btrfs'
+	fi
 	/usr/bin/ramdisk \
 		--fs_root="${D}" \
 		--temp_root="${T}" \
 		--kernel=${MOD_DIR_NAME} \
 		--keep \
+		--plugins=${plugins} \
 		${D}/boot/initramfs-${KERN_SUFFIX} --debug --backtrace || die "failcakes $?"
 }
 
