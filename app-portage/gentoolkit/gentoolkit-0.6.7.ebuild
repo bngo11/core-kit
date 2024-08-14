@@ -2,7 +2,7 @@
 
 EAPI=7
 
-DISTUTILS_USE_SETUPTOOLS=no
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3+ pypy3 )
 PYTHON_REQ_USE="xml(+),threads(+)"
 
@@ -32,7 +32,7 @@ python_prepare_all() {
 	distutils-r1_python_prepare_all
 
 	if use prefix-guest ; then
-		# use correct repo name, bug #632223
+		 use correct repo name, bug #632223
 		sed -i \
 			-e "/load_profile_data/s/repo='gentoo'/repo='gentoo_prefix'/" \
 			pym/gentoolkit/profile.py || die
