@@ -2,7 +2,7 @@
 
 EAPI=7
 PYTHON_COMPAT=( python3+ )
-DISTUTILS_USE_SETUPTOOLS="rdepend"
+DISTUTILS_USE_PEP517=setuptools
 
 inherit bash-completion-r1 distutils-r1 toolchain-funcs
 

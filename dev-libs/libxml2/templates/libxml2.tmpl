@@ -12,7 +12,11 @@ DESCRIPTION="XML C parser and toolkit"
 HOMEPAGE="https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home"
 KEYWORDS="*"
 
-SRC_URI="{{ src_uri_with_use }}"
+SRC_URI="{{ src_uri }}
+	test? (
+	{{ test_src_uri }}
+	)
+"
 
 LICENSE="MIT"
 SLOT="2"
@@ -33,7 +37,6 @@ DEPEND="${RDEPEND} ${PYTHON_DEPS}"
 BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-2.11.5-CVE-2023-45322.patch
 )
 
 src_prepare() {

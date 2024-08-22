@@ -3,6 +3,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3+ )
+DISTUTILS_USE_PEP517=setuptools
 inherit distutils-r1
 
 DESCRIPTION=""
@@ -14,7 +15,7 @@ IUSE=""
 SLOT="0"
 LICENSE=""
 KEYWORDS="*"
-S="${WORKDIR}/brotli-1.1.0"
+S="${WORKDIR}/brotli-${PV}"
 
 src_unpack() {
 	unpack ${ROOT}/usr/share/brotli/bindings/brotli-python-${PV}.tar.gz || die

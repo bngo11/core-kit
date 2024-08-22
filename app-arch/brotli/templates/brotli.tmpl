@@ -17,7 +17,7 @@ IUSE="python test"
 LICENSE="MIT python? ( Apache-2.0 )"
 
 KEYWORDS="*"
-S="${WORKDIR}"/{{github_user}}-{{github_repo}}-{{sha[:7]}}
+S="${WORKDIR}/google-brotli-{{commit}}"
 
 src_configure() {
 	local mycmakeargs=(

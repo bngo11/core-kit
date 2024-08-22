@@ -3,6 +3,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3+ )
+DISTUTILS_USE_PEP517=setuptools
 DISTUTILS_OPTIONAL=1
 
 inherit distutils-r1 libtool usr-ldscript
