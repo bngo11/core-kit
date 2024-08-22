@@ -2,9 +2,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3+ )
-
-inherit autotools bash-completion-r1 python-r1
+inherit autotools bash-completion-r1
 
 DESCRIPTION="library and tools for managing linux kernel modules"
 HOMEPAGE="https://git.kernel.org/?p=utils/kernel/kmod/kmod.git"
@@ -13,7 +11,7 @@ SRC_URI="https://www.kernel.org/pub/linux/utils/kernel/kmod/${P}.tar.xz"
 LICENSE="LGPL-2"
 SLOT="0"
 KEYWORDS="*"
-IUSE="debug doc +lzma +pkcs7 python static-libs +tools +zlib zstd"
+IUSE="debug doc +lzma +pkcs7 static-libs +tools +zlib zstd"
 
 # Upstream does not support running the test suite with custom configure flags.
 # I was also told that the test suite is intended for kmod developers.
@@ -26,7 +24,6 @@ RDEPEND="!sys-apps/module-init-tools
 	!sys-apps/modutils
 	!<sys-apps/openrc-0.13.8
 	lzma? ( >=app-arch/xz-utils-5.0.4-r1 )
-	python? ( ${PYTHON_DEPS} )
 	pkcs7? ( >=dev-libs/openssl-1.1.0:= )
 	zlib? ( >=sys-libs/zlib-1.2.6 )
 	zstd? ( >=app-arch/zstd-1.4.4 )"
@@ -37,18 +34,12 @@ BDEPEND="
 		dev-util/gtk-doc-am
 	)
 	lzma? ( virtual/pkgconfig )
-	python? (
-		dev-python/cython[${PYTHON_USEDEP}]
-		virtual/pkgconfig
-		)
 	zlib? ( virtual/pkgconfig )
 "
 if [[ ${PV} == 9999* ]]; then
 	BDEPEND="${BDEPEND}
 		dev-libs/libxslt"
 fi
-
-REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 DOCS=( NEWS README.md TODO )
 
@@ -89,56 +80,11 @@ src_configure() {
 		$(use_with zstd)
 	)
 
-	local ECONF_SOURCE="${S}"
-
-	kmod_configure() {
-		mkdir -p "${BUILD_DIR}" || die
-		run_in_build_dir econf "${myeconfargs[@]}" "$@"
-	}
-
-	BUILD_DIR="${WORKDIR}/build"
-	kmod_configure --disable-python
-
-	if use python; then
-		python_foreach_impl kmod_configure --enable-python
-	fi
-}
-
-src_compile() {
-	emake -C "${BUILD_DIR}"
-
-	if use python; then
-		local native_builddir="${BUILD_DIR}"
-
-		python_compile() {
-			emake -C "${BUILD_DIR}" -f Makefile -f - python \
-				VPATH="${native_builddir}:${S}" \
-				native_builddir="${native_builddir}" \
-				libkmod_python_kmod_{kmod,list,module,_util}_la_LIBADD='$(PYTHON_LIBS) $(native_builddir)/libkmod/libkmod.la' \
-				<<< 'python: $(pkgpyexec_LTLIBRARIES)'
-		}
-
-		python_foreach_impl python_compile
-	fi
+	econf "${myeconfargs[@]}"
 }
 
 src_install() {
-	emake -C "${BUILD_DIR}" DESTDIR="${D}" install
-	einstalldocs
-
-	if use python; then
-		local native_builddir=${BUILD_DIR}
-
-		python_install() {
-			emake -C "${BUILD_DIR}" DESTDIR="${D}" \
-				VPATH="${native_builddir}:${S}" \
-				install-pkgpyexecLTLIBRARIES \
-				install-dist_pkgpyexecPYTHON
-			python_optimize
-		}
-
-		python_foreach_impl python_install
-	fi
+	default
 
 	find "${ED}" -type f -name "*.la" -delete || die
 
