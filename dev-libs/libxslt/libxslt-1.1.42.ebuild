@@ -16,7 +16,7 @@ IUSE="crypt debug examples python static-libs"
 PDEPEND="python? ( dev-python/libxslt-python )"
 BDEPEND=">=virtual/pkgconfig-1"
 RDEPEND="
-	~dev-libs/libxml2-2.11.5:2
+	dev-libs/libxml2:2
 	crypt? ( >=dev-libs/libgcrypt-1.5.3:0= )
 	python? ( ${PYTHON_DEPS} )
 "
