@@ -2,11 +2,11 @@
 
 EAPI=7
 
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=meson-python
 PYTHON_COMPAT=( python3+ pypy3 )
 PYTHON_REQ_USE="xml(+),threads(+)"
 
-inherit distutils-r1 tmpfiles
+inherit distutils-r1 tmpfiles meson
 
 SRC_URI="https://gitweb.gentoo.org/proj/gentoolkit.git/snapshot/${P}.tar.gz"
 KEYWORDS="*"
@@ -18,6 +18,7 @@ LICENSE="GPL-2"
 SLOT="0"
 
 DEPEND="
+	dev-python/meson-python[${PYTHON_USEDEP}]
 	sys-apps/portage[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
 	sys-apps/gawk

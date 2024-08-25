@@ -2,7 +2,7 @@
 
 EAPI=7
 
-DISTUTILS_USE_SETUPTOOLS=no
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3+ )
 PYTHON_REQ_USE='bzip2(+),threads(+)'
 
@@ -107,13 +107,14 @@ PATCHES=(
 	"${FILESDIR}/${PN}-3.0.14-cdn-feature-ignore-mirror.patch"
 	"${FILESDIR}/${PN}-3.0.14-fixed_obsolete_egrep_warning.patch"
 )
+
 python_prepare_all() {
 	distutils-r1_python_prepare_all
 
 	sed -e "s:^VERSION = \"HEAD\"$:VERSION = \"${PV}\":" -i lib/portage/__init__.py || die
 
 	if use native-extensions; then
-		printf "[build_ext]\nportage-ext-modules=true\n" >> \
+		printf "[build_ext]\nportage_ext_modules=true\n" >> \
 			setup.cfg || die
 	fi
 
@@ -179,14 +180,26 @@ python_prepare_all() {
 	fi
 }
 
-python_compile_all() {
-	local targets=()
-	use doc && targets+=( docbook )
-	use apidoc && targets+=( apidoc )
+python_compile() {
+	local DISTUTILS_ARGS=( build )
+	use doc && DISTUTILS_ARGS+=( docbook )
+	use apidoc && DISTUTILS_ARGS+=( apidoc )
 
-	if [[ ${targets[@]} ]]; then
-		esetup.py "${targets[@]}"
+	_distutils-r1_create_setup_cfg
+
+	local setup_py=( setup.py )
+	if [[ ! -f setup.py ]]; then
+		if [[ ! -f setup.cfg ]]; then
+			die "${FUNCNAME}: setup.py nor setup.cfg not found"
+		fi
+		setup_py=( -c "from setuptools import setup; setup()" )
 	fi
+
+	set -- "${EPYTHON}" "${setup_py[@]}" "${DISTUTILS_ARGS[@]}" \
+		"${mydistutilsargs[@]}" "${MAKEOPTS}" "${@}"
+
+	echo "${@}" >&2
+	"${@}" || die "${die_args[@]}"
 }
 
 python_test() {
@@ -194,9 +207,16 @@ python_test() {
 }
 
 python_install() {
+	local scriptdir=${EPREFIX}/usr/bin
+
 	# Install sbin scripts to bindir for python-exec linking
 	# they will be relocated in pkg_preinst()
-	distutils-r1_python_install \
+	local root=${D%/}/_${EPYTHON}
+
+	# inline DISTUTILS_ARGS logic from esetup.py in order to make
+	# argv overwriting easier
+	local args=(
+		install --skip-build --root="${root}"
 		--system-prefix="${EPREFIX}/usr" \
 		--bindir="$(python_get_scriptdir)" \
 		--docdir="${EPREFIX}/usr/share/doc/${PF}" \
@@ -204,25 +224,102 @@ python_install() {
 		--portage-bindir="${EPREFIX}/usr/lib/portage/${EPYTHON}" \
 		--sbindir="$(python_get_scriptdir)" \
 		--sysconfdir="${EPREFIX}/etc" \
-		"${@}"
+	)
+
+	local DISTUTILS_ARGS=()
+	local mydistutilsargs=()
+
+	# enable compilation for the install phase.
+	local -x PYTHONDONTWRITEBYTECODE=
+
+	# python likes to compile any module it sees, which triggers sandbox
+	# failures if some packages haven't compiled their modules yet.
+	addpredict "${EPREFIX}/usr/lib/${EPYTHON}"
+	addpredict /usr/lib/pypy3.8
+	addpredict /usr/lib/portage/pym
+	addpredict /usr/local # bug 498232
+
+	merge_root=1
+
+	# user may override --install-scripts
+	# note: this is poor but distutils argv parsing is dumb
+
+	# rewrite all the arguments
+	set -- "${args[@]}"
+	args=()
+	echo "params: ${@}"
+	while [[ ${@} ]]; do
+		local a=${1}
+		shift
+
+		case ${a} in
+			--install-scripts=*)
+				scriptdir=${a#--install-scripts=}
+				;;
+			--install-scripts)
+				scriptdir=${1}
+				shift
+				;;
+			*)
+				args+=( "${a}" )
+				;;
+		esac
+	done
+
+	_distutils-r1_create_setup_cfg
+
+	local setup_py=( setup.py )
+	if [[ ! -f setup.py ]]; then
+		if [[ ! -f setup.cfg ]]; then
+			die "${FUNCNAME}: setup.py nor setup.cfg not found"
+		fi
+		setup_py=( -c "from setuptools import setup; setup()" )
+	fi
+
+	set -- "${EPYTHON}" "${setup_py[@]}" "${DISTUTILS_ARGS[@]}" \
+		"${args[@]}" "${@}"
+
+	echo "${@}" >&2
+	"${@}" || die "${die_args[@]}"
+
+	if [[ ${merge_root} ]]; then
+		multibuild_merge_root "${root}" "${D%/}"
+	fi
+	if [[ ! ${DISTUTILS_SINGLE_IMPL} ]]; then
+		_distutils-r1_wrap_scripts "${scriptdir}"
+	fi
 }
 
 python_install_all() {
 	distutils-r1_python_install_all
 
-	local targets=()
-	use doc && targets+=(
+	local DISTUTILS_ARGS=()
+	use doc && DISTUTILS_ARGS+=(
 		install_docbook
 		--htmldir="${EPREFIX}/usr/share/doc/${PF}/html"
 	)
-	use apidoc && targets+=(
+	use apidoc && DISTUTILS_ARGS+=(
 		install_apidoc
 		--htmldir="${EPREFIX}/usr/share/doc/${PF}/html"
 	)
 
 	# install docs
-	if [[ ${targets[@]} ]]; then
-		esetup.py "${targets[@]}"
+	if [[ ${DISTUTILS_ARGS[@]} ]]; then
+		_distutils-r1_create_setup_cfg
+
+		local setup_py=( setup.py )
+		if [[ ! -f setup.py ]]; then
+			if [[ ! -f setup.cfg ]]; then
+				die "${FUNCNAME}: setup.py nor setup.cfg not found"
+			fi
+			setup_py=( -c "from setuptools import setup; setup()" )
+		fi
+
+		set -- "${EPYTHON}" "${setup_py[@]}" "${DISTUTILS_ARGS[@]}" \
+			"${mydistutilsargs[@]}" "${@}"
+
+		echo "${@}" >&2
+		"${@}" || die "${die_args[@]}"
 	fi
 
 	dotmpfiles "${FILESDIR}"/portage-ccache.conf
