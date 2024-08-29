@@ -2,6 +2,7 @@
 
 EAPI=7
 PYTHON_COMPAT=( python3+ )
+DISTUTILS_USE_PEP517=setuptools
 
 CMAKE_ECLASS=cmake
 inherit cmake flag-o-matic mono-env python-r1

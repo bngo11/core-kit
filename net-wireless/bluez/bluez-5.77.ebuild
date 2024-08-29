@@ -2,6 +2,7 @@
 
 EAPI=7
 PYTHON_COMPAT=( python3+ )
+DISTUTILS_USE_PEP517=setuptools
 
 inherit autotools linux-info python-single-r1 readme.gentoo-r1 systemd udev multilib-minimal
 

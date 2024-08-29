@@ -1,0 +1,16 @@
+BDEPEND=sys-devel/flex test? ( dev-lang/perl )
+DEFINED_PHASES=configure install postinst postrm prepare
+DEPEND=>=sys-devel/m4-1.4.16 >=sys-devel/gettext-0.21
+DESCRIPTION=A general-purpose (yacc-compatible) parser generator
+EAPI=7
+HOMEPAGE=https://www.gnu.org/software/bison/
+IUSE=examples nls static test
+KEYWORDS=*
+LICENSE=GPL-2
+PDEPEND=virtual/yacc
+RDEPEND=>=sys-devel/m4-1.4.16 >=sys-devel/gettext-0.21
+RESTRICT=!test? ( test )
+SLOT=0
+SRC_URI=mirror://gnu/bison/bison-3.8.2.tar.xz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=598ebbcf51f4ce8d4fea75e9a68bcd39

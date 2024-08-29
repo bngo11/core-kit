@@ -3,6 +3,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3+ )
+DISTUTILS_USE_PEP517=setuptools
 inherit python-r1 meson
 
 DESCRIPTION="C Library for NVM Express on Linux"

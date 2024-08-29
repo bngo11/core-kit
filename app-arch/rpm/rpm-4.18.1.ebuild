@@ -4,6 +4,7 @@ EAPI=7
 
 LUA_COMPAT=( lua5-3 )
 PYTHON_COMPAT=( python3+ )
+DISTUTILS_USE_PEP517=setuptools
 
 inherit autotools lua-single perl-module python-single-r1 toolchain-funcs
 

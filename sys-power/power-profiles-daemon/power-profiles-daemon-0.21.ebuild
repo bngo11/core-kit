@@ -21,6 +21,7 @@ RDEPEND="
 	>=dev-libs/libgudev-237
 	>=sys-auth/polkit-0.120[introspection]
 	>=dev-python/shtab-1.7
+	>=dev-python/pygobject-3.48:3
 "
 DEPEND="${RDEPEND}
 	doc? ( >=dev-util/gtk-doc-1.33 )
