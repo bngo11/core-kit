@@ -1079,7 +1079,7 @@ distutils-r1_python_prepare_all() {
 # Create implementation-specific configuration file for distutils,
 # setting proper build-dir (and install-dir) paths.
 _distutils-r1_create_setup_cfg() {
-	if [[ ${DISTUTILS_USE_PEP517} != "setuptools" ]]; then
+	if [[ ${DISTUTILS_USE_PEP517} && ${DISTUTILS_USE_PEP517} != "setuptools" ]]; then
 		die "${FUNCNAME} is not implemented in PEP517 mode"
 	fi
 
