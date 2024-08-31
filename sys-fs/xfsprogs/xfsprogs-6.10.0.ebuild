@@ -25,10 +25,6 @@ BDEPEND="
 "
 RDEPEND+=" selinux? ( sec-policy/selinux-xfs )"
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-5.3.0-libdir.patch
-)
-
 src_prepare() {
 	default
 
