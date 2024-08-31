@@ -114,6 +114,7 @@ src_configure() {
 		--with-ivykis=system
 		--with-module-dir=/usr/$(get_libdir)/syslog-ng
 		--with-pidfile-dir=/var/run
+		--with-python-packages=none
 		--with-systemdsystemunitdir="$(systemd_get_systemunitdir)"
 		$(use_enable amqp)
 		$(usex amqp --with-librabbitmq-client=system --without-librabbitmq-client)
