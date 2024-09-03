@@ -5,7 +5,7 @@ EAPI=7
 PYTHON_COMPAT=( python3+ )
 inherit meson python-any-r1
 
-SRC_URI="https://gitlab.freedesktop.org/hadess/power-profiles-daemon/-/archive/0.21/power-profiles-daemon-0.21.tar.gz -> power-profiles-daemon-0.21.tar.gz"
+SRC_URI="https://gitlab.freedesktop.org/hadess/power-profiles-daemon/-/archive/0.22/power-profiles-daemon-0.22.tar.gz -> power-profiles-daemon-0.22.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="Makes power profiles handling available over D-Bus."
