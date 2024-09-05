@@ -3,10 +3,10 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3+ )
+DISTUTILS_USE_PEP517=setuptools
 DISTUTILS_SINGLE_IMPL=1
 
-DISTUTILS_USE_SETUPTOOLS=no
-inherit gnome2 distutils-r1 optfeature
+inherit gnome3 distutils-r1 optfeature
 
 DESCRIPTION="A graphical tool for administering virtual machines"
 HOMEPAGE="https://virt-manager.org https://github.com/virt-manager/virt-manager"
@@ -42,6 +42,7 @@ DEPEND="${RDEPEND}"
 BDEPEND="dev-python/docutils"
 
 DOCS=( README.md NEWS.md )
+DISTUTILS_ARGS=( --no-update-icon-cache --no-compile-schemas )
 
 # Doesn't seem to play nicely in a sandboxed environment.
 RESTRICT="test"
@@ -52,22 +53,18 @@ post_src_unpack() {
 	mv virt-manager-virt-manager* "${S}" || die
 }
 
+src_prepare() {
+	default
+        sed -i "541d" setup.py || die
+}
+
 python_configure() {
 	esetup.py configure --default-graphics=spice
 }
 
-python_install() {
-	esetup.py install
-}
-
-src_install() {
-	local DISTUTILS_ARGS=( --no-update-icon-cache --no-compile-schemas )
-	distutils-r1_src_install
-}
-
 pkg_preinst() {
 	if use gtk; then
-		gnome2_pkg_preinst
+		gnome3_pkg_preinst
 
 		cd "${ED}" || die
 		export GNOME2_ECLASS_ICONS=$(find 'usr/share/virt-manager/icons' -maxdepth 1 -mindepth 1 -type d 2> /dev/null || die)
@@ -81,7 +78,7 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
-	use gtk && gnome2_pkg_postinst
+	use gtk && gnome3_pkg_postinst
 	optfeature "SSH_ASKPASS program implementation" lxqt-base/lxqt-openssh-askpass net-misc/ssh-askpass-fullscreen net-misc/x11-ssh-askpass
 	optfeature "QEMU host support" app-emulation/qemu[usbredir,spice]
 }
