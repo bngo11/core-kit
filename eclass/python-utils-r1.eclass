@@ -41,7 +41,7 @@ inherit toolchain-funcs
 _PYTHON_ALL_IMPLS=(
 	pypy3
 	python2_7
-	python3_{9,10,12}
+	python3_{7,8,9,10,12}
 )
 readonly _PYTHON_ALL_IMPLS
 
@@ -53,7 +53,7 @@ _PYTHON_HISTORICAL_IMPLS=(
 	jython2_7
 	pypy pypy1_{8,9} pypy2_0
 	python2_{5,6}
-	python3_{1,2,3,4,5,6,7,8}
+	python3_{1,2,3,4,5}
 )
 readonly _PYTHON_HISTORICAL_IMPLS
 
@@ -163,7 +163,15 @@ _python_set_impls() {
 			# When adding new '+' entries, also update line 83 ^^
 			# Also let python3_8 be treated as python3+ when explicitly set.
 
-			python3+|python3_9+)
+			python3_5|python3_6|python3_7|python3_8|python3+|python3_7+)
+				supp['python3_7']=1
+				supp['python3_8']=1
+				supp['python3_9']=1
+				supp['python3_10']=1
+				supp['python3_12']=1
+				;;
+			python3_8+)
+				supp['python3_8']=1
 				supp['python3_9']=1
 				supp['python3_10']=1
 				supp['python3_12']=1
@@ -186,6 +194,8 @@ _python_set_impls() {
 
 			python2+)
 				supp['python2_7']=1
+				supp['python3_7']=1
+				supp['python3_8']=1
 				supp['python3_9']=1
 				supp['python3_10']=1
 				supp['python3_12']=1
