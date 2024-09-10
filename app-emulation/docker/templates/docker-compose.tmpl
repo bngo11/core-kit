@@ -16,11 +16,11 @@ KEYWORDS="*"
 
 RDEPEND=">=app-emulation/docker-cli-23.0.0"
 
-RESTRICT="test"
+RESTRICT="test network-sandbox"
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
-		mv {{ github_user }}-{{ github_repo }}* "${S}" || die
+		mv {{ github_repo }}* "${S}" || die
 	fi
 }
 

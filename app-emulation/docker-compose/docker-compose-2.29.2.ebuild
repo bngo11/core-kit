@@ -8,8 +8,7 @@ go-module_set_globals
 
 DESCRIPTION="Define and run multi-container applications with Docker"
 HOMEPAGE="https://github.com/docker/compose"
-SRC_URI="https://github.com/docker/compose/tarball/47bb4f966066d79f5f1cb88cff57c8df43b87137 -> compose-2.21.0-47bb4f9.tar.gz
-https://direct.funtoo.org/96/7a/22/967a223c69b3e7bf44626c2d87968bb4157f0946341437621a19835cfa3b493882e6099c0d0275050c8736dd9ca9cfcab5029e8635471ff073388a1b29741146 -> docker-compose-2.21.0-funtoo-go-bundle-fde9fbd24f7587a011cd17022e88190ee79c86b4f4eb57e328abd20fbbbef500cefe85d010aea4645e92b75afbe725bd617360c3c56b300f193a864519aa79f5.tar.gz"
+SRC_URI="https://github.com/docker/compose/tarball/234036756b94e296b6ff4dc4d54896993b60db36 -> compose-2.29.2-2340367.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="2"
@@ -17,11 +16,11 @@ KEYWORDS="*"
 
 RDEPEND=">=app-emulation/docker-cli-23.0.0"
 
-RESTRICT="test"
+RESTRICT="test network-sandbox"
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
-		mv docker-compose* "${S}" || die
+		mv compose* "${S}" || die
 	fi
 }
 
