@@ -20,7 +20,7 @@ RESTRICT="test network-sandbox"
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
-		mv compose* "${S}" || die
+		mv docker-compose* "${S}" || die
 	fi
 }
 

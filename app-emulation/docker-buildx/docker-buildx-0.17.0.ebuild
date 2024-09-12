@@ -20,7 +20,7 @@ RESTRICT="test network-sandbox"
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
-		mv buildx* "${S}" || die
+		mv docker-buildx* "${S}" || die
 	fi
 }
 

@@ -20,7 +20,7 @@ RESTRICT="test network-sandbox"
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
-		mv {{ github_repo }}* "${S}" || die
+		mv {{ github_user}}-{{ github_repo }}* "${S}" || die
 	fi
 }
 
