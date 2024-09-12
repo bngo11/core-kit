@@ -6,7 +6,7 @@ import re
 async def generate(hub, **pkginfo):
 	python_compat = "python2+"
 	main_ver = (
-		(await hub.pkgtools.fetch.get_page("https://download.virtualbox.org/virtualbox/LATEST.TXT")).splitlines()
+		(await hub.pkgtools.fetch.get_page("https://download.virtualbox.org/virtualbox/LATEST-STABLE.TXT")).splitlines()
 	)[0]
 	html = await hub.pkgtools.fetch.get_page(f"https://download.virtualbox.org/virtualbox/{main_ver}")
 	match = re.search(f"VirtualBox-{main_ver}-([0-9]*)-Linux_amd64.run", html)
