@@ -8,7 +8,7 @@ inherit distutils-r1
 
 DESCRIPTION="Funtoo framework for creating initial ramdisks."
 HOMEPAGE="https://gitlab.com/shadow5061607/funtoo/funtoo-ramdisk"
-SRC_URI=" https://gitlab.com/api/v4/projects/60342138/packages/generic/funtoo-ramdisk/1.1.18/funtoo-ramdisk-1.1.18.tar.gz -> funtoo-ramdisk-1.1.18.tar.gz "
+SRC_URI=" https://gitlab.com/api/v4/projects/60342138/packages/generic/funtoo-ramdisk/1.1.19/funtoo-ramdisk-1.1.19.tar.gz -> funtoo-ramdisk-1.1.19.tar.gz "
 
 DEPEND=""
 RDEPEND="
