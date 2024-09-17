@@ -11,10 +11,10 @@ FEATURES=${FEATURES/multilib-strict/}
 
 GCC_MAJOR="${PV%%.*}"
 
-IUSE="ada +cxx d go +fortran objc objc++ objc-gc " # Languages
+IUSE="+cxx d go +fortran objc objc++ objc-gc " # Languages
 IUSE="$IUSE test" # Run tests
 IUSE="$IUSE doc nls vanilla multilib" # docs/i18n/system flags
-IUSE="$IUSE openmp altivec graphite pch generic_host jit" # Optimizations/features flags
+IUSE="$IUSE openmp altivec pch generic_host jit" # Optimizations/features flags
 IUSE="$IUSE bootstrap bootstrap-lean bootstrap-profiled bootstrap-lto bootstrap-O3" # Bootstrap flags
 IUSE="$IUSE libssp +ssp" # Base hardening flags
 IUSE="$IUSE +pie +vtv link_now ssp_all" # Extra hardening flags
@@ -48,34 +48,18 @@ GMP_VER="6.2.1"
 GMP_EXTRAVER=""
 SRC_URI="$SRC_URI mirror://gnu/gmp/gmp-${GMP_VER}${GMP_EXTRAVER}.tar.xz"
 
-MPFR_VER="4.1.0"
+MPFR_VER="4.2.0"
 MPFR_PATCH_VER=""
 SRC_URI="$SRC_URI http://www.mpfr.org/mpfr-${MPFR_VER}/mpfr-${MPFR_VER}.tar.xz"
 MPFR_PATCH_FILE="${MPFR_PATCH_VER:+${FILESDIR}/mpfr/mpfr-${MPFR_VER}_to_${MPFR_VER}-p${MPFR_PATCH_VER}.patch}"
 
-MPC_VER="1.2.1"
+MPC_VER="1.3.1"
 SRC_URI="$SRC_URI http://ftp.gnu.org/gnu/mpc/mpc-${MPC_VER}.tar.gz"
-
-# Graphite support:
-# TODO: Investigate upstream url changes for clood and isl
-CLOOG_VER="0.18.4"
-ISL_VER="0.20"
-SRC_URI="$SRC_URI graphite? ( http://www.bastoul.net/cloog/pages/download/count.php3?url=./cloog-${CLOOG_VER}.tar.gz http://isl.gforge.inria.fr/isl-${ISL_VER}.tar.xz )"
-
-# Ada Support:
-GNAT_X86="gnat-gpl-2014-x86-linux-bin.tar.gz"
-GNAT_X86_64="gnat-gpl-2017-x86_64-linux-bin.tar.gz"
-SRC_URI="$SRC_URI
-	ada? (
-		amd64? ( mirror://funtoo/gcc/${GNAT_X86_64} )
-		x86? ( mirror://funtoo/gcc/${GNAT_X86}	)
-	)
-"
 
 DESCRIPTION="The GNU Compiler Collection"
 
 LICENSE="GPL-3+ LGPL-3+ || ( GPL-3+ libgcc libstdc++ gcc-runtime-library-exception-3.1 ) FDL-1.3+"
-KEYWORDS=""
+KEYWORDS="*"
 
 RDEPEND="
 	sys-libs/zlib[static-libs]
@@ -184,24 +168,6 @@ src_unpack() {
 	( unpack mpfr-${MPFR_VER}.tar.xz && mv ${WORKDIR}/mpfr-${MPFR_VER} ${S}/mpfr ) || die "mpfr setup fail"
 	( unpack gmp-${GMP_VER}${GMP_EXTRAVER}.tar.xz && mv ${WORKDIR}/gmp-${GMP_VER} ${S}/gmp ) || die "gmp setup fail"
 
-	if use graphite; then
-		( unpack cloog-${CLOOG_VER}.tar.gz && mv ${WORKDIR}/cloog-${CLOOG_VER} ${S}/cloog ) || die "cloog setup fail"
-		( unpack isl-${ISL_VER}.tar.xz && mv ${WORKDIR}/isl-${ISL_VER} ${S}/isl ) || die "isl setup fail"
-	fi
-
-	# GNAT ada support
-	if use ada ; then
-		if use amd64; then
-			unpack $GNAT_X86_64 || die "ada setup failed"
-		elif use x86; then
-			unpack $GNAT_X86 || die "ada setup failed"
-		elif use riscv64; then
-			unpack $GNAT_RISCV64 || die "ada setup failed"
-		else
-			die "GNAT ada setup failed, only x86, amd64, and riscv64 currently supported by this ebuild. Patches welcome!"
-		fi
-	fi
-
 	cd $S
 	mkdir ${WORKDIR}/objdir
 
@@ -246,9 +212,6 @@ src_prepare() {
 	fi
 
 	is_crosscompile && _gcc_prepare_cross
-
-	# Ada gnat compiler bootstrap preparation
-	use ada && _gcc_prepare_gnat
 
 	# Must be called in src_prepare by EAPI6
 	eapply_user
@@ -304,34 +267,6 @@ _gcc_prepare_cross() {
 	fi
 }
 
-_gcc_prepare_gnat() {
-	export GNATBOOT="${S}/gnatboot"
-
-	if [ -f  gcc/ada/libgnat/s-parame.adb ] ; then
-		einfo "Patching ada stack handling..."
-		grep -q -e '-- Default_Sec_Stack_Size --' gcc/ada/libgnat/s-parame.adb && eapply "${FILESDIR}/Ada-Integer-overflow-in-SS_Allocate.patch"
-	fi
-
-	if use amd64; then
-		einfo "Preparing gnat_x86_64 for ada:"
-		make -C ${WORKDIR}/${GNAT_X86_64%%.*} ins-all prefix=${S}/gnatboot > /dev/null || die "ada preparation failed"
-		find ${S}/gnatboot -name ld -exec mv -v {} {}.old \;
-	elif use x86; then
-		einfo "Preparing gnat_x86 for ada:"
-		make -C ${WORKDIR}/${GNAT_X86%%.*} ins-all prefix=${S}/gnatboot > /dev/null || die "ada preparation failed"
-		find ${S}/gnatboot -name ld -exec mv -v {} {}.old \;
-	elif use riscv64; then
-		einfo "Preparing gnat_riscv64 for ada:"
-		make -C ${WORKDIR}/${GNAT_RISCV64%%.*} ins-all prefix=${S}/gnatboot > /dev/null || die "ada preparation failed"
-		find ${S}/gnatboot -name ld -exec mv -v {} {}.old \;
-	else
-		die "GNAT ada setup failed, only x86, amd64, and riscv64 currently supported by this ebuild. Patches welcome!"
-	fi
-
-	# Setup additional paths as needed before we start.
-	use ada && export PATH="${GNATBOOT}/bin:${PATH}"
-}
-
 gcc_conf_lang_opts() {
 	# Determine language support:
 	local conf_gcc_lang=""
@@ -345,8 +280,6 @@ gcc_conf_lang_opts() {
 	use fortran && GCC_LANG+=",fortran" || conf_gcc_lang+=" --disable-libquadmath"
 
 	use go && GCC_LANG+=",go"
-
-	use ada && GCC_LANG+=",ada" && conf_gcc_lang+=" CC=${GNATBOOT}/bin/gcc CXX=${GNATBOOT}/bin/g++ AR=${GNATBOOT}/bin/gcc-ar AS=as LD=ld NM=${GNATBOOT}/bin/gcc-nm RANLIB=${GNATBOOT}/bin/gcc-ranlib"
 
 	use d && GCC_LANG+=",d"
 
@@ -445,8 +378,6 @@ src_configure() {
 	confgcc+=" $(use_enable pie default-pie)"
 	confgcc+=" $(use_enable ssp default-ssp)"
 	! use pch && confgcc+=" --disable-libstdcxx-pch"
-	use graphite && confgcc+=" --disable-isl-version-check"
-
 	use vtv && confgcc+=" --enable-vtable-verify --enable-libvtv"
 	! use vtv && confgcc+=" --disable-vtable-verify --disable-libvtv"
 
@@ -478,7 +409,6 @@ src_configure() {
 		--enable-secureplt \
 		--enable-lto \
 		--with-system-zlib \
-		$(use_with graphite cloog) \
 		--with-bugurl=http://bugs.funtoo.org \
 		--with-pkgversion="$branding" \
 		$(gcc_checking_opts stage1) $(gcc_checking_opts) \
@@ -506,7 +436,6 @@ src_configure() {
 				--enable-secureplt \
 				--enable-lto \
 				--with-system-zlib \
-				$(use_with graphite cloog) \
 				--with-bugurl=http://bugs.funtoo.org \
 				--with-pkgversion="$branding" \
 				$(gcc_checking_opts stage1) $(gcc_checking_opts) \
@@ -591,7 +520,6 @@ linkify_compiler_binaries() {
 
 	use go && binary_languages="${binary_languages} gccgo"
 	use fortran && binary_languages="${binary_languages} gfortran"
-	use ada && binary_languages="${binary_languages} ${gnat_bins}"
 	use d && binary_languages="${binary_languages} gdc"
 
 	for x in ${binary_languages} ; do
@@ -763,7 +691,7 @@ src_install() {
 	# paths on the dependency_libs line. The following code finds and fixes them:
 
 	for x in $(find ${D}${LIBPATH} -iname '*.la'); do
-		dep="$(cat $x | grep ^dependency_libs)"
+		dep="$(grep ^dependency_libs $x)"
 		[ "$dep" == "" ] && continue
 		inner_dep="${dep#dependency_libs=}"
 		inner_dep="${inner_dep//\'/}"
