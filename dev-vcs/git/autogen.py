@@ -1,20 +1,29 @@
 #!/usr/bin/env python3
 
-import re
-
+import json
 
 async def generate(hub, **pkginfo):
-	kernel_org = "https://www.kernel.org/pub/software/scm/git"
-	html_data = await hub.pkgtools.fetch.get_page("https://git-scm.com/download/linux")
-	latest = re.search(f'<a href="{kernel_org}/git-([0-9.]*)\.tar.gz', html_data)
-	version = latest.group(1)
-	src_artifact = hub.pkgtools.ebuild.Artifact(url=f"{kernel_org}/git-{version}.tar.xz")
-	artifacts = [
-		src_artifact,
-		hub.pkgtools.ebuild.Artifact(url=f"{kernel_org}/git-manpages-{version}.tar.xz"),
-	]
-	ebuild = hub.pkgtools.ebuild.BreezyBuild(**pkginfo, version=version, artifacts=artifacts)
-	ebuild.push()
+	json_data = await hub.pkgtools.fetch.get_page("https://api.github.com/repos/git/git/tags", is_json=True)
+	version = None
 
+	for item in json_data:
+		try:
+			version = item["name"].lstrip('v')
+			list(map(int, version.split(".")))
+			break
+
+		except (KeyError, IndexError, ValueError):
+			continue
+
+	if version:
+		url = f"https://www.kernel.org/pub/software/scm/git/git-{version}.tar.xz"
+		mpurl = f"https://www.kernel.org/pub/software/scm/git/git-manpages-{version}.tar.xz"
+		ebuild = hub.pkgtools.ebuild.BreezyBuild(
+			**pkginfo,
+			version=version,
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=url.rsplit('/', 1)[-1]),
+						hub.pkgtools.ebuild.Artifact(url=mpurl, final_name=mpurl.rsplit('/', 1)[-1])]
+		)
+		ebuild.push()
 
 # vim: ts=4 sw=4 noet
