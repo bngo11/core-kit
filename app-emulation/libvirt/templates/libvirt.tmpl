@@ -249,7 +249,6 @@ src_configure() {
 		$(meson_feature pcap libpcap)
 		$(meson_feature policykit polkit)
 		$(meson_feature qemu driver_qemu)
-		$(meson_feature qemu yajl)
 		$(meson_feature rbd storage_rbd)
 		$(meson_feature sasl)
 		$(meson_feature selinux)

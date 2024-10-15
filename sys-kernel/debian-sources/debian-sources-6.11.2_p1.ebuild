@@ -7,7 +7,7 @@ inherit check-reqs eutils ego savedconfig
 SLOT=$PF
 
 DEB_PATCHLEVEL="1"
-KERNEL_TRIPLET="6.10.3"
+KERNEL_TRIPLET="6.11.2"
 VERSION_SUFFIX="_p${DEB_PATCHLEVEL}"
 if [ ${PR} != "r0" ]; then
 	VERSION_SUFFIX+="-${PR}"
@@ -247,6 +247,8 @@ src_prepare() {
 	# build generic CRC32C module into kernel, to defeat FL-11913
 	# (cannot mount ext4 filesystem in initramfs if created with recent e2fsprogs version)
 	tweak_config .config CONFIG_CRYPTO_CRC32C y
+	tweak_config .config CONFIG_MODULE_COMPRESS_NONE y
+	tweak_config .config CONFIG_MODULE_COMPRESS_XZ n
 	# get config into good state:
 	yes "" | make oldconfig >/dev/null 2>&1 || die
 	cp .config "${T}"/config || die
