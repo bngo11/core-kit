@@ -13,7 +13,7 @@ LIBNL_DIR=${LIBNL_DIR//./_}
 DESCRIPTION="Libraries providing APIs to netlink protocol based Linux kernel interfaces"
 HOMEPAGE="http://www.infradead.org/~tgr/libnl/ https://github.com/thom311/libnl"
 SRC_URI="
-	https://github.com/thom311/libnl/releases/download/libnl3_10_0/libnl-3.10.0.tar.gz -> libnl-3.10.0.tar.gz
+	https://github.com/thom311/libnl/releases/download/libnl3_11_0/libnl-3.11.0.tar.gz -> libnl-3.11.0.tar.gz
 "
 LICENSE="LGPL-2.1 utils? ( GPL-2 )"
 SLOT="3"

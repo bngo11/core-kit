@@ -12,7 +12,7 @@ LICENSE="LGPL-2.1+"
 SLOT="0/1"
 IUSE="dbus +json keyutils python ssl +uuid"
 
-SRC_URI="https://github.com/linux-nvme/libnvme/archive/refs/tags/v1.10.tar.gz -> libnvme-1.10.tar.gz"
+SRC_URI="https://github.com/linux-nvme/libnvme/archive/refs/tags/v1.11.tar.gz -> libnvme-1.11.tar.gz"
 KEYWORDS="*"
 
 DEPEND="
