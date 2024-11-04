@@ -244,6 +244,7 @@ src_prepare() {
 			fi
 		fi
 	fi
+	tweak_config .config CONFIG_MEMCG_SWAP y
 	# build generic CRC32C module into kernel, to defeat FL-11913
 	# (cannot mount ext4 filesystem in initramfs if created with recent e2fsprogs version)
 	tweak_config .config CONFIG_CRYPTO_CRC32C y
