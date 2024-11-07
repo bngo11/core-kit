@@ -13,7 +13,7 @@ HOMEPAGE="https://www.gnupg.org/related_software/gpgme"
 SRC_URI="https://gnupg.org/ftp/gcrypt/gpgme/gpgme-1.24.0.tar.bz2 -> gpgme-1.24.0.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1"
-SLOT="1/11.32.20.1"
+SLOT="1/11.33.21.1"
 KEYWORDS="*"
 IUSE="common-lisp static-libs +cxx python qt5 test"
 RESTRICT="!test? ( test )"
@@ -23,7 +23,7 @@ RESTRICT="!test? ( test )"
 #   made gpgme stop installing gpgme-config)
 RDEPEND="app-crypt/gnupg
 	dev-libs/libassuan
-	dev-libs/libgpg-error
+	>=dev-libs/libgpg-error-1.47
 	python? ( ${PYTHON_DEPS} )
 	qt5? ( dev-qt/qtcore:5 )"
 	#doc? ( app-doc/doxygen[dot] )
