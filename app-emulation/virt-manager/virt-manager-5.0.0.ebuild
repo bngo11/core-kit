@@ -3,10 +3,10 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3+ )
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=meson-python
 DISTUTILS_SINGLE_IMPL=1
 
-inherit gnome3 distutils-r1 optfeature
+inherit gnome3 distutils-r1 optfeature meson
 
 DESCRIPTION="A graphical tool for administering virtual machines"
 HOMEPAGE="https://virt-manager.org https://github.com/virt-manager/virt-manager"
@@ -42,24 +42,27 @@ DEPEND="${RDEPEND}"
 BDEPEND="dev-python/docutils"
 
 DOCS=( README.md NEWS.md )
-DISTUTILS_ARGS=( --no-update-icon-cache --no-compile-schemas )
-
-# Doesn't seem to play nicely in a sandboxed environment.
-RESTRICT="test"
-
-distutils_enable_tests pytest
 
 post_src_unpack() {
 	mv virt-manager-virt-manager* "${S}" || die
 }
 
-src_prepare() {
-	default
-        sed -i "541d" setup.py || die
+src_configure() {
+	# While in the past we did allow test suite to run, any errors from
+	# test_cli.py were ignored. Since that's where like 90% of tests actually
+	# lives, just disable tests (and do not drag additional dependencies).
+	local emesonargs=(
+		-Dcompile-schemas=false
+		-Ddefault-graphics=spice
+		-Dtests=disabled
+		-Dupdate-icon-cache=false
+	)
+
+	meson_src_configure
 }
 
-python_configure() {
-	esetup.py configure --default-graphics=spice
+src_install() {
+	meson_src_install
 }
 
 pkg_preinst() {
@@ -67,7 +70,7 @@ pkg_preinst() {
 		gnome3_pkg_preinst
 
 		cd "${ED}" || die
-		export GNOME2_ECLASS_ICONS=$(find 'usr/share/virt-manager/icons' -maxdepth 1 -mindepth 1 -type d 2> /dev/null || die)
+		export GNOME3_ECLASS_ICONS=$(find 'usr/share/virt-manager/icons' -maxdepth 1 -mindepth 1 -type d 2> /dev/null || die)
 	else
 		rm -r "${ED}/usr/share/virt-manager/ui/" || die
 		rm -r "${ED}/usr/share/virt-manager/icons/" || die
