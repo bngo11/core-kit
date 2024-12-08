@@ -6,8 +6,8 @@ inherit cargo
 
 DESCRIPTION="Fuzzy Finder in rust!"
 HOMEPAGE="https://github.com/lotabout/skim"
-SRC_URI="https://github.com/lotabout/skim/tarball/17c261af1cc0e81ebfb5b8a85fc03ffedd9de440 -> skim-0.15.4-17c261a.tar.gz
-https://direct.funtoo.org/63/17/84/631784768c32e7f5a7accc27fcf539486568892f33369f075544b008d2f85ab0ae3a00ffcb51524f44632491b50abeb20b28c58519b76c9bd65397f8756f490c -> skim-0.15.4-funtoo-crates-bundle-ddbfbd2c058b4c5d1bebcbf53ad1914373a7d7b7a05bd0307a3c34bb3b775477bdf06a9f1ab02429e248f92525de6868060105752c6285943248c6bf8b6fc49e.tar.gz"
+SRC_URI="https://github.com/lotabout/skim/tarball/1121509428a6e4ada14a7d852075bd99ff17369e -> skim-0.15.5-1121509.tar.gz
+https://direct.funtoo.org/89/9b/6f/899b6f78488e9e768194db383c19dff3a44cc1bf081aa73c3993520c1bccf0b7d278c860646003bf2fca053d9217ccda339fd89a8d0231e345ef67dd5f2f76f6 -> skim-0.15.5-funtoo-crates-bundle-4966630b20aa9015b0528584456249b216eb68e7290b3c8509048861943e5d26839626b33606fd9b0005187f13658001bbaacff9f33b5befe6523c6082b85bbf.tar.gz"
 
 LICENSE="Apache-2.0 MIT MPL-2.0 Unlicense"
 SLOT="0"
