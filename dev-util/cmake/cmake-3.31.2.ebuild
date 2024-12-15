@@ -18,7 +18,7 @@ S="${WORKDIR}/${MY_P}"
 LICENSE="CMake"
 SLOT="0"
 KEYWORDS="*"
-IUSE="doc emacs ncurses qt5 test"
+IUSE="dap doc emacs ncurses qt5 test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
@@ -30,6 +30,7 @@ RDEPEND="
 	>=net-misc/curl-7.21.5[ssl]
 	sys-libs/zlib
 	virtual/pkgconfig
+	dap? ( dev-cpp/cppdap )
 	emacs? ( >=app-editors/emacs-23.1:* )
 	ncurses? ( sys-libs/ncurses:0= )
 	qt5? (
@@ -93,6 +94,7 @@ src_configure() {
 
 	local mycmakeargs=(
 		-DCMAKE_USE_SYSTEM_LIBRARIES=ON
+		-DCMake_ENABLE_DEBUGGER=$(usex dap)
 		-DCMAKE_DOC_DIR=/share/doc/${PF}
 		-DCMAKE_MAN_DIR=/share/man
 		-DCMAKE_DATA_DIR=/share/${PN}
