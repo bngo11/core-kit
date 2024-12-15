@@ -1,14 +1,8 @@
-From f4009d1efccf571d229e89fab846b0d5873e7a5b Mon Sep 17 00:00:00 2001
+From 9bc75325cc38962ecdd4a3ebd67ce34ea8162a45 Mon Sep 17 00:00:00 2001
 From: Lars Wendler <polynomial-c@gentoo.org>
 Date: Thu, 13 Feb 2020 13:12:45 +0100
-Subject: [PATCH] Prefer pkgconfig in FindBLAS
+Subject: [PATCH 3/6] Prefer pkgconfig in FindBLAS
 
----
- Modules/FindBLAS.cmake | 7 +++++++
- 1 file changed, 7 insertions(+)
-
-diff --git a/Modules/FindBLAS.cmake b/Modules/FindBLAS.cmake
-index 9b6d09c2f9..c2af42468c 100644
 --- a/Modules/FindBLAS.cmake
 +++ b/Modules/FindBLAS.cmake
 @@ -7,6 +7,10 @@ FindBLAS
@@ -20,18 +14,18 @@ index 9b6d09c2f9..c2af42468c 100644
 +all further checks.
 +
  This module finds an installed Fortran library that implements the
- BLAS linear-algebra interface (see http://www.netlib.org/blas/).
+ `BLAS linear-algebra interface`_.
  
-@@ -107,6 +111,9 @@ if(NOT (CMAKE_C_COMPILER_LOADED OR CMAKE_CXX_COMPILER_LOADED OR CMAKE_Fortran_CO
+@@ -276,6 +280,9 @@ function(_add_blas_target)
    endif()
- endif()
+ endfunction()
  
 +# first, try PkgConfig
-+set(BLA_PREFER_PKGCONFIG On)
++set(BLA_PREFER_PKGCONFIG ON)
 +
  if(CMAKE_Fortran_COMPILER_LOADED)
    include(${CMAKE_CURRENT_LIST_DIR}/CheckFortranFunctionExists.cmake)
  else()
 -- 
-2.25.0
+2.41.0
 

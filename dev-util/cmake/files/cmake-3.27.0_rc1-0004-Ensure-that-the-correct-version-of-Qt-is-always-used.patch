@@ -1,4 +1,7 @@
-Ensure that the correct version of Qt is always used.
+From 30cf2aa7830a09b2bc4132eb3a3920fc0853b827 Mon Sep 17 00:00:00 2001
+From: Sam James <sam@gentoo.org>
+Date: Fri, 9 Jun 2023 09:57:18 +0100
+Subject: [PATCH 4/6] Ensure that the correct version of Qt is always used.
 
 With the introduction qt-4.8.6, Qt binaries were moved from /usr/bin to
 /usr/$(get_libdir)/qt4/bin, leaving behind in their place symlinks to qtchooser.
@@ -8,11 +11,14 @@ is necessary to find the correct version explicitly.
 
 Once qmake is found, it is queried for the correct location of all other items.
 
-Gentoo-bug: 547222
+Bug: https://bugs.gentoo.org/547222
 
+[imported from cmake-3.5.2-FindQt4.patch.]
+
+Signed-off-by: Sam James <sam@gentoo.org>
 --- a/Modules/FindQt4.cmake
 +++ b/Modules/FindQt4.cmake
-@@ -482,13 +482,23 @@
+@@ -478,13 +478,23 @@ function(_QT4_FIND_QMAKE QMAKE_NAMES QMAKE_RESULT VERSION_RESULT)
  
    get_filename_component(qt_install_version "[HKEY_CURRENT_USER\\Software\\trolltech\\Versions;DefaultQtVersion]" NAME)
  
@@ -43,3 +49,6 @@ Gentoo-bug: 547222
  
    set(major 0)
    if (QT_QMAKE_EXECUTABLE)
+-- 
+2.41.0
+

@@ -12,7 +12,7 @@ DESCRIPTION="Cross platform Make"
 HOMEPAGE="https://cmake.org/"
 
 MY_P="${P/_/-}"
-SRC_URI="https://github.com/Kitware/CMake/releases/download/v3.24.1/cmake-3.24.1.tar.gz -> cmake-3.24.1.tar.gz"
+SRC_URI="https://github.com/Kitware/CMake/releases/download/v3.31.2/cmake-3.31.2.tar.gz -> cmake-3.31.2.tar.gz"
 S="${WORKDIR}/${MY_P}"
 
 LICENSE="CMake"
@@ -49,12 +49,12 @@ BDEPEND+="
 
 SITEFILE="50${PN}-gentoo.el"
 PATCHES=(
-	"${FILESDIR}"/${PN}-3.14.0_rc3-prefix-dirs.patch
-	"${FILESDIR}"/${PN}-3.17.0_rc1-FindBLAS.patch
-	"${FILESDIR}"/${PN}-3.5.2-FindQt4.patch
-	"${FILESDIR}"/${PN}-2.8.10.2-FindPythonLibs.patch
-	"${FILESDIR}"/${PN}-3.9.0_rc2-FindPythonInterp.patch
-	"${FILESDIR}"/${PN}-3.18.0-filter_distcc_warning.patch
+	"${FILESDIR}"/${PN}-3.27.0_rc1-0001-Don-t-use-.so-for-modules-on-darwin-macos.-Use-.bund.patch
+	"${FILESDIR}"/${PN}-3.27.0_rc1-0002-Set-some-proper-paths-to-make-cmake-find-our-tools.patch
+	"${FILESDIR}"/${PN}-3.27.0_rc1-0003-Prefer-pkgconfig-in-FindBLAS.patch
+	"${FILESDIR}"/${PN}-3.27.0_rc1-0004-Ensure-that-the-correct-version-of-Qt-is-always-used.patch
+	"${FILESDIR}"/${PN}-3.27.0_rc1-0005-Respect-Gentoo-s-Python-eclasses.patch
+	"${FILESDIR}"/${PN}-3.30.3-cudahostld.patch
 )
 
 cmake_src_bootstrap() {
