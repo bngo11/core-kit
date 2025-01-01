@@ -4,7 +4,7 @@ EAPI=6
 
 WANT_AUTOMAKE="none"
 
-inherit autotools cron flag-o-matic pam user
+inherit autotools cron flag-o-matic pam user eapi7-ver
 
 DESCRIPTION="A command scheduler with extended capabilities over cron and anacron"
 HOMEPAGE="http://fcron.free.fr/"
@@ -64,6 +64,9 @@ src_prepare() {
 }
 
 src_configure() {
+	export CC=/usr/bin/gcc-12.3.0
+	export CXX=/usr/bin/g++-12.3.0
+
 	# Don't try to pass --with-debug as it'll play with cflags as
 	# well, and run foreground which is a _very_ nasty idea for
 	# Gentoo.
