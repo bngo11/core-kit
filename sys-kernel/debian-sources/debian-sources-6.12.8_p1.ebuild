@@ -249,6 +249,7 @@ src_prepare() {
 	tweak_config .config CONFIG_CRYPTO_CRC32C y
 	tweak_config .config CONFIG_MODULE_COMPRESS_NONE y
 	tweak_config .config CONFIG_MODULE_COMPRESS_XZ n
+	tweak_config .config CONFIG_MODULE_COMPRESS n
 	# get config into good state:
 	yes "" | make oldconfig >/dev/null 2>&1 || die
 	cp .config "${T}"/config || die
