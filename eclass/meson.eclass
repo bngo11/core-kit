@@ -237,7 +237,7 @@ meson_src_configure() {
 	mesonargs+=("${emesonargs[@]}")
 
 	BUILD_DIR="${BUILD_DIR:-${WORKDIR}/${P}-build}"
-	set -- meson "${mesonargs[@]}" "$@" \
+	set -- meson setup "${mesonargs[@]}" "$@" \
 		"${EMESON_SOURCE:-${S}}" "${BUILD_DIR}"
 	echo "$@"
 	tc-env_build "$@" || die
