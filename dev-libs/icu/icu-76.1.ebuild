@@ -14,6 +14,7 @@ SRC_URI="https://github.com/unicode-org/icu/releases/download/release-${PV//./-}
 S="${WORKDIR}"/${PN}/source
 
 KEYWORDS="*"
+WANT_AUTOCONF="2.72"
 
 LICENSE="BSD"
 SLOT="0/${PV}"
@@ -32,9 +33,13 @@ MULTILIB_CHOST_TOOLS=(
 )
 
 PATCHES=(
-	"${FILESDIR}/${PN}-65.1-remove-bashisms.patch"
+	"${FILESDIR}/${PN}-76.1-remove-bashisms.patch"
 	"${FILESDIR}/${PN}-64.2-darwin.patch"
 	"${FILESDIR}/${PN}-68.1-nonunicode.patch"
+
+	# Undo change for now which exposes underlinking in consumers;
+	# revisit when things are a bit quieter and tinderbox its removal.
+	"${FILESDIR}/${PN}-76.1-undo-pkgconfig-change-for-now.patch"
 )
 
 src_prepare() {
@@ -44,6 +49,11 @@ src_prepare() {
 	# won't use unofficial APIs. We need this despite the configure argument.
 	sed -i \
 		-e "s/#define U_DISABLE_RENAMING 0/#define U_DISABLE_RENAMING 1/" \
+		common/unicode/uconfig.h || die
+	#
+	# ODR violations, experimental API
+	sed -i \
+		-e "s/#   define UCONFIG_NO_MF2 0/#define UCONFIG_NO_MF2 1/" \
 		common/unicode/uconfig.h || die
 
 	# Fix linking of icudata
@@ -61,11 +71,6 @@ src_prepare() {
 
 src_configure() {
 	MAKEOPTS+=" VERBOSE=1"
-
-	# ICU tries to append -std=c++11 without this, so as of 71.1,
-	# despite GCC 9+ using c++14 (or gnu++14) and GCC 11+ using gnu++17,
-	# we still need this.
-	append-cxxflags -std=c++14
 
 	if tc-is-cross-compiler; then
 		mkdir "${WORKDIR}"/host || die

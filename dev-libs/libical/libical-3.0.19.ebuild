@@ -37,13 +37,11 @@ RDEPEND="${COMMON_DEPEND}
 "
 
 DOCS=(
-	AUTHORS ReadMe.txt ReleaseNotes.txt TEST THANKS TODO
-	doc/{AddingOrModifyingComponents,UsingLibical}.txt
+	AUTHORS README.md ReleaseNotes.txt TEST THANKS TODO
+	doc/AddingOrModifyingComponents.txt doc/UsingLibical.md
 )
 
 PATCHES=(
-	"${FILESDIR}/${PN}-3.0.4-tests.patch"
-	"${FILESDIR}/${PN}-3.0.5-pkgconfig-libdir.patch"
 )
 
 pkg_setup() {
