@@ -10,7 +10,7 @@ DESCRIPTION="C Library for NVM Express on Linux"
 HOMEPAGE="https://github.com/linux-nvme/libnvme"
 LICENSE="LGPL-2.1+"
 SLOT="0/1"
-IUSE="dbus +json keyutils python ssl +uuid"
+IUSE="dbus +json keyutils python ssl static-libs +uuid"
 
 SRC_URI="https://github.com/linux-nvme/libnvme/archive/refs/tags/v1.11.1.tar.gz -> libnvme-1.11.1.tar.gz"
 KEYWORDS="*"
@@ -41,6 +41,11 @@ src_configure() {
 		$(meson_feature ssl openssl)
 		$(meson_feature python)
 	)
+
+	if use static-libs; then
+		emesonargs+=( --default-library=both )
+	fi
+
 	meson_src_configure
 }
 

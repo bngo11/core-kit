@@ -26,6 +26,7 @@ DEPEND_COMMON="
 		readline? ( sys-libs/readline:= )
 		sanlock? ( sys-cluster/sanlock )
 	)
+	sys-libs/libnvme
 "
 # /run is now required for locking during early boot. /var cannot be assumed to
 # be available -- thus, pull in recent enough baselayout for /run.
@@ -42,6 +43,7 @@ RDEPEND="
 DEPEND="
 	${DEPEND_COMMON}
 	static? (
+		sys-libs/libnvme[static-libs]
 		sys-apps/util-linux[static-libs]
 		lvm? (
 			dev-libs/libaio[static-libs]
