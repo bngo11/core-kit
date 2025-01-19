@@ -21,9 +21,9 @@ RDEPEND="!dev-util/boost-build"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-4.9.2-disable_python_rpath.patch
+	"${FILESDIR}"/${PN}-4.9.2-darwin-gentoo-toolchain.patch
 	"${FILESDIR}"/${PN}-4.9.2-add-none-feature-options.patch
 	"${FILESDIR}"/${PN}-4.9.2-no-implicit-march-flags.patch
-	"${FILESDIR}"/${PN}-4.9.2-odr.patch
 )
 
 src_configure() {
@@ -53,8 +53,8 @@ src_install() {
 
 	insinto /usr/share/b2/src
 	doins -r "${FILESDIR}/site-config.jam" \
-		bootstrap.jam build-system.jam ../example/user-config.jam \
-		build kernel options tools util
+		build-system.jam ../example/user-config.jam \
+		build options tools util
 
 	find "${ED}"/usr/share/b2/src -iname '*.py' -delete || die
 
