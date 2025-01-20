@@ -178,6 +178,8 @@ src_configure() {
 	busybox_config_option n FEATURE_HAVE_RPC
 	busybox_config_option n FEATURE_INETD_RPC
 
+	busybox_config_option n TC
+
 	# default a bunch of uncommon options to off
 	local opt
 	for opt in \

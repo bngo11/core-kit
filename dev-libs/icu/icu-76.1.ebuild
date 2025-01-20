@@ -93,7 +93,7 @@ src_configure() {
 		$(use_enable debug)
 		$(use_enable static-libs static)
 		$(use_enable test tests)
-		$(multilib_native_use_enable examples samples)
+		$(use_enable examples samples)
 	)
 
 	tc-is-cross-compiler && myeconfargs+=(
