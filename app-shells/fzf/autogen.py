@@ -9,8 +9,6 @@ async def generate(hub, **pkginfo):
 	links = soup.find_all("a")
 	links.reverse()
 	deps_ver = links[0].get("href").split("-")[1]
-	print(links)
-	print(deps_ver)
 
 	json_data = await hub.pkgtools.fetch.get_page("https://api.github.com/repos/junegunn/fzf/releases", is_json=True)
 	version = None
