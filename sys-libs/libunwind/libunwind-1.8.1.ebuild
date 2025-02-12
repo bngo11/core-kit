@@ -8,7 +8,7 @@ inherit autotools
 
 DESCRIPTION="Portable and efficient API to determine the call-chain of a program"
 HOMEPAGE="https://savannah.nongnu.org/projects/libunwind"
-SRC_URI="mirror://nongnu/libunwind/${MY_P}.tar.gz"
+SRC_URI="https://github.com/libunwind/libunwind/releases/download/v${MY_PV}/${MY_P}.tar.gz"
 S="${WORKDIR}/${MY_P}"
 
 LICENSE="MIT"

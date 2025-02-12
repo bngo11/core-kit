@@ -10,6 +10,6 @@ LICENSE=|| ( GPL-2+ LGPL-3+ ) utils? ( GPL-3+ )
 RDEPEND=>=sys-libs/zlib-1.2.8-r1[static-libs?,-mgorny(-)] bzip2? ( >=app-arch/bzip2-1.0.6-r4[static-libs?,-mgorny(-)] ) lzma? ( >=app-arch/xz-utils-5.0.5-r1[static-libs?,-mgorny(-)] ) zstd? ( app-arch/zstd:=[static-libs?,-mgorny(-)] ) elibc_musl? ( dev-libs/libbsd sys-libs/argp-standalone sys-libs/fts-standalone sys-libs/obstack-standalone ) !dev-libs/libelf
 RESTRICT=!test? ( test )
 SLOT=0
-SRC_URI=https://sourceware.org/elfutils/ftp/0.187/elfutils-0.187.tar.bz2
+SRC_URI=https://sourceware.org/elfutils/ftp/0.192/elfutils-0.192.tar.bz2
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=d85a7fd4226a4575653a50726b8a4ad0
+_md5_=3e404d0a50d6afac492d83af2e786d99

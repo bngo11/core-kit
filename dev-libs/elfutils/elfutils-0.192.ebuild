@@ -33,7 +33,7 @@ BDEPEND=">=sys-devel/flex-2.5.4a
 RESTRICT="!test? ( test )"
 
 PATCHES=(
-	"${FILESDIR}"/patches/
+#	"${FILESDIR}"/patches/
 )
 
 src_prepare() {
