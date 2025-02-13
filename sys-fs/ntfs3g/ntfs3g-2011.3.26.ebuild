@@ -6,7 +6,7 @@ inherit autotools toolchain-funcs
 
 DESCRIPTION="Open source read-write NTFS driver that runs under FUSE"
 HOMEPAGE="https://github.com/tuxera/ntfs-3g"
-SRC_URI="https://github.com/tuxera/ntfs-3g/tarball/78414d93613532fd82f3a82aba5d4a1c32898781 -> ntfs-3g-2022.10.3-78414d9.tar.gz"
+SRC_URI="https://github.com/tuxera/ntfs-3g/tarball/d740b6c3e90cbc679974085b9f7b481182589152 -> ntfs-3g-2011.3.26-d740b6c.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
