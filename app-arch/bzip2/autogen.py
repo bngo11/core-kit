@@ -1,36 +1,44 @@
 #!/usr/bin/env python3
 
-from bs4 import BeautifulSoup
-from packaging.version import Version
-import os
-import re
-
-regex = r'(\d+(?:\.\d+)+)'
-
+import json
 
 async def generate(hub, **pkginfo):
-    download_url = "https://sourceware.org/pub/bzip2/"
-    html = await hub.pkgtools.fetch.get_page(download_url)
-    soup = BeautifulSoup(html, features='html.parser').find_all('a', href=True)
+	gitlabid = 12551088
+	gitlaburl = "gitlab.com"
+	json_data = await hub.pkgtools.fetch.get_page(f"https://{gitlaburl}/api/v4/projects/{gitlabid}/repository/tags", is_json=True)
+	version = None
+	url = None
+	basever = pkginfo.get('basever')
 
-    tarballs = [a.get('href') for a in soup if '.tar.' in a.contents[0] and not a.contents[0].endswith('sig')]
-    versions = [(Version(re.findall(regex, a)[0]), a) for a in tarballs if re.findall(regex, a)]
-    latest = max(versions)
+	for item in json_data:
+		try:
+			version = item['name'].split('-')[-1]
+			verlist = version.split(".")
+			list(map(int, verlist))
+			if len(verlist) > 1:
+				if int(verlist[1]) >= 89 and int(verlist[0]) != 0:
+					continue
 
-    artifact = hub.pkgtools.ebuild.Artifact(url=download_url+latest[1])
-    await artifact.fetch()
-    artifact.extract()
-    makefile = os.path.join(artifact.extract_path, f"bzip2-{latest[0]}/Makefile-libbz2_so")
-    with open(makefile, "r") as mf:
-        lines = mf.readlines()
-        for line in lines:
-            if 'soname' in line and not line.startswith('#'):
-                soname = line.split()[-2].split('so.')[1].split('.')[0]
+			if basever:
+				baselist = basever.split('.')
+				baselen = len(baselist)
+				if verlist[:baselen] != baselist:
+					continue
+			break
 
-    ebuild = hub.pkgtools.ebuild.BreezyBuild(
-        **pkginfo,
-        version=latest[0],
-        artifacts=[artifact],
-        soname=soname,
-    )
-    ebuild.push()
+		except (IndexError, ValueError, KeyError):
+			continue
+	else:
+		version = None
+
+	if version:
+		pkginfo['version'] = version
+		final_name = f'{pkginfo["name"]}-{version}.tar.gz'
+		url = f"https://sourceware.org/pub/bzip2/{final_name}"
+		ebuild = hub.pkgtools.ebuild.BreezyBuild(
+			soname=1,
+			**pkginfo,
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=final_name)]
+		)
+		ebuild.push()
+# vim: ts=4 sw=4 noet
