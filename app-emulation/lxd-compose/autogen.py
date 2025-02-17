@@ -1,48 +1,41 @@
 #!/usr/bin/env python3
 
-from metatools.version import generic
-
+import json
 
 async def generate(hub, **pkginfo):
 	github_user = "MottainaiCI"
 	github_repo = pkginfo.get("name")
+	json_data = await hub.pkgtools.fetch.get_page(f"https://api.github.com/repos/{github_user}/{github_repo}/releases", is_json=True)
+	version = None
+	url = None
 
-	release_data = await hub.pkgtools.fetch.get_page(
-		f"https://api.github.com/repos/{github_user}/{github_repo}/releases",
-		is_json=True,
-	)
+	for item in json_data:
+		try:
+			if item["prerelease"] or item["draft"]:
+				continue
 
-	try:
-		latest_release = max(
-			(
-				release
-				for release in release_data
-				if not release["prerelease"] and not release["draft"]
-			),
-			key=lambda release: generic.parse(release["tag_name"]),
+			version = item["tag_name"].lstrip("v")
+			list(map(int, version.split(".")))
+
+			for asset in item['assets']:
+				asset_name = asset["name"]
+
+				if asset_name.endswith("tar.gz"):
+					url = asset["browser_download_url"]
+					break
+
+			if url:
+				break
+
+		except (KeyError, IndexError, ValueError):
+			continue
+
+	if version and url:
+		ebuild = hub.pkgtools.ebuild.BreezyBuild(
+			**pkginfo,
+			version=version,
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=asset_name)]
 		)
-	except ValueError:
-		raise hub.pkgtools.ebuild.BreezyError(
-			f"Can't find suitable release of {github_repo}"
-		)
+		ebuild.push()
 
-	tag_name = latest_release["tag_name"]
-	latest_version = tag_name.lstrip("v")
-
-	source_name = f"{github_repo}-{tag_name}-source.tar.gz"
-	source_asset = next(
-		asset for asset in latest_release["assets"] if asset["name"] == source_name
-	)
-
-	source_url = source_asset["browser_download_url"]
-	source_name = f"{github_repo}-{latest_version}.tar.gz"
-
-	source_artifact = hub.pkgtools.ebuild.Artifact(
-		url=source_url, final_name=source_name
-	)
-
-	ebuild = hub.pkgtools.ebuild.BreezyBuild(
-		**pkginfo, version=latest_version, artifacts=[source_artifact]
-	)
-	ebuild.push()
-
+# vim: ts=4 sw=4 noet

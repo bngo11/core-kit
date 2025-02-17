@@ -1,47 +1,35 @@
 #!/usr/bin/env python3
 
-from metatools.version import generic
-
+import json
 
 async def generate(hub, **pkginfo):
 	github_user = "p7zip-project"
 	github_repo = pkginfo.get("name")
+	json_data = await hub.pkgtools.fetch.get_page(f"https://api.github.com/repos/{github_user}/{github_repo}/releases", is_json=True)
+	version = None
+	url = None
 
-	release_data = await hub.pkgtools.fetch.get_page(
-		f"https://api.github.com/repos/{github_user}/{github_repo}/releases",
-		is_json=True,
-	)
+	for item in json_data:
+		try:
+			if item["prerelease"] or item["draft"]:
+				continue
 
-	try:
-		latest_release = max(
-			(
-				release
-				for release in release_data
-				if not release["prerelease"] and not release["draft"]
-			),
-			key=lambda release: generic.parse(release["tag_name"]),
+			version = item["tag_name"].lstrip("v")
+			list(map(int, version.split(".")))
+			url = item["tarball_url"]
+			break
+
+		except (KeyError, IndexError, ValueError):
+			continue
+
+	if version and url:
+		final_name = f"{pkginfo.get('name')}-{version}.tar.gz"
+		ebuild = hub.pkgtools.ebuild.BreezyBuild(
+			**pkginfo,
+			version=version,
+			github_repo=github_repo,
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=final_name)]
 		)
-	except ValueError:
-		raise hub.pkgtools.ebuild.BreezyError(
-			f"Can't find suitable release of {github_repo}"
-		)
+		ebuild.push()
 
-	tag_name = latest_release["tag_name"]
-	latest_version = tag_name.lstrip("v")
-
-	source_url = latest_release["tarball_url"]
-	source_name = f"{github_repo}-{latest_version}.tar.gz"
-
-	source_artifact = hub.pkgtools.ebuild.Artifact(
-		url=source_url, final_name=source_name
-	)
-
-	ebuild = hub.pkgtools.ebuild.BreezyBuild(
-		**pkginfo,
-		version=latest_version,
-		github_user=github_user,
-		github_repo=github_repo,
-		artifacts=[source_artifact],
-	)
-	ebuild.push()
-
+# vim: ts=4 sw=4 noet

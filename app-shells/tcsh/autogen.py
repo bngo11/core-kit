@@ -1,26 +1,31 @@
 #!/usr/bin/env python3
 
-from metatools.version import generic
-from bs4 import BeautifulSoup
+import json
 
 async def generate(hub, **pkginfo):
-	url = "https://astron.com/pub/tcsh/"
-	html_data = await hub.pkgtools.fetch.get_page(url)
-	soup = BeautifulSoup(html_data, "html.parser")
-	archives = {}
-	for link in soup.find_all("a"):
-		href = link.get("href")
-		if href is not None and href.endswith(".tar.gz"):
-			ver = href.split(".tar")[0].split("/")[-1].replace("tcsh-","")
-			if ver.upper().isupper():
-				continue
-			archives.update({ver:href})
-	latest_version = sorted(archives, key=lambda x: generic.parse(x)).pop()
-	ebuild = hub.pkgtools.ebuild.BreezyBuild(
-		**pkginfo,
-		version=latest_version,
-		artifacts=[hub.pkgtools.ebuild.Artifact(url=url+archives[latest_version])],
-	)
-	ebuild.push()
+	github_user = "tcsh-org"
+	github_repo = pkginfo.get("name")
+	json_data = await hub.pkgtools.fetch.get_page(f"https://api.github.com/repos/{github_user}/{github_repo}/tags", is_json=True)
+	version = None
+	url = None
+
+	for item in json_data:
+		try:
+			version = item["name"].lstrip("TCSH").replace("_", ".")
+			list(map(int, version.split(".")))
+			break
+
+		except (KeyError, IndexError, ValueError):
+			continue
+
+	if version:
+		final_name = f"{pkginfo.get('name')}-{version}.tar.gz"
+		url = f"https://astron.com/pub/tcsh/{final_name}"
+		ebuild = hub.pkgtools.ebuild.BreezyBuild(
+			**pkginfo,
+			version=version,
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=final_name)]
+		)
+		ebuild.push()
 
 # vim: ts=4 sw=4 noet

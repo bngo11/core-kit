@@ -1,30 +1,34 @@
 #!/usr/bin/env python3
 
-from bs4 import BeautifulSoup
-from metatools.version import generic
+import json
 
 async def generate(hub, **pkginfo):
+	github_user = "kdave"
+	github_repo = pkginfo.get("name")
+	json_data = await hub.pkgtools.fetch.get_page(f"https://api.github.com/repos/{github_user}/{github_repo}/releases", is_json=True)
+	version = None
+	url = None
 
-	user = "kdave"
-	pkg_name = pkginfo["name"]
-	url = f"https://www.kernel.org/pub/linux/kernel/people/{user}/{pkg_name}/"
-	html_data = await hub.pkgtools.fetch.get_page(url)
-	vers = []
-	soup = BeautifulSoup(html_data, "html.parser")
-	for link in soup.find_all("a"):
-		href = link.get("href")
-		if href.endswith(".tar.xz"):
-			vers.append( href.split(pkg_name)[1].split(".tar")[0].split("-")[1])
+	for item in json_data:
+		try:
+			if item["prerelease"] or item["draft"]:
+				continue
 
-	latest_version = sorted(vers, key=lambda v: generic.parse(v)).pop().lstrip("v")
-	final_name = f"{pkg_name}-v{latest_version}.tar.xz"
-	url = f"{url}{final_name}"
+			version = item["tag_name"]
+			list(map(int, version.lstrip("v").split(".")))
+			break
 
-	ebuild = hub.pkgtools.ebuild.BreezyBuild(
-		**pkginfo,
-		version=latest_version,
-		artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=final_name)],
-	)
-	ebuild.push()
+		except (KeyError, IndexError, ValueError):
+			continue
+
+	if version:
+		final_name = f"{github_repo}-{version}.tar.xz"
+		url = f"https://www.kernel.org/pub/linux/kernel/people/{github_user}/{github_repo}/{final_name}"
+		ebuild = hub.pkgtools.ebuild.BreezyBuild(
+			**pkginfo,
+			version=version,
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=final_name)]
+		)
+		ebuild.push()
 
 # vim: ts=4 sw=4 noet

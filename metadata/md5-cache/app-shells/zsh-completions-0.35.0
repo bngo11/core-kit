@@ -6,5 +6,5 @@ KEYWORDS=*
 LICENSE=BSD
 RDEPEND=app-shells/zsh
 SLOT=0
-SRC_URI=https://github.com/zsh-users/zsh-completions/archive/refs/tags/0.35.0.tar.gz -> 0.35.0.tar.gz
-_md5_=aa96faafebfc3075a9ac8956e6098b94
+SRC_URI=https://github.com/zsh-users/zsh-completions/archive/refs/tags/0.35.0.tar.gz -> zsh-completions-0.35.0.tar.gz
+_md5_=dcd55a5e3e7527cbda7f7bb11f2cf54b

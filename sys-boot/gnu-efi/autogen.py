@@ -1,36 +1,35 @@
 #!/usr/bin/env python3
 
 from bs4 import BeautifulSoup
-from metatools.version import generic
-import re
-
 
 async def generate(hub, **pkginfo):
-    project_name="gnu-efi"
-    project_name = pkginfo.get("name")
+	html_data = await hub.pkgtools.fetch.get_page("https://sourceforge.net/projects/gnu-efi/files")
+	soup = BeautifulSoup(html_data, "html.parser")
+	links = soup.find_all("a")
+	version = None
 
-    sourceforge_url = f"https://sourceforge.net/projects/{project_name}/files"
-    sourceforge_soup = BeautifulSoup(
-            await hub.pkgtools.fetch.get_page(sourceforge_url), "lxml"
-            )
+	for link in links:
+		href = link.get("href")
+		if href and "download" in href:
+			final_name = href.split("/")[-2]
+			version = final_name.rsplit("-", 1)[-1].rstrip(".tar.bz2")
 
-    files_list = sourceforge_soup.find(id="files_list")
-    files = (
-            version_row.get("title") for version_row in files_list.tbody.find_all("tr")
-            )
-    versions = { generic.parse(re.search(r"\d+\.\d+(\.\d+)?", file).group()): file for file in files }
+			try:
+				list(map(int, version.split(".")))
+				break
+
+			except ValueError:
+				continue
+
+	if version:
+		url = f"https://downloads.sourceforge.net/gnu-efi/gnu-efi/{final_name}"
+		ebuild = hub.pkgtools.ebuild.BreezyBuild(
+			**pkginfo,
+			version=version,
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=final_name)],
+		)
+
+		ebuild.push()
 
 
-    target_version = max(versions.keys())
-    target_file = versions[target_version]
-
-    src_url = f"https://downloads.sourceforge.net/{project_name}/{project_name}/{target_file}"
-
-
-    ebuild = hub.pkgtools.ebuild.BreezyBuild(
-            **pkginfo,
-            version=target_version,
-            artifacts=[hub.pkgtools.ebuild.Artifact(url=src_url)],
-            )
-    ebuild.push()
-
+# vim: ts=4 sw=4 noet

@@ -2,7 +2,7 @@
 
 EAPI=7
 
-SRC_URI="https://github.com/zsh-users/zsh-completions/archive/refs/tags/0.35.0.tar.gz -> 0.35.0.tar.gz"
+SRC_URI="https://github.com/zsh-users/zsh-completions/archive/refs/tags/0.35.0.tar.gz -> zsh-completions-0.35.0.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="Additional completion definitions for Zsh"
@@ -14,8 +14,6 @@ SLOT="0"
 RDEPEND="app-shells/zsh"
 
 src_prepare() {
-	
-	rm -rf src/_flameshot
 	
 
 	default
