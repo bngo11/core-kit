@@ -14,15 +14,15 @@ async def generate(hub, **pkginfo):
 			if item["prerelease"] or item["draft"]:
 				continue
 
-			version = item["tag_name"]
-			list(map(int, version.lstrip("v").split(".")))
+			version = item["tag_name"].lstrip("v")
+			list(map(int, version.split(".")))
 			break
 
 		except (KeyError, IndexError, ValueError):
 			continue
 
 	if version:
-		final_name = f"{github_repo}-{version}.tar.xz"
+		final_name = f"{github_repo}-v{version}.tar.xz"
 		url = f"https://www.kernel.org/pub/linux/kernel/people/{github_user}/{github_repo}/{final_name}"
 		ebuild = hub.pkgtools.ebuild.BreezyBuild(
 			**pkginfo,
