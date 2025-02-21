@@ -34,6 +34,8 @@ BDEPEND="
 "
 
 src_configure() {
+	addpredict /dev
+
 	local emesonargs=(
 		-Dsystemd-user-unit-dir="$(systemd_get_userunitdir)"
 		$(meson_feature geolocation geoclue)
