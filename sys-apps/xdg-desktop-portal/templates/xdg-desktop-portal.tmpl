@@ -23,6 +23,8 @@ DEPEND="
 	>=sys-libs/libportal-0.6
 	>=sys-apps/bubblewrap-0.6
 	>=sys-apps/flatpak-1.14
+	dev-util/umockdev
+	dev-python/pytest
 "
 RDEPEND="${DEPEND}
 	sys-apps/dbus
