@@ -6,7 +6,7 @@ inherit bash-completion-r1 golang-base golang-vcs-snapshot linux-info systemd ud
 
 DESCRIPTION="The core functions you need to create Docker images and run Docker containers"
 HOMEPAGE="https://www.docker.com/ https://github.com/moby/moby"
-SRC_URI="https://github.com/moby/moby/tarball/383a9d96e2dd4915861d98ceca095fdf100b7643 -> moby-28.0.0-383a9d9.tar.gz"
+SRC_URI="https://github.com/moby/moby/tarball/7d8c3a1d5e70f929853841f92b592ddcf84559b9 -> moby-28.0.1-7d8c3a1.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -216,9 +216,9 @@ pkg_setup() {
 }
 
 src_compile() {
-	export DOCKER_GITCOMMIT="383a9d9"
+	export DOCKER_GITCOMMIT="7d8c3a1"
 	export GOPATH="${WORKDIR}/${P}"
-	export VERSION="28.0.0-funtoo"
+	export VERSION="28.0.1-funtoo"
 
 	# setup CFLAGS and LDFLAGS for separate build target
 	# see https://github.com/tianon/docker-overlay/pull/10
