@@ -16,7 +16,8 @@ DESCRIPTION="stupid content tracker: distributed VCS designed for speed and effi
 HOMEPAGE="https://www.git-scm.com/"
 SRC_URI="
 https://www.kernel.org/pub/software/scm/git/git-2.49.0.tar.xz -> git-2.49.0.tar.xz
-https://www.kernel.org/pub/software/scm/git/git-manpages-2.49.0.tar.xz -> git-manpages-2.49.0.tar.xz"
+https://www.kernel.org/pub/software/scm/git/git-manpages-2.49.0.tar.xz -> git-manpages-2.49.0.tar.xz
+https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.49.0.tar.xz -> git-htmldocs-2.49.0.tar.xz"
 KEYWORDS="*"
 
 LICENSE="GPL-2"
@@ -192,7 +193,7 @@ src_unpack() {
 	unpack git-manpages-2.49.0.tar.xz
 	if use doc ; then
 		pushd "${S}"/Documentation &>/dev/null || die
-		unpack ${PN}-htmldocs-${DOC_VER}.tar.${SRC_URI_SUFFIX}
+		unpack git-htmldocs-2.49.0.tar.xz
 		popd &>/dev/null || die
 	fi
 
@@ -299,14 +300,12 @@ src_install() {
 	dodoc README* Documentation/{SubmittingPatches,CodingGuidelines}
 	use doc && dodir /usr/share/doc/${PF}/html
 	local d
-	for d in / /howto/ /technical/ ; do
-		docinto ${d}
-		dodoc Documentation${d}*.txt
-		if use doc ; then
+	if use doc ; then
+		for d in / /howto/ /technical/ ; do
 			docinto ${d}/html
 			dodoc Documentation${d}*.html
-		fi
-	done
+		done
+	fi
 	docinto /
 	# Upstream does not ship this pre-built :-(
 	use doc && doinfo Documentation/{git,gitman}.info
@@ -328,8 +327,6 @@ src_install() {
 		elisp-site-file-install "${FILESDIR}"/${SITEFILE}
 	fi
 
-	#dobin contrib/fast-import/git-p4 # Moved upstream
-	#dodoc contrib/fast-import/git-p4.txt # Moved upstream
 	newbin contrib/fast-import/import-tars.perl import-tars
 	exeinto /usr/libexec/git-core/
 	newexe contrib/git-resurrect.sh git-resurrect
@@ -342,7 +339,6 @@ src_install() {
 		git_emake install-man install-html || die "Failed to emake install-html install-man for git-subtree"
 	fi
 	newdoc README README.git-subtree
-	dodoc git-subtree.txt
 	popd &>/dev/null || die
 
 	# diff-highlight
@@ -352,12 +348,11 @@ src_install() {
 	# git-jump
 	exeinto /usr/libexec/git-core/
 	doexe contrib/git-jump/git-jump
-	newdoc contrib/git-jump/README git-jump.txt
+	newdoc contrib/git-jump/README README.git-jump
 
 	# git-contacts
 	exeinto /usr/libexec/git-core/
 	doexe contrib/contacts/git-contacts
-	dodoc contrib/contacts/git-contacts.txt
 
 	if use gnome-keyring ; then
 		pushd contrib/credential/libsecret &>/dev/null || die
