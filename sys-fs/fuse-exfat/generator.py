@@ -8,7 +8,6 @@ async def generate(hub, **pkginfo):
 	url = None
 
 	for item in json_data:
-		print(pkginfo["name"])
 		try:
 			if item["prerelease"] or item["draft"]:
 				continue
@@ -18,7 +17,6 @@ async def generate(hub, **pkginfo):
 
 			for asset in item['assets']:
 				asset_name = asset["name"]
-				print(asset_name)
 				if asset_name.rsplit('-', 1)[0] != pkginfo["name"]:
 					continue
 
