@@ -12,7 +12,7 @@ DESCRIPTION="XML C parser and toolkit"
 HOMEPAGE="https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home"
 KEYWORDS="*"
 
-SRC_URI="https://download.gnome.org/sources/libxml2/2.12/libxml2-2.12.10.tar.xz -> libxml2-2.12.10.tar.xz
+SRC_URI="https://download.gnome.org/sources/libxml2/2.14/libxml2-2.14.0.tar.xz -> libxml2-2.14.0.tar.xz
 	test? (
 			https://www.w3.org/XML/2004/xml-schema-test-suite/xmlschema2002-01-16/xsts-2002-01-16.tar.gz
             https://www.w3.org/XML/2004/xml-schema-test-suite/xmlschema2004-01-14/xsts-2004-01-14.tar.gz
