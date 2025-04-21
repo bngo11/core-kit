@@ -1,0 +1,31 @@
+--- a/image/usr/sbin/update-ca-certificates	2025-04-21 14:09:30.098153119 -0500
++++ b/image/usr/sbin/update-ca-certificates	2025-04-21 14:11:39.795747950 -0500
+@@ -30,6 +30,8 @@
+ CERTBUNDLE=ca-certificates.crt
+ ETCCERTSDIR=/etc/ssl/certs
+ HOOKSDIR=/etc/ca-certificates/update.d
++ROOT=""
++RELPATH=""
+ 
+ while [ $# -gt 0 ];
+ do
+@@ -66,7 +68,9 @@
+       CERTSDIR="$1/${CERTSDIR}"
+       LOCALCERTSDIR="$1/${LOCALCERTSDIR}"
+       ETCCERTSDIR="$1/${ETCCERTSDIR}"
+-      HOOKSDIR="$1/${HOOKSDIR}";;
++      HOOKSDIR="$1/${HOOKSDIR}"
++      RELPATH="../../.."
++      ROOT=$(readlink -f "$1");;
+     --help|-h|*)
+       echo "$0: [--verbose] [--fresh]"
+       exit;;
+@@ -102,7 +106,7 @@
+                                                   -e 's/,/_/g').pem"
+   if ! test -e "$PEM" || [ "$(readlink "$PEM")" != "$CERT" ]
+   then
+-    ln -sf "$CERT" "$PEM"
++    ln -sf "${RELPATH}${CERT#$ROOT}" "$PEM"
+     echo "+$PEM" >> "$ADDED"
+   fi
+   # Add trailing newline to certificate, if it is missing (#635570)

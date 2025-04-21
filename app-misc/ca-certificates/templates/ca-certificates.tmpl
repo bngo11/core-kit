@@ -47,7 +47,7 @@ src_unpack() {
 src_prepare() {
 	cd "image/${EPREFIX}" || die
 	default
-	eapply -p2 "${FILESDIR}"/${PN}-20150426-root.patch
+	eapply -p2 "${FILESDIR}"/${PN}-20250419-root.patch
 	local relp=$(echo "${EPREFIX}" | sed -e 's:[^/]\+:..:g')
 	sed -i \
 		-e '/="$ROOT/s:ROOT:ROOT'"${EPREFIX}"':' \
