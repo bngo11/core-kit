@@ -66,7 +66,7 @@ src_compile() {
 		find * -name '*.crt' | LC_ALL=C sort
 	) > etc/ca-certificates.conf
 
-	sh usr/sbin/update-ca-certificates --root "${S}/image" || die
+	sh usr/sbin/update-ca-certificates --sysroot "${S}/image" || die
 }
 
 src_install() {
@@ -81,7 +81,7 @@ pkg_postinst() {
 		# to include their stuff in the db.
 		# However it's too overzealous when the user has custom certs in place.
 		# --fresh is to clean up dangling symlinks
-		"${EROOT}"/usr/sbin/update-ca-certificates --root "${ROOT}"
+		"${EROOT}"/usr/sbin/update-ca-certificates --sysroot "${ROOT}"
 	fi
 
 	if [[ -n "$(find -L "${EROOT}"/etc/ssl/certs/ -type l)" ]] ; then
