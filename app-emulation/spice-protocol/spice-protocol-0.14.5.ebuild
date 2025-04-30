@@ -7,7 +7,7 @@ inherit meson
 
 DESCRIPTION="Headers defining the SPICE protocol"
 HOMEPAGE="https://www.spice-space.org/"
-SRC_URI="https://www.spice-space.org/download/releases/spice-protocol-0.14.4.tar.xz -> spice-protocol-0.14.4.tar.xz"
+SRC_URI="https://www.spice-space.org/download/releases/spice-protocol-0.14.5.tar.xz -> spice-protocol-0.14.5.tar.xz"
 
 LICENSE="BSD"
 SLOT="0"
