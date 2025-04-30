@@ -1,30 +1,27 @@
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-
-inherit git-r3
-
-EGIT_REPO_URI="https://github.com/funtoo/keychain"
-EGIT_CHECKOUT_DIR="${WORKDIR}/${P}"
-EGIT_BRANCH="devel"
-
+EAPI=7
 
 DESCRIPTION="manage ssh and GPG keys in a convenient and secure manner. Frontend for ssh-agent/ssh-add"
 HOMEPAGE="http://www.funtoo.org/Keychain"
+SRC_URI="https://github.com/funtoo/keychain/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="*"
 IUSE=""
 
 DEPEND=""
 RDEPEND="app-shells/bash || ( net-misc/openssh net-misc/ssh )"
 
+src_compile() {
+	make
+}
 
 src_install() {
 	dobin keychain || die "dobin failed"
 	doman keychain.1 || die "doman failed"
-	dodoc ChangeLog README.md || die
+	dodoc ChangeLog.md README.md || die
 }
 
 pkg_postinst() {
