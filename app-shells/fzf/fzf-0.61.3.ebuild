@@ -12,6 +12,7 @@ SRC_URI="https://github.com/junegunn/fzf/archive/v0.61.3.tar.gz -> fzf-0.61.3.ta
 LICENSE="MIT BSD-with-disclosure"
 SLOT="0"
 KEYWORDS="*"
+RESTRICT="network-sandbox"
 
 src_prepare() {
 	default
