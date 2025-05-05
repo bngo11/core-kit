@@ -7,10 +7,10 @@ HOMEPAGE=https://github.com/openzfs/zfs
 IUSE=custom-cflags debug +rootfs +dist-kernel-cap kernel_linux dist-kernel modules-sign +strip
 KEYWORDS=*
 LICENSE=CDDL MIT debug? ( GPL-2+ )
-PDEPEND=dist-kernel? ( ~sys-fs/zfs-2.3.2[dist-kernel] )
-RDEPEND=dist-kernel-cap? ( dist-kernel? ( <virtual/dist-kernel-6.15 ) ) sys-apps/kmod[tools] dist-kernel? ( virtual/dist-kernel:= )
+PDEPEND=dist-kernel? ( ~sys-fs/zfs-2.2.7[dist-kernel] )
+RDEPEND=dist-kernel-cap? ( dist-kernel? ( <virtual/dist-kernel-6.13 ) ) sys-apps/kmod[tools] dist-kernel? ( virtual/dist-kernel:= )
 RESTRICT=test
 SLOT=0
-SRC_URI=https://github.com/openzfs/zfs/tarball/7e5ef9b5dc31bbf95402e2d0d856477e48c7d335 -> zfs-2.3.2-7e5ef9b.tar.gz
+SRC_URI=https://github.com/openzfs/zfs/tarball/9e6cb3f730bf39831c9b8acc6ce889668beab7ff -> zfs-2.2.7-9e6cb3f.tar.gz
 _eclasses_=autotools	e9ade2787b2f54643c7cdffbfa1cca9c	edo	c0eb9cbe6b0bd01fcb4918f12598a4d3	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	linux-mod-r1	a580f9b06c64a300a9b062e07bf01161	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=5aa564531f52a7cf29877dd0d0d2c990
+_md5_=60a9c44e024c963d05677db88f57cd8d
