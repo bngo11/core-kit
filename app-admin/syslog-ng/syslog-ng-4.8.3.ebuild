@@ -8,7 +8,7 @@ inherit autotools python-single-r1 systemd
 MY_PV_MM=$(ver_cut 1-2)
 DESCRIPTION="syslog replacement with advanced filtering features"
 HOMEPAGE="https://www.syslog-ng.com/products/open-source-log-management/"
-SRC_URI="https://github.com/syslog-ng/syslog-ng/releases/download/syslog-ng-4.8.2/syslog-ng-4.8.2.tar.gz -> syslog-ng-4.8.2.tar.gz"
+SRC_URI="https://github.com/syslog-ng/syslog-ng/releases/download/syslog-ng-4.8.3/syslog-ng-4.8.3.tar.gz -> syslog-ng-4.8.3.tar.gz"
 
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0"
