@@ -10,7 +10,7 @@ inherit distutils-r1 libtool flag-o-matic qmake-utils toolchain-funcs
 
 DESCRIPTION="GnuPG Made Easy is a library for making GnuPG easier to use"
 HOMEPAGE="https://www.gnupg.org/related_software/gpgme"
-SRC_URI="https://gnupg.org/ftp/gcrypt/gpgme/gpgme-1.24.2.tar.bz2 -> gpgme-1.24.2.tar.bz2"
+SRC_URI="https://gnupg.org/ftp/gcrypt/gpgme/gpgme-1.24.3.tar.bz2 -> gpgme-1.24.3.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="1/11.33.21.1"
