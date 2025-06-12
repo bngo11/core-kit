@@ -6,7 +6,7 @@ DISTUTILS_USE_PEP517=setuptools
 
 inherit bash-completion-r1 distutils-r1 toolchain-funcs
 
-SRC_URI="https://github.com/mesonbuild/meson/tarball/bf17c66f63ed97566516057c2bf35131d1ef240d -> meson-1.8.1-bf17c66.tar.gz"
+SRC_URI="https://github.com/mesonbuild/meson/tarball/5a82ea0501736a666ca9cc003ea0774f8219fd65 -> meson-1.8.2-5a82ea0.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="Open source build system"

@@ -11,6 +11,9 @@ sudo:
               match: SUDO_
               replace: ''
             - kind: string
+              match: v
+              replace: ''
+            - kind: string
               match: _
               replace: .
             - kind: string

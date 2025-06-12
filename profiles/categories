@@ -11,6 +11,7 @@ app-mobilephone
 app-portage
 app-shells
 app-text
+dev-cpp
 dev-lang
 dev-libs
 dev-python
