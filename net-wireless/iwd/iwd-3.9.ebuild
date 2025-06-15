@@ -5,7 +5,7 @@ inherit flag-o-matic linux-info systemd
 
 DESCRIPTION="Wireless daemon for linux"
 HOMEPAGE="https://git.kernel.org/pub/scm/network/wireless/iwd.git/"
-SRC_URI="https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-3.8.tar.xz -> iwd-3.8.tar.xz"
+SRC_URI="https://mirrors.edge.kernel.org/pub/linux/network/wireless/iwd-3.9.tar.xz -> iwd-3.9.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -17,7 +17,7 @@ MYRST2MAN="RST2MAN=:"
 DEPEND="
 	sys-apps/dbus
 	client? ( sys-libs/readline:0= )
-	~dev-libs/ell-0.77
+	~dev-libs/ell-0.78
 "
 
 RDEPEND="
