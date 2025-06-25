@@ -13,7 +13,7 @@ async def generate(hub, **pkginfo):
 			version = item["name"].lstrip("v")
 			list(map(int, version.split(".")))
 			final_name = f"{github_repo}-{version}.tar.xz"
-			url = f"https://mirrors.edge.kernel.org/pub/linux/utils/{github_repo}/v{version}/{final_name}"
+			url = f"https://mirrors.edge.kernel.org/pub/linux/utils/{github_repo}/v{'.'.join(version.split('.')[:2])}/{final_name}"
 			break
 
 		except (KeyError, IndexError, ValueError):

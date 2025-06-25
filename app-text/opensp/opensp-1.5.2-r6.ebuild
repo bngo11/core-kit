@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -12,7 +11,7 @@ SRC_URI="mirror://sourceforge/openjade/${MY_P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="*"
 IUSE="doc elibc_glibc nls static-libs test"
 
 RDEPEND="
@@ -39,6 +38,8 @@ src_prepare() {
 }
 
 src_configure() {
+	export CC=/usr/bin/gcc-12.3.0 CXX=/usr/bin/g++-12.3.0
+
 	export CONFIG_SHELL=${BASH}  # configure needs bash
 
 	# The following filters are taken from openjade's ebuild. See bug #100828.
