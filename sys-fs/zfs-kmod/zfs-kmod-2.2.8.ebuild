@@ -42,6 +42,7 @@ RDEPEND="
 PDEPEND="dist-kernel? ( ~sys-fs/zfs-${PV}[dist-kernel] )"
 
 PATCHES=(
+	"${FILESDIR}"/${PN}-2.1.11-gentoo.patch
 )
 
 pkg_pretend() {
