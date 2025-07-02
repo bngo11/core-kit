@@ -14,11 +14,10 @@ HOMEPAGE="https://github.com/gentoo/eudev"
 
 LICENSE="LGPL-2.1 MIT GPL-2"
 SLOT="0"
-IUSE="+hwdb +kmod introspection +rule-generator selinux static-libs test user"
+IUSE="+hwdb +kmod +rule-generator selinux static-libs test user"
 RESTRICT="!test? ( test )"
 
 COMMON_DEPEND=">=sys-apps/util-linux-2.20
-	introspection? ( >=dev-libs/gobject-introspection-1.38 )
 	kmod? ( >=sys-apps/kmod-16 )
 	selinux? ( >=sys-libs/libselinux-2.1.9 )
 	!<sys-libs/glibc-2.11
@@ -92,7 +91,6 @@ src_configure() {
 		--enable-manpages
 		--disable-hwdb
 		--with-rootlibdir="${EPREFIX}"/$(get_libdir)
-		$(use_enable introspection)
 		$(use_enable kmod)
 		$(use_enable static-libs static)
 		$(use_enable selinux)

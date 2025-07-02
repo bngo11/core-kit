@@ -15,7 +15,7 @@ KEYWORDS="*"
 CRYPTO_BACKENDS="gcrypt kernel nettle +openssl"
 # we don't support nss since it doesn't allow cryptsetup to be built statically
 # and it's missing ripemd160 support so it can't provide full backward compatibility
-IUSE="${CRYPTO_BACKENDS} doc fips nls pwquality +reencrypt ssh static static-libs test +udev urandom"
+IUSE="${CRYPTO_BACKENDS} blkid doc fips nls pwquality +reencrypt ssh static static-libs test +udev urandom"
 RESTRICT="!test? ( test )"
 REQUIRED_USE="^^ ( ${CRYPTO_BACKENDS//+/} )
 	fips? ( !kernel !nettle )
@@ -90,6 +90,7 @@ src_configure() {
 		--with-crypto_backend=$(for x in ${CRYPTO_BACKENDS//+/} ; do usev ${x} ; done)
 		$(use_enable doc asciidoc)
 		$(use_enable udev)
+		$(use_enable blkid)
 		$(use_enable nls)
 		$(use_enable pwquality)
 		$(usex reencrypt '' '--disable-luks2-reencrypt')

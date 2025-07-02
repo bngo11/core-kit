@@ -7,14 +7,14 @@ inherit autotools linux-info toolchain-funcs tmpfiles udev flag-o-matic
 
 DESCRIPTION="test"
 HOMEPAGE="https://sourceware.org/lvm2/"
-SRC_URI="https://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.32.tgz -> LVM2.2.03.32.tgz
+SRC_URI="https://mirrors.kernel.org/sourceware/lvm2/LVM2.2.03.33.tgz -> LVM2.2.03.33.tgz
 "
 S="${WORKDIR}/${PN^^}.${PV}"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="*"
-IUSE="+lvm readline sanlock selinux static static-libs thin +udev valgrind"
+IUSE="blkid +lvm readline sanlock selinux static static-libs thin +udev valgrind"
 REQUIRED_USE="
 	thin? ( lvm )
 "
@@ -147,6 +147,7 @@ src_configure() {
 		--with-default-run-dir=/run/lvm
 		--with-default-locking-dir=/run/lock/lvm
 		--with-default-pid-dir=/run
+		$(use_with blkid)
 		$(use_enable udev udev_rules)
 		$(use_enable udev udev_sync)
 		$(use_with udev udevdir "${EPREFIX}$(get_udevdir)"/rules.d)
@@ -160,6 +161,7 @@ src_configure() {
 }
 
 src_compile() {
+	sed -i -e 's/-lnvme/-lnvme -luring/' make.tmpl || die
 	emake V=1 -C include
 
 	if use lvm ; then

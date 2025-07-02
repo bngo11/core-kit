@@ -4,7 +4,7 @@ DEPEND=static-libs? ( >=dev-libs/json-c-0.16_p20220414:=[static-libs(+)] dev-lib
 DESCRIPTION=Tool to setup encrypted devices with dm-crypt
 EAPI=7
 HOMEPAGE=https://gitlab.com/cryptsetup/cryptsetup/blob/master/README.md
-IUSE=gcrypt kernel nettle +openssl doc fips nls pwquality +reencrypt ssh static static-libs test +udev urandom kernel_linux
+IUSE=gcrypt kernel nettle +openssl blkid doc fips nls pwquality +reencrypt ssh static static-libs test +udev urandom kernel_linux
 KEYWORDS=*
 LICENSE=GPL-2+
 RDEPEND=static-libs? ( >=dev-libs/json-c-0.16_p20220414:=[static-libs(+)] dev-libs/popt[static-libs(+)] >=sys-apps/util-linux-2.31-r1[static-libs(+)] app-crypt/argon2:=[static-libs(+)] gcrypt? ( dev-libs/libgcrypt:0=[static-libs(+)] dev-libs/libgpg-error[static-libs(+)] ) nettle? ( >=dev-libs/nettle-2.4[static-libs(+)] ) openssl? ( dev-libs/openssl:0=[static-libs(+)] ) pwquality? ( dev-libs/libpwquality[static-libs(+)] ) ssh? ( net-libs/libssh[static-libs(+)] ) sys-fs/lvm2[static-libs(+)] ) >=dev-libs/json-c-0.16_p20220414:= dev-libs/popt >=sys-apps/util-linux-2.31-r1 app-crypt/argon2:= gcrypt? ( dev-libs/libgcrypt:0= dev-libs/libgpg-error ) nettle? ( >=dev-libs/nettle-2.4 ) openssl? ( dev-libs/openssl:0= ) pwquality? ( dev-libs/libpwquality ) ssh? ( net-libs/libssh ) sys-fs/lvm2 udev? ( virtual/libudev:= ) virtual/tmpfiles
@@ -13,4 +13,4 @@ RESTRICT=!test? ( test )
 SLOT=0/11
 SRC_URI=https://github.com/mbroz/cryptsetup/tarball/13306948c860278964105b10214da578ab30eeba -> cryptsetup-2.8.0-1330694.tar.gz
 _eclasses_=autotools	619846d0d85ed5d3334692c0215a603e	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	tmpfiles	6f14f7c8fb6f63585daa89581247c82c	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=e0650b88e9fb87ada6174beea4f68ccb
+_md5_=42082c00cb07122255b508f10e52df08
