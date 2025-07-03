@@ -7,7 +7,7 @@ inherit flag-o-matic multilib multilib-minimal preserve-libs toolchain-funcs usr
 DESCRIPTION="Another cute console display library"
 HOMEPAGE="https://tiswww.case.edu/php/chet/readline/rltop.html"
 SRC_URI="
-	https://ftp.gnu.org/gnu/readline/readline-8.2.13.tar.gz -> readline-8.2.13.tar.gz
+	https://ftp.gnu.org/gnu/readline/readline-8.3.tar.gz -> readline-8.3.tar.gz
 "
 
 LICENSE="GPL-3"
@@ -27,7 +27,7 @@ PATCHES=(
 )
 
 src_unpack() {
-	unpack readline-8.2.13.tar.gz || die
+	unpack readline-8.3.tar.gz || die
 }
 
 src_prepare() {

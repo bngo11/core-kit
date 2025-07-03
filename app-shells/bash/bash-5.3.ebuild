@@ -9,11 +9,11 @@ MY_P="${PN}-${PV/_/-}"
 S="${WORKDIR}/${MY_P}"
 DESCRIPTION="The standard GNU Bourne again shell"
 HOMEPAGE="http://tiswww.case.edu/php/chet/bash/bashtop.html"
-SRC_URI="https://ftp.gnu.org/gnu/bash/bash-5.3-rc2.tar.gz -> bash-5.3-rc2.tar.gz"
+SRC_URI="https://ftp.gnu.org/gnu/bash/bash-5.3.tar.gz -> bash-5.3.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="*"
 IUSE="afs bashlogger examples mem-scramble +net nls plugins +readline"
 
 DEPEND="
