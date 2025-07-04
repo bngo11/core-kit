@@ -285,7 +285,7 @@ ruby_fakegem_install_gemspec() {
 				ruby_fakegem_genspec ${gemspec}
 			fi
 		fi
-	) || die "Unable to generate gemspec file."
+	)
 
 	insinto $(ruby_fakegem_gemsdir)/specifications
 	newins ${gemspec} ${RUBY_FAKEGEM_NAME}-${RUBY_FAKEGEM_VERSION}.gemspec || die "Unable to install gemspec file."
