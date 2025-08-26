@@ -11,7 +11,7 @@ inherit gnome3 distutils-r1 optfeature meson
 DESCRIPTION="A graphical tool for administering virtual machines"
 HOMEPAGE="https://virt-manager.org https://github.com/virt-manager/virt-manager"
 
-SRC_URI="https://github.com/virt-manager/virt-manager/tarball/cd88fd51f228fe1ca54e0425ad31a4b13ced28aa -> virt-manager-5.0.0-cd88fd5.tar.gz"
+SRC_URI="https://github.com/virt-manager/virt-manager/tarball/0343ff4c3280b737031e446500feec6a306a4ae2 -> virt-manager-5.1.0-0343ff4.tar.gz"
 KEYWORDS="*"
 
 LICENSE="GPL-2"
