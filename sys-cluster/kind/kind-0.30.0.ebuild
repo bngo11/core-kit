@@ -38,6 +38,8 @@ EGO_SUM=(
 	"github.com/spf13/cobra v1.8.0/go.mod"
 	"github.com/spf13/pflag v1.0.5"
 	"github.com/spf13/pflag v1.0.5/go.mod"
+	"go.yaml.in/yaml/v3 v3.0.4"
+	"go.yaml.in/yaml/v3 v3.0.4/go.mod"
 	"golang.org/x/sys v0.6.0"
 	"golang.org/x/sys v0.6.0/go.mod"
 	"gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod"
@@ -50,8 +52,8 @@ EGO_SUM=(
 
 go-module_set_globals
 
-SRC_URI="https://github.com/kubernetes-sigs/kind/tarball/200b3aac0b5ff698426715db9b4d13288bd470a3 -> kind-0.29.0-200b3aa.tar.gz
-https://direct.funtoo.org/6e/ef/e5/6eefe59d62de4676f2633fe896963f91c721613c90944f75ae7288416bde23633c6195c7679e91d6af24202c148e90b4a0a0f428787cebb65d11dfb669f0977f -> kind-0.29.0-funtoo-go-bundle-8bde5768ecf7f89c94f35066a56be015332fc27f270a621d444db1df901ddf3900af01dd08a0130014e06f84358a7eb2fc0594cf5e9bfde0a021e27495cec5bf.tar.gz"
+SRC_URI="https://github.com/kubernetes-sigs/kind/tarball/9a205e8c8540557602240f8766d3c95c51c23c4c -> kind-0.30.0-9a205e8.tar.gz
+https://direct.funtoo.org/01/a6/4b/01a64b2b128c84ab1cb97e79a9d603b11056325ccd5502970d735b2c9e5f533729c6354b3b34b9ac5d925c08755373a4e05e8fa682056287023405154e2476cc -> kind-0.30.0-funtoo-go-bundle-bcf32de9cb38aab365e206891c1716013f715aeb944f171912270e1eaa1d7ed6509cd1d1725aa02dfb95e5f9c0921fd79a4d29afd7b3acd05bcba29bc91c1a82.tar.gz"
 
 DESCRIPTION="Tool for running local Kubernetes clusters using Docker container nodes"
 HOMEPAGE="https://kind.sigs.k8s.io/ https://github.com/kubernetes-sigs/kind"
