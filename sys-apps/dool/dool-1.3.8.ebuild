@@ -8,7 +8,7 @@ inherit python-single-r1
 
 DESCRIPTION="Linux CLI tool providing real-time system resource monitoring"
 HOMEPAGE="https://github.com/scottchiefbaker/dool"
-SRC_URI="https://github.com/scottchiefbaker/dool/tarball/a52e710f74aad0eae46c5aafdb137070b4c00fe3 -> dool-1.3.6-a52e710.tar.gz"
+SRC_URI="https://github.com/scottchiefbaker/dool/tarball/b74503e2dfbca8ef01c284d40aa77dc82be308b9 -> dool-1.3.8-b74503e.tar.gz"
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="${PYTHON_DEPS}"
