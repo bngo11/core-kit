@@ -1,72 +1,89 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-BASHCOMP_P=bashcomp-2.0.2
-inherit eapi7-ver
+BASHCOMP_P=bashcomp-2.0.3
+PYTHON_COMPAT=( python3+ )
+inherit bash-completion-r1 python-any-r1
 
 DESCRIPTION="Programmable Completion for bash"
 HOMEPAGE="https://github.com/scop/bash-completion"
 SRC_URI="
 	https://github.com/scop/bash-completion/releases/download/${PV}/${P}.tar.xz
-	https://bitbucket.org/mgorny/bashcomp2/downloads/${BASHCOMP_P}.tar.gz"
+	eselect? ( https://github.com/mgorny/bashcomp2/releases/download/v${BASHCOMP_P#*-}/${BASHCOMP_P}.tar.gz )"
 
-LICENSE="GPL-2"
+LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ~ia64 ~mips ppc ~ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris"
-IUSE="test"
-# Multiple test failures, need to investigate the exact problem
+KEYWORDS="*"
+IUSE="+eselect test"
 RESTRICT="test"
 
 # completion collision with net-fs/mc
-RDEPEND="
-	>=app-shells/bash-4.3_p30-r1
+RDEPEND=">=app-shells/bash-4.3_p30-r1:0
 	sys-apps/miscfiles
 	!app-eselect/eselect-bashcomp
 	!!net-fs/mc"
-
-DEPEND="
-	app-arch/xz-utils
+DEPEND="app-arch/xz-utils
 	test? (
 		${RDEPEND}
 		app-misc/dtach
 		dev-util/dejagnu
 		dev-tcltk/tcllib
+		$(python_gen_any_dep '
+			dev-python/pexpect[${PYTHON_USEDEP}]
+			dev-python/pytest[${PYTHON_USEDEP}]
+		')
 	)"
-
 PDEPEND=">=app-shells/gentoo-bashcomp-20140911"
 
-# Remove unwanted completions.
-STRIP_COMPLETIONS=(
-	# Slackware package stuff, quite generic names cause collisions
-	# (e.g. with sys-apps/pacman)
-	explodepkg installpkg makepkg pkgtool removepkg upgradepkg
+strip_completions() {
+	# Remove unwanted completions.
+	local strip_completions=(
+		# Slackware package stuff, quite generic names cause collisions
+		# (e.g. with sys-apps/pacman)
+		explodepkg installpkg makepkg pkgtool removepkg upgradepkg interdiff
 
-	# Debian/Red Hat network stuff
-	ifdown ifup ifstatus
+		# Debian/Red Hat network stuff
+		ifdown ifup ifquery ifstatus
 
-	# Installed in app-editors/vim-core
-	xxd
+		# Installed in app-editors/vim-core
+		xxd
 
-	# Now-dead symlinks to deprecated completions
-	hd ncal
+		# Now-dead symlinks to deprecated completions
+		hd ncal
+	)
+	if [[ ${ARCH} != *-fbsd && ${ARCH} != *-freebsd ]]; then
+		strip_completions+=(
+			freebsd-update kldload kldunload portinstall portsnap
+			pkg_deinstall pkg_delete pkg_info
+		)
+	fi
 
-	# Installed by sys-apps/util-linux-2.28
-	mount umount mount.linux umount.linux
-)
+	local file
+	for file in "${strip_completions[@]}"; do
+		rm "${ED}"/usr/share/bash-completion/completions/${file} ||
+			die "stripping ${file} failed"
+	done
+
+	# remove deprecated completions (moved to other packages)
+	rm "${ED}"/usr/share/bash-completion/completions/_* || die
+}
+
+pkg_setup() {
+	use test && python-any-r1_pkg_setup
+}
+
+python_check_deps() {
+	has_version "dev-python/pexpect[${PYTHON_USEDEP}]" &&
+	has_version "dev-python/pytest[${PYTHON_USEDEP}]"
+}
 
 src_prepare() {
-	eapply "${WORKDIR}/${BASHCOMP_P}/${PN}"-2.1_p*.patch
+	use eselect &&
+		eapply "${WORKDIR}/${BASHCOMP_P}/bash-completion-blacklist-support.patch"
 	# Bug 543100, update bug 601194
 	eapply "${FILESDIR}/${PN}-2.1-escape-characters-r1.patch"
 	eapply_user
-
-	# Remove implicit completions for vim.
-	# https://bugs.gentoo.org/649986
-	sed -i -e 's/vi vim gvim rvim view rview rgvim rgview gview//' \
-		bash_completion || die
-	rm test/completion/vi.exp || die
 }
 
 src_test() {
@@ -79,8 +96,13 @@ src_test() {
 	tail -f "${T}/dtach-test.log" &
 	local tail_pid=${!}
 
+	# override the default expect timeout and buffer size to avoid tests
+	# failing randomly due to cold cache, busy system or just more output
+	# than upstream anticipated (they run tests on pristine docker
+	# installs of binary distros)
 	nonfatal dtach -N "${T}/dtach.sock" \
-		bash -c 'emake check &> "${T}"/dtach-test.log; echo ${?} > "${T}"/dtach-test.out'
+		bash -c 'emake check RUNTESTFLAGS="OPT_TIMEOUT=300 OPT_BUFFER_SIZE=1000000" PYTESTFLAGS="-vv" \
+			&> "${T}"/dtach-test.log; echo ${?} > "${T}"/dtach-test.out'
 
 	kill "${tail_pid}"
 	[[ -f ${T}/dtach-test.out ]] || die "Unable to run tests"
@@ -93,19 +115,18 @@ src_install() {
 
 	emake DESTDIR="${D}" profiledir="${EPREFIX}"/etc/bash/bashrc.d install
 
-	local file
-	for file in "${STRIP_COMPLETIONS[@]}"; do
-		rm "${ED}"/usr/share/bash-completion/completions/${file} || die
-	done
-	# remove deprecated completions (moved to other packages)
-	rm "${ED}"/usr/share/bash-completion/completions/_* || die
+	strip_completions
+	# fix missing aliases
+	bashcomp_alias tar bsdtar gtar star
 
 	dodoc AUTHORS CHANGES CONTRIBUTING.md README.md
 
 	# install the eselect module
-	insinto /usr/share/eselect/modules
-	doins "${WORKDIR}/${BASHCOMP_P}/bashcomp.eselect"
-	doman "${WORKDIR}/${BASHCOMP_P}/bashcomp.eselect.5"
+	if use eselect; then
+		insinto /usr/share/eselect/modules
+		doins "${WORKDIR}/${BASHCOMP_P}/bashcomp.eselect"
+		doman "${WORKDIR}/${BASHCOMP_P}/bashcomp.eselect.5"
+	fi
 }
 
 pkg_postinst() {
