@@ -56,6 +56,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-3.27.0_rc1-0004-Ensure-that-the-correct-version-of-Qt-is-always-used.patch
 	"${FILESDIR}"/${PN}-3.27.0_rc1-0005-Respect-Gentoo-s-Python-eclasses.patch
 	"${FILESDIR}"/${PN}-3.30.3-cudahostld.patch
+	"${FILESDIR}"/${PN}-4.1.1-curl-8.16.0.patch
 )
 
 cmake_src_bootstrap() {

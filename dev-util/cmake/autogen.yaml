@@ -15,6 +15,7 @@ cmake_rule:
           - 3.27.0_rc1-0005-Respect-Gentoo-s-Python-eclasses.patch
           # cuda
           - 3.30.3-cudahostld.patch
+          - 4.1.1-curl-8.16.0.patch
         github:
           user: Kitware
           repo: CMake
