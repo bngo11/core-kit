@@ -10,7 +10,7 @@ HOMEPAGE="http://fishshell.com/"
 MY_PV="${PV/_beta/b}"
 MY_P="${PN}-${MY_PV}"
 
-SRC_URI="https://github.com/fish-shell/fish-shell/releases/download/4.0.6/fish-4.0.6-linux-aarch64.tar.xz -> fish-4.0.6-linux-aarch64.tar.xz"
+SRC_URI="https://github.com/fish-shell/fish-shell/releases/download/4.0.8/fish-4.0.8-linux-aarch64.tar.xz -> fish-4.0.8-linux-aarch64.tar.xz"
 KEYWORDS="*"
 
 LICENSE="GPL-2"
