@@ -44,11 +44,11 @@ GCC_A="gcc-${PV}.tar.xz"
 SRC_URI="https://ftpmirror.gnu.org/gnu/gcc/${P}/${GCC_A}"
 
 # Math libraries:
-GMP_VER="6.2.1"
+GMP_VER="6.3.0"
 GMP_EXTRAVER=""
 SRC_URI="$SRC_URI mirror://gnu/gmp/gmp-${GMP_VER}${GMP_EXTRAVER}.tar.xz"
 
-MPFR_VER="4.2.0"
+MPFR_VER="4.2.2"
 MPFR_PATCH_VER=""
 SRC_URI="$SRC_URI http://www.mpfr.org/mpfr-${MPFR_VER}/mpfr-${MPFR_VER}.tar.xz"
 MPFR_PATCH_FILE="${MPFR_PATCH_VER:+${FILESDIR}/mpfr/mpfr-${MPFR_VER}_to_${MPFR_VER}-p${MPFR_PATCH_VER}.patch}"
