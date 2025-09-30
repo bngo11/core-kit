@@ -59,13 +59,13 @@ LLVM_VERSION=$(ver_cut 1-3)
 # @DESCRIPTION:
 # The major version of current LLVM trunk.  Used to determine
 # the correct branch to use.
-_LLVM_MASTER_MAJOR=17
+_LLVM_MASTER_MAJOR=21x
 
 # @ECLASS_VARIABLE: _LLVM_NEWEST_MANPAGE_RELEASE
 # @INTERNAL
 # @DESCRIPTION:
 # The newest release of LLVM for which manpages were generated.
-_LLVM_NEWEST_MANPAGE_RELEASE=15.0.7
+_LLVM_NEWEST_MANPAGE_RELEASE=21.1.2
 
 # @ECLASS_VARIABLE: _LLVM_SOURCE_TYPE
 # @INTERNAL
