@@ -23,7 +23,8 @@ RDEPEND="dev-libs/glib:2
 		dev-libs/libgpg-error
 	)
 	introspection? ( dev-libs/gobject-introspection:= )
-	pkcs7? ( net-libs/gnutls )
+	pkcs7? ( net-libs/gnutls
+			 dev-libs/openssl )
 	vala? ( dev-lang/vala:= )"
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig
@@ -58,7 +59,8 @@ src_configure() {
 		$(meson_use gpg)
 		$(meson_use introspection)
 		$(meson_use man)
-		$(meson_use pkcs7)
+		$(meson_use pkcs7 gnutls_pkcs7)
+		$(meson_use pkcs7 openssl_pkcs7)
 		$(meson_use test tests)
 		$(meson_use vala vapi)
 	)

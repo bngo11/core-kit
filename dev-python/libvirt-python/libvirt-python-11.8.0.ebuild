@@ -16,6 +16,7 @@ SLOT="0"
 KEYWORDS="*"
 IUSE="examples test"
 RESTRICT="!test? ( test )"
+S="${WORKDIR}/libvirt_python-${PV}"
 
 RDEPEND="app-emulation/libvirt:0/${PV}"
 DEPEND="virtual/pkgconfig"
