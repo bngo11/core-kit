@@ -25,10 +25,6 @@ DEPEND="${RDEPEND}
 RESTRICT="test"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-2.25-build-system-fixes.patch
-	"${FILESDIR}"/${PN}-2.26-no-perl.patch
-	"${FILESDIR}"/${PN}-2.25-ignore-RAISE_SETFCAP-install-failures.patch
-	"${FILESDIR}"/${PN}-2.21-include.patch
 )
 
 src_prepare() {
@@ -76,5 +72,5 @@ multilib_src_install() {
 }
 
 multilib_src_install_all() {
-	dodoc CHANGELOG README doc/capability.notes
+	dodoc CHANGELOG README
 }
