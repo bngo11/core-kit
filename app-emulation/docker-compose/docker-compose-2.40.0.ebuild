@@ -8,7 +8,7 @@ go-module_set_globals
 
 DESCRIPTION="Define and run multi-container applications with Docker"
 HOMEPAGE="https://github.com/docker/compose"
-SRC_URI="https://github.com/docker/compose/tarball/a32dc3da722e6b2e4fbfc72e40b1a697c4686460 -> compose-2.39.4-a32dc3d.tar.gz"
+SRC_URI="https://github.com/docker/compose/tarball/d9423f6872586c5cd9e1dd761bd5a8f02113a93c -> compose-2.40.0-d9423f6.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="2"
