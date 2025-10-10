@@ -10,8 +10,8 @@ PARCH=${P/_}
 
 DESCRIPTION="Port of OpenBSD's free SSH release"
 HOMEPAGE="https://www.openssh.com/"
-SRC_URI="https://github.com/openssh/openssh-portable/tarball/1dfb2c1db06d7c5831a0315692f7e51f5ac03e2f -> openssh-portable-10.1_p1-1dfb2c1.tar.gz"
-S="${WORKDIR}/openssh-openssh-portable-1dfb2c1"
+SRC_URI="https://github.com/openssh/openssh-portable/tarball/d01efaa1c9ed84fd9011201dbc3c7cb0a82bcee3 -> openssh-portable-10.2_p1-d01efaa.tar.gz"
+S="${WORKDIR}/openssh-openssh-portable-d01efaa"
 
 LICENSE="BSD GPL-2"
 SLOT="0"
