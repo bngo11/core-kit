@@ -59,6 +59,11 @@ else
 	BDEPEND=${MESON_DEPEND}
 fi
 
+# @ECLASS-VARIABLE: MESON_EXE
+# @DEFAULT_UNSET
+# @DESCRIPTION:
+# The meson executable to use
+
 # @ECLASS-VARIABLE: BUILD_DIR
 # @DEFAULT_UNSET
 # @DESCRIPTION:
@@ -237,7 +242,7 @@ meson_src_configure() {
 	mesonargs+=("${emesonargs[@]}")
 
 	BUILD_DIR="${BUILD_DIR:-${WORKDIR}/${P}-build}"
-	set -- meson setup "${mesonargs[@]}" "$@" \
+	set -- "${MESON_EXE:-meson}" setup "${mesonargs[@]}" "$@" \
 		"${EMESON_SOURCE:-${S}}" "${BUILD_DIR}"
 	echo "$@"
 	tc-env_build "$@" || die

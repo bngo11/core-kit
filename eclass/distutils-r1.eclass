@@ -116,6 +116,8 @@ esac
 #
 # - poetry - poetry-core backend
 #
+# - scikit-build-core - scikit-build-core backend
+#
 # - setuptools - distutils or setuptools (incl. legacy mode)
 #
 # - sip - sipbuild backend
@@ -259,6 +261,11 @@ _distutils_set_globals() {
 			poetry)
 				bdep+='
 					>=dev-python/poetry-core-1.0.8[${PYTHON_USEDEP}]
+				'
+				;;
+			scikit-build-core)
+				bdep+='
+					>=dev-python/scikit-build-core-0.11.5[${PYTHON_USEDEP}]
 				'
 				;;
 			setuptools)
@@ -432,6 +439,15 @@ unset -f _distutils_set_globals
 # @DESCRIPTION:
 # An array containing options to be passed to the build system.
 # Supported by a subset of build systems used by the eclass.
+#
+# For maturin, the arguments will be passed as `maturin build`
+# arguments.
+#
+# For meson-python, the arguments will be passed as `meson setup`
+# arguments.
+#
+# For scikit-build-core, the arguments will be passed as `cmake`
+# options (e.g. `-DFOO=BAR` form should be used).
 #
 # For setuptools, the arguments will be passed as first parameters
 # to setup.py invocations (via esetup.py), as well as to the PEP517
@@ -993,6 +1009,11 @@ _distutils-r1_print_package_versions() {
 					dev-python/poetry-core
 				)
 				;;
+			scikit-build-core)
+				packages+=(
+					dev-python/scikit-build-core
+				)
+				;;
 			setuptools)
 				packages+=(
 					dev-python/setuptools
@@ -1189,6 +1210,9 @@ _distutils-r1_backend_to_key() {
 		poetry.core.masonry.api|poetry.masonry.api)
 			echo poetry
 			;;
+		scikit-build-core)
+			echo scikit_build_core.build
+			;;
 		setuptools.build_meta|setuptools.build_meta:__legacy__)
 			echo setuptools
 			;;
@@ -1333,7 +1357,7 @@ distutils_pep517_install() {
 	if [[ -n ${DISTUTILS_ARGS[@]} ]]; then
 		case ${DISTUTILS_USE_PEP517} in
 		meson-python)
-			# variables defined by setup_meson_src_configure
+			# variables defined by meson_src_configure
 			local MESONARGS=() BOOST_INCLUDEDIR BOOST_LIBRARYDIR NM READELF
 			# it also calls filter-lto
 			local x
@@ -1341,7 +1365,7 @@ distutils_pep517_install() {
 				local -x "${x}=${!x}"
 			done
 
-			setup_meson_src_configure "${DISTUTILS_ARGS[@]}"
+			meson_src_configure "${DISTUTILS_ARGS[@]}"
 
 			local -x NINJAOPTS=$(get_NINJAOPTS)
 			config_settings=$(
@@ -1356,6 +1380,50 @@ distutils_pep517_install() {
 						"builddir": "${BUILD_DIR}",
 						"setup-args": sys.argv[1:],
 						"compile-args": ["-v"] + ninjaopts,
+					}))
+				EOF
+			)
+			;;
+		scikit-build-core)
+			# TODO: split out the config/toolchain logic from cmake.eclass
+			# for now, we copy the most important bits
+			local CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE:-RelWithDebInfo}
+			cat >> "${BUILD_DIR}"/config.cmake <<- _EOF_ || die
+				set(CMAKE_ASM_FLAGS_${CMAKE_BUILD_TYPE^^} "" CACHE STRING "")
+				set(CMAKE_ASM-ATT_FLAGS_${CMAKE_BUILD_TYPE^^} "" CACHE STRING "")
+				set(CMAKE_C_FLAGS_${CMAKE_BUILD_TYPE^^} "" CACHE STRING "")
+				set(CMAKE_CXX_FLAGS_${CMAKE_BUILD_TYPE^^} "" CACHE STRING "")
+				set(CMAKE_Fortran_FLAGS_${CMAKE_BUILD_TYPE^^} "" CACHE STRING "")
+				set(CMAKE_EXE_LINKER_FLAGS_${CMAKE_BUILD_TYPE^^} "" CACHE STRING "")
+				set(CMAKE_MODULE_LINKER_FLAGS_${CMAKE_BUILD_TYPE^^} "" CACHE STRING "")
+				set(CMAKE_SHARED_LINKER_FLAGS_${CMAKE_BUILD_TYPE^^} "" CACHE STRING "")
+				set(CMAKE_STATIC_LINKER_FLAGS_${CMAKE_BUILD_TYPE^^} "" CACHE STRING "")
+			_EOF_
+
+			# hack around CMake ignoring CPPFLAGS
+			local -x CFLAGS="${CFLAGS} ${CPPFLAGS}"
+			local -x CXXFLAGS="${CXXFLAGS} ${CPPFLAGS}"
+
+			local cmake_args=(
+				"-C${BUILD_DIR}/config.cmake"
+				"${DISTUTILS_ARGS[@]}"
+			)
+
+			local -x NINJAOPTS=$(get_NINJAOPTS)
+			config_settings=$(
+				"${EPYTHON}" - "${cmake_args[@]}" <<-EOF || die
+					import json
+					import os
+					import shlex
+					import sys
+
+					ninjaopts = shlex.split(os.environ["NINJAOPTS"])
+					print(json.dumps({
+						"build.tool-args": ninjaopts,
+						"build.verbose": True,
+						"cmake.args": ";".join(sys.argv[1:]),
+						"cmake.build-type": "${CMAKE_BUILD_TYPE}",
+						"install.strip": False,
 					}))
 				EOF
 			)
