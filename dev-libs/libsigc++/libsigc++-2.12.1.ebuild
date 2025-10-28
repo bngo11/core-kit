@@ -5,6 +5,7 @@ inherit gnome3 flag-o-matic meson
 
 DESCRIPTION="Typesafe callback system for standard C++"
 HOMEPAGE="http://libsigc.sourceforge.net/"
+SRC_URI=" https://github.com/libsigcplusplus/libsigcplusplus/releases/download/2.12.1/libsigc++-2.12.1.tar.xz -> libsigc++-2.12.1.tar.xz "
 
 LICENSE="LGPL-2.1+"
 SLOT="2"
