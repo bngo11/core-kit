@@ -13,11 +13,9 @@ async def generate(hub, **pkginfo):
 				vername = item['tag_name']
 				if vername.startswith("2") and not version2:
 					version2 = vername
-					ver2index = ".".join(vername.split('.')[:2])
 
 				if vername.startswith("3") and not version3:
 					version3 = vername
-					ver3index = ".".join(vername.split('.')[:2])
 
 				if version2 and version3:
 					list(map(int, version2.split(".")))
@@ -28,7 +26,7 @@ async def generate(hub, **pkginfo):
 			continue
 
 	if version2:
-		url = f"https://download.gnome.org/sources/libsigc++/{ver2index}/libsigc++-{version2}.tar.xz"
+		url = f"https://github.com/libsigcplusplus/libsigcplusplus/releases/download/{version2}/libsigc++-{version2}.tar.xz"
 		ebuild = hub.pkgtools.ebuild.BreezyBuild(
 			**pkginfo,
 			version=version2,
@@ -39,7 +37,7 @@ async def generate(hub, **pkginfo):
 		ebuild.push()
 
 	if version3:
-		url = f"https://download.gnome.org/sources/libsigc++/{ver3index}/libsigc++-{version3}.tar.xz"
+		url = f"https://github.com/libsigcplusplus/libsigcplusplus/releases/download/{version3}/libsigc++-{version3}.tar.xz"
 		ebuild = hub.pkgtools.ebuild.BreezyBuild(
 			**pkginfo,
 			version=version3,
