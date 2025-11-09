@@ -6,7 +6,7 @@ inherit autotools eutils prefix multilib-minimal
 
 DESCRIPTION="A Client that groks URLs"
 HOMEPAGE="https://curl.haxx.se/"
-SRC_URI="https://github.com/curl/curl/releases/download/curl-8_16_0/curl-8.16.0.tar.gz -> curl-8.16.0.tar.gz"
+SRC_URI="https://github.com/curl/curl/releases/download/curl-8_17_0/curl-8.17.0.tar.gz -> curl-8.17.0.tar.gz"
 
 LICENSE="curl"
 SLOT="0"
