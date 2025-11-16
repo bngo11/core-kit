@@ -6,7 +6,7 @@ inherit bash-completion-r1 golang-vcs-snapshot
 
 DESCRIPTION="The command-line interface for Docker"
 HOMEPAGE="https://www.docker.com/ https://github.com/docker/cli"
-SRC_URI="https://github.com/docker/cli/tarball/ecc694264de6b34e4b59d16245603382f22fa813 -> cli-28.5.2-ecc6942.tar.gz"
+SRC_URI="https://github.com/docker/cli/tarball/eedd9698e9c3ee3aa9100789ea4b4515443d2e50 -> cli-29.0.1-eedd969.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -43,8 +43,8 @@ src_compile() {
 	export CGO_LDFLAGS="-L${ESYSROOT}/usr/$(get_libdir)"
 		emake \
 		LDFLAGS="$(usex hardened '-extldflags -fno-PIC' '')" \
-		VERSION="28.5.2-funtoo" \
-		GITCOMMIT="ecc6942" \
+		VERSION="29.0.1-funtoo" \
+		GITCOMMIT="eedd969" \
 		dynbinary
 
 	# build man pages

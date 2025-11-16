@@ -8,7 +8,7 @@ inherit toolchain-funcs linux-info flag-o-matic distutils-r1
 
 DESCRIPTION="Checkpoint/Restore tool"
 HOMEPAGE="https://criu.org/"
-SRC_URI="https://github.com/checkpoint-restore/criu/tarball/a44aa6d985472d995d04fef7eae22d63c7500f8c -> criu-4.1.1-a44aa6d.tar.gz"
+SRC_URI="https://github.com/checkpoint-restore/criu/tarball/3c7d4fa013297b431da48eff821db7f2e8b90c27 -> criu-4.2-3c7d4fa.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
