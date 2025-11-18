@@ -15,9 +15,9 @@ PLOCALES="bg ca de es fr is it ko pt_PT ru sv vi zh_CN"
 DESCRIPTION="stupid content tracker: distributed VCS designed for speed and efficiency"
 HOMEPAGE="https://www.git-scm.com/"
 SRC_URI="
-https://www.kernel.org/pub/software/scm/git/git-2.51.2.tar.xz -> git-2.51.2.tar.xz
-https://www.kernel.org/pub/software/scm/git/git-manpages-2.51.2.tar.xz -> git-manpages-2.51.2.tar.xz
-https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.51.2.tar.xz -> git-htmldocs-2.51.2.tar.xz"
+https://www.kernel.org/pub/software/scm/git/git-2.52.0.tar.xz -> git-2.52.0.tar.xz
+https://www.kernel.org/pub/software/scm/git/git-manpages-2.52.0.tar.xz -> git-manpages-2.52.0.tar.xz
+https://www.kernel.org/pub/software/scm/git/git-htmldocs-2.52.0.tar.xz -> git-htmldocs-2.52.0.tar.xz"
 KEYWORDS="*"
 
 LICENSE="GPL-2"
@@ -188,12 +188,12 @@ exportmakeopts() {
 }
 
 src_unpack() {
-	unpack git-2.51.2.tar.xz
+	unpack git-2.52.0.tar.xz
 	cd "${S}" || die
-	unpack git-manpages-2.51.2.tar.xz
+	unpack git-manpages-2.52.0.tar.xz
 	if use doc ; then
 		pushd "${S}"/Documentation &>/dev/null || die
-		unpack git-htmldocs-2.51.2.tar.xz
+		unpack git-htmldocs-2.52.0.tar.xz
 		popd &>/dev/null || die
 	fi
 
