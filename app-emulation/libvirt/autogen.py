@@ -8,11 +8,16 @@ async def generate(hub, **pkginfo):
 	json_data = await hub.pkgtools.fetch.get_page("https://gitlab.com/api/v4/projects/192693/repository/tags")
 	json_list = json.loads(json_data)
 	for tag in json_list:
-		v = tag["name"].lstrip("v")
-		if "-rc" in v:
+		try:
+			v = tag["name"].lstrip("v")
+			if "-rc" in v:
+				continue
+			list(map(int, v.split(".")))
+			version = v
+			break
+		except:
 			continue
-		version = v
-		break
+
 	url = f"https://libvirt.org/sources/libvirt-{version}.tar.xz"
 	urlpy = f"https://libvirt.org/sources/python/libvirt_python-{version}.tar.gz"
 	python_compat = "python3+"
