@@ -6,7 +6,7 @@ inherit autotools flag-o-matic
 
 DESCRIPTION="Terminal multiplexer"
 HOMEPAGE="https://tmux.github.io/"
-SRC_URI="https://github.com/tmux/tmux/tarball/5b6cc27a67b74b6a676bf7e32f4b57d5fa73dd5f -> tmux-3.5-5b6cc27.tar.gz"
+SRC_URI="https://github.com/tmux/tmux/tarball/f222026042c5e4f11fff8da31f502a151525b022 -> tmux-3.6-f222026.tar.gz"
 KEYWORDS="*"
 S="${WORKDIR}/${P/_/-}"
 

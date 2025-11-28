@@ -125,6 +125,14 @@ esac
 # - standalone - standalone build systems without external deps
 #   (used for bootstrapping).
 #
+# - uv_build - uv_build backend (using dev-python/uv)
+#
+# The variable needs to be set before the inherit line.  If another
+# value than "standalone" and "no" is used, The eclass adds appropriate
+# build-time dependencies, verifies the value and calls the appropriate
+# modern entry point for the backend.  With DISTUTILS_UPSTREAM_PEP517,
+# this variable can be used to override the upstream build backend.
+#
 # The variable needs to be set before the inherit line.  The eclass
 # adds appropriate build-time dependencies and verifies the value.
 #
@@ -280,6 +288,11 @@ _distutils_set_globals() {
 				'
 				;;
 			standalone)
+				;;
+			uv_build)
+				bdep+='
+					dev-python/uv_build[${PYTHON_USEDEP}]
+				'
 				;;
 			*)
 				die "Unknown DISTUTILS_USE_PEP517=${DISTUTILS_USE_PEP517}"
@@ -1026,6 +1039,12 @@ _distutils-r1_print_package_versions() {
 					dev-python/sip
 				)
 				;;
+			uv_build)
+				packages+=(
+					dev-python/uv
+					dev-python/uv_build
+				)
+				;;
 		esac
 	else
 		case ${DISTUTILS_USE_SETUPTOOLS} in
@@ -1218,6 +1237,9 @@ _distutils-r1_backend_to_key() {
 			;;
 		sipbuild.api)
 			echo sip
+			;;
+		uv_build)
+			echo uv_build
 			;;
 		*)
 			die "Unknown backend: ${backend}"
