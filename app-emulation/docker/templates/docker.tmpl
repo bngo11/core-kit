@@ -256,8 +256,6 @@ src_install() {
 
 	systemd_dounit contrib/init/systemd/docker.{service,socket}
 
-	udev_dorules contrib/udev/*.rules
-
 	dodoc AUTHORS CONTRIBUTING.md NOTICE README.md
 	dodoc -r docs/*
 
