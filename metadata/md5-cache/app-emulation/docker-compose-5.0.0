@@ -8,6 +8,6 @@ LICENSE=Apache-2.0
 RDEPEND=>=app-emulation/docker-cli-23.0.0
 RESTRICT=test network-sandbox
 SLOT=2
-SRC_URI=https://github.com/docker/compose/tarball/49b1c1e932aecd3a4843b392162d4bd56021935e -> compose-2.40.3-49b1c1e.tar.gz
+SRC_URI=https://github.com/docker/compose/tarball/13d70b1c11342dafb534f3793078666437e6d00a -> compose-5.0.0-13d70b1.tar.gz
 _eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	go-module	cb10a443c46556a15ed035d7a99128e8	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=3f6ac19e52a4342174a88a8b62842aa0
+_md5_=2b8551a39497bf11dae3034a85c6af77
