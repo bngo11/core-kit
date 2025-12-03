@@ -1,0 +1,11 @@
+--- a/netshaper/Makefile	2025-12-01 10:47:16.000000000 -0600
++++ b/netshaper/Makefile	2025-12-02 22:21:30.113556650 -0600
+@@ -3,7 +3,7 @@
+ 
+ NSOBJ = netshaper.o
+ TARGETS += netshaper
+-LDLIBS += -lm
++LDLIBS += -lm -lmnl
+ 
+ all: $(TARGETS) $(LIBS)
+ 
