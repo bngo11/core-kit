@@ -4,15 +4,9 @@
 EAPI=7
 
 inherit flag-o-matic
-SRC_URI="https://dev.gentoo.org/~aidecoe/distfiles/${CATEGORY}/${PN}/gentoo-logo.png"
 
-if [[ ${PV} == 9999 ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://anongit.freedesktop.org/git/plymouth"
-else
-	SRC_URI="${SRC_URI} https://www.freedesktop.org/software/plymouth/releases/${P}.tar.xz"
-	KEYWORDS="~alpha amd64 ~arm arm64 ~ia64 ~ppc ~ppc64 ~sparc x86"
-fi
+SRC_URI="${SRC_URI} https://www.freedesktop.org/software/plymouth/releases/${P}.tar.xz"
+KEYWORDS="*"
 
 inherit autotools readme.gentoo-r1 systemd toolchain-funcs
 
@@ -83,7 +77,7 @@ src_install() {
 	default
 
 	insinto /usr/share/plymouth
-	newins "${DISTDIR}"/gentoo-logo.png bizcom.png
+	newins "${FILESDIR}"/gentoo-logo.png bizcom.png
 
 	if use split-usr ; then
 		# Install compatibility symlinks as some rdeps hardcode the paths
