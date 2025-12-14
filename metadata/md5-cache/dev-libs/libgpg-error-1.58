@@ -10,6 +10,6 @@ LICENSE=GPL-2 LGPL-2.1
 RDEPEND=nls? ( >=virtual/libintl-0-r1 )
 RESTRICT=!test? ( test )
 SLOT=0
-SRC_URI=https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.56.tar.bz2 -> libgpg-error-1.56.tar.bz2
+SRC_URI=https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.58.tar.bz2 -> libgpg-error-1.58.tar.bz2
 _eclasses_=autotools	619846d0d85ed5d3334692c0215a603e	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	prefix	e51c7882b7b721e54e684f7eb143cbfe	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=fa3fa1b35ac4351592bff4dec7ac0c0e
+_md5_=f21a153f962b3a98c28a2b15e78b1da2

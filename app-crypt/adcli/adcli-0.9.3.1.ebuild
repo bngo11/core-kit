@@ -6,7 +6,7 @@ inherit autotools
 
 DESCRIPTION="Tool for performing actions on an Active Directory domain"
 HOMEPAGE="https://www.freedesktop.org/software/realmd/adcli/adcli.html"
-SRC_URI="https://gitlab.freedesktop.org/realmd/adcli/-/archive/0.9.3/adcli-0.9.3.tar.bz2 -> adcli-0.9.3.tar.bz2"
+SRC_URI="https://gitlab.freedesktop.org/realmd/adcli/-/archive/0.9.3.1/adcli-0.9.3.1.tar.bz2 -> adcli-0.9.3.1.tar.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

@@ -6,7 +6,7 @@ inherit autotools toolchain-funcs prefix
 
 DESCRIPTION="Contains error handling functions used by GnuPG software"
 HOMEPAGE="https://www.gnupg.org/related_software/libgpg-error/"
-SRC_URI="https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.56.tar.bz2 -> libgpg-error-1.56.tar.bz2"
+SRC_URI="https://gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.58.tar.bz2 -> libgpg-error-1.58.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"
