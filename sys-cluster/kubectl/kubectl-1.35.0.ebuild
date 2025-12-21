@@ -5,8 +5,8 @@ inherit bash-completion-r1 go-module
 
 DESCRIPTION="CLI to run commands against Kubernetes clusters"
 HOMEPAGE="https://kubernetes.io"
-SRC_URI="https://github.com/kubernetes/kubernetes/tarball/83121daffb5bc787717b1eeed83b6feb4b58b0d5 -> kubernetes-1.34.3-83121da.tar.gz
-https://direct.funtoo.org/74/e3/66/74e3663c9bad03a5ddf29caa41d371a7162fb7fc88762c1733762ec5f5a644f9a1ce3aceaedac9e13a75c1404f2844d4c24ce40447181019887fcc064d3fad13 -> kubectl-1.34.3-funtoo-go-bundle-bc45735b994843179313403adfa4f513669f94b20f8a72e3514295b3ab8a0bec51b5fa699ad0c8f93f98090963c71dda679ccf39b7f9a0ec80322543a11b0ceb.tar.gz"
+SRC_URI="https://github.com/kubernetes/kubernetes/tarball/2049416c7235eeec9a413c38472708e49af3ed88 -> kubernetes-1.35.0-2049416.tar.gz
+https://direct.funtoo.org/4e/57/a4/4e57a45ba2ba086432b6c943a72754485d7f83bf4e3c2a463439d474061212e342699b104961f24da36fa8d60b2daae08d1470e2e81349c6202998a52391a9b6 -> kubectl-1.35.0-funtoo-go-bundle-5ec05e1dfbcab612ec4929b9db36f0076bbcd6337c4ab985279f8494d7299bbe09c868b630df0ef23da651189e7c818fc7c25405f4b351ef952a5612f07a91cf.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"

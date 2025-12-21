@@ -6,8 +6,8 @@ inherit meson
 
 DESCRIPTION="Display and control your Android device"
 HOMEPAGE="https://github.com/Genymobile/scrcpy"
-SRC_URI="https://github.com/Genymobile/scrcpy/releases/download/v3.3.3/scrcpy-server-v3.3.3 -> scrcpy-server-v3.3.3
-         https://github.com/Genymobile/scrcpy/archive/refs/tags/v3.3.3.tar.gz -> scrcpy-3.3.3.tar.gz"
+SRC_URI="https://github.com/Genymobile/scrcpy/releases/download/v3.3.4/scrcpy-server-v3.3.4 -> scrcpy-server-v3.3.4
+         https://github.com/Genymobile/scrcpy/archive/refs/tags/v3.3.4.tar.gz -> scrcpy-3.3.4.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
