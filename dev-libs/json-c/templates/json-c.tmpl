@@ -40,6 +40,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
+		-DCMAKE_POLICY_VERSION_MINIMUM=3.5
 		-DBUILD_STATIC_LIBS=$(usex static-libs)
 		-DDISABLE_WERROR=ON
 		-DENABLE_RDRAND=$(usex cpu_flags_x86_rdrand)
