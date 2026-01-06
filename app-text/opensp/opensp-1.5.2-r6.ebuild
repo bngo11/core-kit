@@ -38,8 +38,6 @@ src_prepare() {
 }
 
 src_configure() {
-	export CC=/usr/bin/gcc-12.3.0 CXX=/usr/bin/g++-12.3.0
-
 	export CONFIG_SHELL=${BASH}  # configure needs bash
 
 	# The following filters are taken from openjade's ebuild. See bug #100828.

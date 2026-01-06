@@ -87,8 +87,6 @@ src_prepare() {
 }
 
 src_configure() {
-	export CC=/usr/bin/gcc-12.3.0 CXX=/usr/bin/g++-12.3.0
-
 	# sql_compat will cause a collision with sqlite3
 	# --enable-sql_compat
 	# Don't --enable-sql* because we don't want to use bundled sqlite.
