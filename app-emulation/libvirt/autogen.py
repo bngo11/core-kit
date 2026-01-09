@@ -5,7 +5,7 @@ import json
 
 async def generate(hub, **pkginfo):
 
-	json_data = await hub.pkgtools.fetch.get_page("https://gitlab.com/api/v4/projects/192693/repository/tags")
+	json_data = await hub.pkgtools.fetch.get_page("https://gitlab.com/api/v4/projects/192693/repository/tags?per_page=100")
 	json_list = json.loads(json_data)
 	for tag in json_list:
 		try:

@@ -1,0 +1,72 @@
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=7
+
+RUST_MIN_VER="1.82.0"
+RUST_NEEDS_LLVM=1
+
+inherit cargo rust-toolchain
+
+DESCRIPTION="A suite of tools for thin provisioning on Linux"
+HOMEPAGE="https://github.com/jthornber/thin-provisioning-tools"
+
+SRC_URI="{{src_uri}}"
+KEYWORDS="*"
+
+LICENSE="GPL-3"
+# Dependent crate licenses
+LICENSE+=" Apache-2.0 BSD ISC MIT MPL-2.0 Unicode-3.0 ZLIB"
+SLOT="0"
+IUSE="io-uring"
+
+RDEPEND="virtual/libudev:="
+# libdevmapper.h needed for devicemapper-sys crate
+DEPEND="
+	${RDEPEND}
+	sys-fs/lvm2
+"
+# Needed for bindgen
+BDEPEND="
+	sys-devel/clang
+	virtual/pkgconfig
+"
+
+DOCS=(
+	CHANGES
+	COPYING
+	README.md
+	doc/TODO.md
+	doc/thinp-version-2/notes.md
+)
+
+# Rust
+QA_FLAGS_IGNORED="usr/sbin/pdata_tools"
+
+PATCHES=(
+	"${FILESDIR}/${PN}-1.0.6-build-with-cargo.patch"
+)
+
+src_unpack() {
+	cargo_src_unpack
+	rm -rf "${S}"
+	mv ${WORKDIR}/jthornber-thin-provisioning-tools-* ${S} || die
+}
+
+src_configure() {
+	local myfeatures=( $(usev io-uring io_uring) )
+	cargo_src_configure
+}
+
+src_compile() {
+	cargo_src_compile
+}
+
+src_install() {
+	emake \
+		DESTDIR="${D}" \
+		DATADIR="${ED}/usr/share" \
+		PDATA_TOOLS="${S}/target/release/pdata_tools" \
+		install
+
+	einstalldocs
+}
