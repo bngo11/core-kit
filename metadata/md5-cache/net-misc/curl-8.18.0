@@ -13,4 +13,4 @@ RESTRICT=test
 SLOT=0
 SRC_URI=https://github.com/curl/curl/releases/download/curl-8_18_0/curl-8.18.0.tar.gz -> curl-8.18.0.tar.gz
 _eclasses_=autotools	619846d0d85ed5d3334692c0215a603e	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	libtool	f143db5a74ccd9ca28c1234deffede96	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	dbed54cab0d2fac962c6342aeae40ef9	multilib-minimal	8bddda43703ba94d8341f4e247f97566	prefix	e51c7882b7b721e54e684f7eb143cbfe	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=061a913d0a075d6ea13be897be911d32
+_md5_=08cbd0197e6893900503d7576f81e637
