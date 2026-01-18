@@ -10,7 +10,7 @@ LICENSE=GPL-3+ BSD MIT fonts? ( GPL-2-with-font-exception ) themes? ( CC-BY-SA-3
 RDEPEND=app-arch/xz-utils >=sys-libs/ncurses-5.2-r5:0= grub_platforms_emu? ( sdl? ( media-libs/libsdl2 ) ) device-mapper? ( >=sys-fs/lvm2-2.02.45 ) libzfs? ( sys-fs/zfs:= ) mount? ( sys-fs/fuse:3 ) truetype? ( media-libs/freetype:2= ) ppc? ( >=sys-apps/ibm-powerpc-utils-1.3.5 ) ppc64? ( >=sys-apps/ibm-powerpc-utils-1.3.5 ) kernel_linux? ( grub_platforms_efi-32? ( sys-boot/efibootmgr ) grub_platforms_efi-64? ( sys-boot/efibootmgr ) ) !sys-boot/grub:0 nls? ( sys-devel/gettext )
 REQUIRED_USE=grub_platforms_coreboot? ( fonts ) grub_platforms_qemu? ( fonts ) grub_platforms_ieee1275? ( fonts ) grub_platforms_loongson? ( fonts )
 RESTRICT=!test? ( test ) test? ( userpriv )
-SLOT=2/2.12
-SRC_URI=fonts? ( https://ftp.gnu.org/pub/gnu/unifont/unifont-15.0.06/unifont-15.0.06.pcf.gz -> unifont-15.0.06.pcf.gz ) themes? ( https://download.sourceforge.net/dejavu/dejavu-sans-ttf-2.37.zip -> dejavu-sans-ttf-2.37.zip ) https://ftp.gnu.org/gnu/grub/grub-2.12.tar.gz -> grub-2.12.tar.gz
+SLOT=2/2.14
+SRC_URI=fonts? ( https://ftp.gnu.org/pub/gnu/unifont/unifont-15.0.06/unifont-15.0.06.pcf.gz -> unifont-15.0.06.pcf.gz ) themes? ( https://download.sourceforge.net/dejavu/dejavu-sans-ttf-2.37.zip -> dejavu-sans-ttf-2.37.zip ) https://ftp.gnu.org/gnu/grub/grub-2.14.tar.gz -> grub-2.14.tar.gz
 _eclasses_=autotools	619846d0d85ed5d3334692c0215a603e	bash-completion-r1	47a7402d95930413ce25ba8d857339bb	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	optfeature	8e0c2c8d30c10832f241f5e76ef3f0c7	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=b0574e13f391cd529947fd68f37b445d
+_md5_=c696846a35f1c8d66124545ea3fa43f5
