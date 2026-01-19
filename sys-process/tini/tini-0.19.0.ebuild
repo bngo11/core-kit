@@ -37,7 +37,7 @@ src_prepare() {
 }
 
 src_configure() {
-	local mycmakeargs=()
+	local mycmakeargs=(-DCMAKE_POLICY_VERSION_MINIMUM=3.5)
 	use args || mycmakeargs+=(-DMINIMAL=ON)
 
 	cmake_src_configure

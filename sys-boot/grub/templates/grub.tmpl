@@ -142,10 +142,6 @@ src_prepare() {
 	if [[ -n ${GRUB_AUTORECONF} ]]; then
 		eautoreconf
 	fi
-
-	# Avoid error due to extra_deps.lst missing from source tarball:
-	#       make[3]: *** No rule to make target 'grub-core/extra_deps.lst', needed by 'syminfo.lst'.  Stop.
-	echo "depends bli part_gpt" > grub-core/extra_deps.lst || die
 }
 
 grub_do() {

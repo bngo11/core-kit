@@ -30,7 +30,7 @@ fi
 inherit bash-completion-r1 flag-o-matic multibuild optfeature toolchain-funcs
 
 SRC_URI="fonts? (
-  https://ftp.gnu.org/pub/gnu/unifont/unifont-15.0.06/unifont-15.0.06.pcf.gz -> unifont-15.0.06.pcf.gz
+  https://ftp.gnu.org/pub/gnu/unifont/unifont-17.0.03/unifont-17.0.03.pcf.gz -> unifont-17.0.03.pcf.gz
 )
 themes? (
   https://download.sourceforge.net/dejavu/dejavu-sans-ttf-2.37.zip -> dejavu-sans-ttf-2.37.zip
@@ -40,10 +40,7 @@ https://ftp.gnu.org/gnu/grub/grub-2.14.tar.gz -> grub-2.14.tar.gz
 S=${WORKDIR}/${P%_*}
 KEYWORDS="*"
 PATCHES=(
-	"${FILESDIR}"/"${PN}-gfxpayload.patch"
-	"${FILESDIR}"/"${PN}-2.02_beta2-KERNEL_GLOBS.patch"
-	"${FILESDIR}"/"${PN}-2.06-test-words.patch"
-	"${FILESDIR}"/"${PN}-2.06-binutils-2.36.patch"
+	"${FILESDIR}"/"${PN}-2.14-revert-image-base.patch"
 )
 
 DEJAVU=dejavu-sans-ttf-2.37
@@ -147,10 +144,6 @@ src_prepare() {
 	if [[ -n ${GRUB_AUTORECONF} ]]; then
 		eautoreconf
 	fi
-
-	# Avoid error due to extra_deps.lst missing from source tarball:
-	#       make[3]: *** No rule to make target 'grub-core/extra_deps.lst', needed by 'syminfo.lst'.  Stop.
-	echo "depends bli part_gpt" > grub-core/extra_deps.lst || die
 }
 
 grub_do() {
