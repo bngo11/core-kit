@@ -12,7 +12,7 @@ DESCRIPTION="Cross platform Make"
 HOMEPAGE="https://cmake.org/"
 
 MY_P="${P/_/-}"
-SRC_URI="https://github.com/Kitware/CMake/releases/download/v4.2.1/cmake-4.2.1.tar.gz -> cmake-4.2.1.tar.gz"
+SRC_URI="https://github.com/Kitware/CMake/releases/download/v4.2.2/cmake-4.2.2.tar.gz -> cmake-4.2.2.tar.gz"
 S="${WORKDIR}/${MY_P}"
 
 LICENSE="CMake"
