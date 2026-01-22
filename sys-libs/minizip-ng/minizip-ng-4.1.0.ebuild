@@ -6,7 +6,7 @@ inherit cmake
 
 DESCRIPTION="Fork of the popular zip manipulation library found in the zlib distribution."
 HOMEPAGE="https://github.com/zlib-ng/minizip-ng"
-SRC_URI="https://github.com/zlib-ng/minizip-ng/tarball/f3ed731e27a97e30dffe076ed5e0537daae5c1bd -> minizip-ng-4.0.10-f3ed731.tar.gz"
+SRC_URI="https://github.com/zlib-ng/minizip-ng/tarball/cf4b58e17ebdcff8c6fbce1a9c3af5bf0485423c -> minizip-ng-4.1.0-cf4b58e.tar.gz"
 
 LICENSE="ZLIB"
 SLOT="0"
