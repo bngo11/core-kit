@@ -22,6 +22,6 @@ post_src_unpack() {
 }
 
 src_install() {
-	mkdir -p "${D}"/usr/bin
-	./install -p "${D}"/usr/bin
+	mkdir -p "${D}"/usr
+	./install -P "${D}"/usr
 }
