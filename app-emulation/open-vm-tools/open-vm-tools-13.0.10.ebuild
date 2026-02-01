@@ -7,7 +7,7 @@ inherit autotools linux-info pam systemd toolchain-funcs
 DESCRIPTION="Opensourced tools for VMware guests"
 HOMEPAGE="https://github.com/vmware/open-vm-tools"
 MY_P="${PN}-${PV/_p/-}"
-SRC_URI="https://github.com/vmware/open-vm-tools/tarball/fbc80ffbd226b4a61bb8ea1c9a682b5c7614e3fd -> open-vm-tools-13.0.5-fbc80ff.tar.gz"
+SRC_URI="https://github.com/vmware/open-vm-tools/tarball/f8fbcd0bf3b5869e2822542c398a51ddf7bd5f7a -> open-vm-tools-13.0.10-f8fbcd0.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

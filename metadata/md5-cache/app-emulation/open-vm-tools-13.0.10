@@ -10,6 +10,6 @@ LICENSE=LGPL-2.1
 RDEPEND=dev-libs/glib net-libs/libtirpc deploypkg? ( dev-libs/libmspack ) fuse? ( sys-fs/fuse:0 ) pam? ( sys-libs/pam ) ssl? ( dev-libs/openssl:0 ) vgauth? ( dev-libs/libxml2 dev-libs/xmlsec ) X? ( x11-libs/libXext multimon? ( x11-libs/libXinerama ) x11-libs/libXi x11-libs/libXrender x11-libs/libXrandr x11-libs/libXtst x11-libs/libSM x11-libs/libXcomposite x11-libs/gdk-pixbuf:2 x11-libs/gtk+:3 gtkmm? ( dev-cpp/gtkmm:3.0 dev-libs/libsigc++:2 ) ) dnet? ( dev-libs/libdnet ) icu? ( dev-libs/icu:= ) resolutionkms? ( x11-libs/libdrm[video_cards_vmware] virtual/libudev )
 REQUIRED_USE=multimon? ( X ) vgauth? ( ssl )
 SLOT=0
-SRC_URI=https://github.com/vmware/open-vm-tools/tarball/fbc80ffbd226b4a61bb8ea1c9a682b5c7614e3fd -> open-vm-tools-13.0.5-fbc80ff.tar.gz
+SRC_URI=https://github.com/vmware/open-vm-tools/tarball/f8fbcd0bf3b5869e2822542c398a51ddf7bd5f7a -> open-vm-tools-13.0.10-f8fbcd0.tar.gz
 _eclasses_=autotools	619846d0d85ed5d3334692c0215a603e	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	pam	756a09f72c4cdbb55f2694c95f1e0860	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=ae425880ea1efd5184b34818fbe5ec14
+_md5_=cac12c9eabe8823c79cce327700f119d
