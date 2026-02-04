@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="Use any linux distribution inside your terminal. Enable both backward and forward compatibility with software and freedom to use whatever distribution you’re more comfortable with. Mirror available at: https://gitlab.com/89luca89/distrobox"
 HOMEPAGE="https://distrobox.privatedns.org/ https://github.com/89luca89/distrobox"
-SRC_URI="https://github.com/89luca89/distrobox/tarball/856da362c4cde69e4340ffa22bc01d72693743e2 -> distrobox-1.8.2.3-856da36.tar.gz"
+SRC_URI="https://github.com/89luca89/distrobox/tarball/08e4963711ee1c556f8eb44582a3aa0fbb4c9a77 -> distrobox-1.8.2.4-08e4963.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
