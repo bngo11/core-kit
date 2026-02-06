@@ -94,6 +94,7 @@ src_configure() {
 		$(use_enable multicall single-binary)
 		$(use_enable xattr)
 		$(use_with gmp libgmp)
+		$(use_with selinux)
 	)
 
 	if use gmp ; then
