@@ -6,7 +6,7 @@ inherit autotools qmake-utils
 
 DESCRIPTION="Simple passphrase entry dialogs which utilize the Assuan protocol"
 HOMEPAGE="https://gnupg.org/aegypten2"
-SRC_URI="https://gnupg.org/ftp/gcrypt/pinentry/pinentry-1.2.1.tar.bz2 -> pinentry-1.2.1.tar.bz2"
+SRC_URI="https://gnupg.org/ftp/gcrypt/pinentry/pinentry-1.3.2.tar.bz2 -> pinentry-1.3.2.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -28,7 +28,7 @@ DEPEND="
 "
 RDEPEND="
 	${DEPEND}
-	gtk? ( app-crypt/gcr:0[gtk] )
+	gtk? ( app-crypt/gcr:4[gtk] )
 "
 BDEPEND="
 	sys-devel/gettext
@@ -37,6 +37,10 @@ BDEPEND="
 IDEPEND=">=app-eselect/eselect-pinentry-0.7.2"
 
 DOCS=( AUTHORS ChangeLog NEWS README THANKS TODO )
+PATCHES=(
+	"${FILESDIR}"/"${PN}-1.0.0-AR.patch"
+	"${FILESDIR}"/"${PN}-1.3.0-automagic.patch"
+)
 
 src_prepare() {
 	default
