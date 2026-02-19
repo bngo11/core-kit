@@ -8,7 +8,7 @@ async def generate(hub, **pkginfo):
 	json_data = await hub.pkgtools.fetch.get_page(f"https://api.github.com/repos/{github_user}/{github_repo}/tags", is_json=True)
 	version = None
 	url = None
-	basever = "3.9"
+	basever = "3.10"
 
 	for item in json_data:
 		try:
@@ -24,7 +24,7 @@ async def generate(hub, **pkginfo):
 
 	if version:
 		final_name = f"postfix-{version}.tar.gz"
-		url = f"https://de.postfix.org/ftpmirror/official/{final_name}"
+		url = f"http://mirrors.loonybin.net/pub/postfix/official/{final_name}"
 		ebuild = hub.pkgtools.ebuild.BreezyBuild(
 			**pkginfo,
 			version=version,
