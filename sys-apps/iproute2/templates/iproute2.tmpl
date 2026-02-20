@@ -44,7 +44,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-5.12.0-configure-nomagic.patch # bug 643722
 	#"${FILESDIR}"/${PN}-5.1.0-portability.patch
 	"${FILESDIR}"/${PN}-5.7.0-mix-signal.h-include.patch
-	"${FILESDIR}"/${PN}-6.18.0-libmnl.patch
+	"${FILESDIR}"/${PN}-6.19.0-libmnl.patch
 )
 
 doecho() {

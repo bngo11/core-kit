@@ -1,0 +1,11 @@
+--- a/Makefile	2026-02-20 09:14:26.211274951 -0600
++++ b/Makefile	2026-02-20 09:57:25.899702891 -0600
+@@ -74,7 +74,7 @@
+ endif
+ 
+ LIBNETLINK=../lib/libutil.a ../lib/libnetlink.a
+-LDLIBS += $(LIBNETLINK)
++LDLIBS += $(LIBNETLINK) -lmnl
+ 
+ all: config.mk
+ 	@set -e; \
