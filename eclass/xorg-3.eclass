@@ -112,7 +112,7 @@ HOMEPAGE="https://www.x.org/wiki/ https://gitlab.freedesktop.org/xorg/${XORG_MOD
 # @DESCRIPTION:
 # Most X11 projects provide tarballs as tar.bz2 or tar.xz. This eclass defaults
 # to bz2.
-: "${XORG_TARBALL_SUFFIX:="bz2"}"
+: "${XORG_TARBALL_SUFFIX:="xz"}"
 
 if [[ ${PV} == *9999* ]]; then
 	: "${EGIT_REPO_URI:="https://gitlab.freedesktop.org/xorg/${XORG_MODULE}${XORG_PACKAGE_NAME}.git"}"
