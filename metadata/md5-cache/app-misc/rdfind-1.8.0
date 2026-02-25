@@ -8,6 +8,6 @@ KEYWORDS=*
 LICENSE=GPL-2+
 RDEPEND=dev-libs/nettle:=
 SLOT=0
-SRC_URI=https://github.com/pauldreik/rdfind/tarball/4c0b37733434376b86d407a9c1582ec14bfa47bb -> rdfind-1.7.0-4c0b377.tar.gz
+SRC_URI=https://github.com/pauldreik/rdfind/tarball/fde47187b4f39f1e45563a9cc6ee83e137b2d55a -> rdfind-1.8.0-fde4718.tar.gz
 _eclasses_=autotools	619846d0d85ed5d3334692c0215a603e	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=1fa2c370870495fa5dfcd4c54011fa5b
+_md5_=60a5ee518d1bf4d2e776e9be2592de28
