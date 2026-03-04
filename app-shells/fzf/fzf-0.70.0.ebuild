@@ -7,7 +7,7 @@ inherit bash-completion-r1 go-module
 DESCRIPTION="General-purpose command-line fuzzy finder, written in Golang"
 HOMEPAGE="https://github.com/junegunn/fzf"
 
-SRC_URI="https://github.com/junegunn/fzf/archive/v0.68.0.tar.gz -> fzf-0.68.0.tar.gz"
+SRC_URI="https://github.com/junegunn/fzf/archive/v0.70.0.tar.gz -> fzf-0.70.0.tar.gz"
 
 LICENSE="MIT BSD-with-disclosure"
 SLOT="0"
