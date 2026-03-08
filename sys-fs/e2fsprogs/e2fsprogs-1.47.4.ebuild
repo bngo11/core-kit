@@ -6,7 +6,7 @@ inherit flag-o-matic toolchain-funcs udev usr-ldscript
 
 DESCRIPTION="Standard EXT2/EXT3/EXT4 filesystem utilities"
 HOMEPAGE="http://e2fsprogs.sourceforge.net/"
-SRC_URI="https://github.com/tytso/e2fsprogs/tarball/da631e117dcf8797bfda0f48bdaa05ac0fbcf7af -> e2fsprogs-1.47.3-da631e1.tar.gz"
+SRC_URI="https://github.com/tytso/e2fsprogs/tarball/7ee1d505ef3b37831215f490411f346fe57e9053 -> e2fsprogs-1.47.4-7ee1d50.tar.gz"
 
 LICENSE="GPL-2 BSD"
 SLOT="0"
