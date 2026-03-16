@@ -8,7 +8,7 @@ inherit autotools flag-o-matic linux-mod-r1 multiprocessing
 DESCRIPTION="Linux ZFS kernel module for sys-fs/zfs"
 HOMEPAGE="https://github.com/openzfs/zfs"
 
-MODULES_KERNEL_MAX=6.18
+MODULES_KERNEL_MAX=6.19
 MODULES_KERNEL_MIN=3.10
 
 SRC_URI="https://github.com/openzfs/zfs/tarball/11fc9d206b854cec1d2e7a004a64d41fcce18a0e -> zfs-2.4.1-11fc9d2.tar.gz"
