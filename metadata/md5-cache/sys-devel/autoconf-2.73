@@ -7,7 +7,7 @@ IUSE=emacs
 KEYWORDS=*
 LICENSE=GPL-3+
 PDEPEND=emacs? ( app-emacs/autoconf-mode )
-RDEPEND=sys-apps/texinfo >=dev-lang/perl-5.10 >=sys-devel/m4-1.4.16 >=sys-devel/autoconf-wrapper-13 sys-devel/gnuconfig !~sys-devel/autoconf-2.72:2.5
+RDEPEND=sys-apps/texinfo >=dev-lang/perl-5.10 >=sys-devel/m4-1.4.16 >=sys-devel/autoconf-wrapper-13 sys-devel/gnuconfig !~sys-devel/autoconf-2.73:2.5
 SLOT=latest
-SRC_URI=https://ftp.gnu.org/gnu/autoconf/autoconf-2.72.tar.xz -> autoconf-2.72.tar.xz
-_md5_=47968dc6bf31bed254ec17c725005cdf
+SRC_URI=https://ftp.gnu.org/gnu/autoconf/autoconf-2.73.tar.xz -> autoconf-2.73.tar.xz
+_md5_=b6bca55b34749e290d7ea0cf900d632f
