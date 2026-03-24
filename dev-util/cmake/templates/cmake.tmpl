@@ -93,7 +93,7 @@ src_configure() {
 	filter-flags '-flto*' -fwhole-program-vtables '-fsanitize=cfi*' || die
 
 	local mycmakeargs=(
-		-DCMAKE_USE_SYSTEM_LIBRARIES=ON
+		-DCMAKE_USE_SYSTEM_LIBRARIES=OFF
 		-DCMake_ENABLE_DEBUGGER=$(usex dap)
 		-DCMAKE_DOC_DIR=/share/doc/${PF}
 		-DCMAKE_MAN_DIR=/share/man
