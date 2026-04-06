@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=LGPL-2.1
 RDEPEND=>=dev-libs/glib-2.56.0:2 virtual/libudev virtual/udev sys-auth/polkit[introspection] systemd? ( sys-apps/systemd ) doc? ( app-text/asciidoc )
 SLOT=0
-SRC_URI=https://gitlab.freedesktop.org/bolt/bolt/-/archive/0.9.10/bolt-0.9.10.tar.bz2 -> bolt-0.9.10.tar.bz2
+SRC_URI=https://gitlab.freedesktop.org/bolt/bolt/-/archive/0.9.11/bolt-0.9.11.tar.bz2 -> bolt-0.9.11.tar.bz2
 _eclasses_=eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	meson	9dd80e336e5b53305fbef9693721928e	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	e7575bc4a90349d76e72777013b2bbc2	python-utils-r1	c57a84554d3dca7c828e40d877b2dd7d	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=8eac48430172317e04a6496bc8d2a3eb
+_md5_=d4911f624d88dbe04970e13e7296e1ac
