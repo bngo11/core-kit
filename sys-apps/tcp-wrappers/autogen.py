@@ -8,9 +8,7 @@ async def generate(hub, **pkginfo):
 	soup = BeautifulSoup(html_data, "html.parser")
 	links = soup.find_all("a")
 	links.reverse()
-	version = None
-	debian_filename = None
-	orig_filename = None
+	version = debian_filename = orig_filename = None
 
 	for link in links:
 		href = link.get("href")

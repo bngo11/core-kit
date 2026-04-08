@@ -2,7 +2,7 @@
 
 EAPI=7
 
-SRC_URI="https://ftp.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz -> autoconf-2.13.tar.gz
+SRC_URI="https://ftpmirror.gnu.org/gnu/autoconf/autoconf-2.13.tar.gz -> autoconf-2.13.tar.gz
 "
 KEYWORDS="*"
 

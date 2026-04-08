@@ -35,7 +35,7 @@ SRC_URI="fonts? (
 themes? (
   https://download.sourceforge.net/dejavu/dejavu-sans-ttf-2.37.zip -> dejavu-sans-ttf-2.37.zip
 )
-https://ftp.gnu.org/gnu/grub/grub-2.14.tar.gz -> grub-2.14.tar.gz
+https://ftpmirror.gnu.org/gnu/grub/grub-2.14.tar.gz -> grub-2.14.tar.gz
 "
 S=${WORKDIR}/${P%_*}
 KEYWORDS="*"

@@ -8,7 +8,7 @@ MY_P="${P/_/.}"
 DESCRIPTION="Text formatter used for man pages"
 HOMEPAGE="https://www.gnu.org/software/groff/groff.html"
 
-SRC_URI="https://ftp.gnu.org/gnu/groff/groff-1.24.1.tar.gz -> groff-1.24.1.tar.gz
+SRC_URI="https://ftpmirror.gnu.org/gnu/groff/groff-1.24.1.tar.gz -> groff-1.24.1.tar.gz
 "
 S="${WORKDIR}/${MY_P}"
 
