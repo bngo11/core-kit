@@ -1,0 +1,14 @@
+BDEPEND=virtual/pkgconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.17:1.17 ) >=sys-devel/autoconf-2.71 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure install prepare unpack
+DEPEND=sys-apps/util-linux:0= ntfsdecrypt? ( >=dev-libs/libgcrypt-1.2.2:0 >=net-libs/gnutls-1.4.4 ) sys-apps/attr
+DESCRIPTION=Open source read-write NTFS driver that runs under FUSE
+EAPI=7
+HOMEPAGE=https://github.com/tuxera/ntfs-3g
+IUSE=acl debug +fuse +mount-ntfs ntfsdecrypt +ntfsprogs static-libs suid xattr
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=sys-apps/util-linux:0= ntfsdecrypt? ( >=dev-libs/libgcrypt-1.2.2:0 >=net-libs/gnutls-1.4.4 )
+SLOT=0
+SRC_URI=https://github.com/tuxera/ntfs-3g/tarball/d1cb9e825d059ef5db0ccd30d5bce202edbd69dc -> ntfs-3g-2026.2.25-d1cb9e8.tar.gz
+_eclasses_=autotools	619846d0d85ed5d3334692c0215a603e	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=c5b5317ebdabba3c4c113163e19217de

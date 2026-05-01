@@ -80,7 +80,6 @@ src_configure() {
 		-Db_pch=false
 		-Db_pie=false
 		-Db_staticpic=false
-		-Db_thinlto_cache=false
 		-Dbacklight=false
 		-Dbinfmt=false
 		-Dbump-proc-sys-fs-file-max=false
@@ -88,7 +87,6 @@ src_configure() {
 		-Dcompat-mutable-uid-boundaries=false
 		-Dcoredump=false
 		-Dcpp_debugstl=false
-		-Dcpp_importstd=false
 		-Dcpp_rtti=false
 		-Dcreate-log-dirs=false
 		-Ddebug=false
@@ -135,7 +133,6 @@ src_configure() {
 		-Dnss-myhostname=false
 		-Dnss-systemd=false
 		-Doomd=false
-		-Dos2_emxomf=false
 		-Doss-fuzz=false
 		-Dpkgconfig.relocatable=false
 		-Dportabled=false
