@@ -21,9 +21,8 @@ KEYWORDS="*"
 BDEPEND="
 	app-arch/xz-utils
 	dev-lang/perl
+	net-misc/rsync
 "
-
-[[ -n ${PATCH_VER} ]] && PATCHES=( "${WORKDIR}"/${PATCH_PV} )
 
 src_unpack() {
 	# Avoid kernel-2_src_unpack
@@ -31,6 +30,9 @@ src_unpack() {
 }
 
 src_prepare() {
+	local PATCHES=()
+	[[ -n ${PATCH_VER} ]] && PATCHES+=( "${WORKDIR}"/${PATCH_PV} )
+
 	# TODO: May need forward porting to newer versions
 	use elibc_musl && PATCHES+=(
 		"${FILESDIR}"/${PN}-5.15-remove-inclusion-sysinfo.h.patch
