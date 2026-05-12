@@ -14,9 +14,9 @@ detect_arch
 
 RDEPEND="virtual/linux-sources"
 
-DESCRIPTION="Linux 7.0.5"
+DESCRIPTION="Linux 7.0.6"
 
-SRC_URI="https://mirrors.edge.kernel.org/pub/linux/kernel/v7.x/linux-7.0.tar.xz -> linux-7.0.tar.xz https://mirrors.edge.kernel.org/pub/linux/kernel/v7.x/patch-7.0.5.xz -> patch-7.0.5.xz"
+SRC_URI="https://mirrors.edge.kernel.org/pub/linux/kernel/v7.x/linux-7.0.tar.xz -> linux-7.0.tar.xz https://mirrors.edge.kernel.org/pub/linux/kernel/v7.x/patch-7.0.6.xz -> patch-7.0.6.xz"
 
 pkg_postinst() {
 	kernel-2_pkg_postinst
