@@ -61,7 +61,6 @@ src_configure() {
 	# https://www.spinics.net/lists/linux-xfs/msg30185.html
 	# https://www.spinics.net/lists/linux-xfs/msg30272.html
 	local myconf=(
-		--enable-blkid
 		--with-crond-dir="${EPREFIX}/etc/cron.d"
 		--with-systemd-unit-dir="$(systemd_get_systemunitdir)"
 		$(use_enable icu libicu)
