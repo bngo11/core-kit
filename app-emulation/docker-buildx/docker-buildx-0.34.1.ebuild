@@ -8,7 +8,7 @@ go-module_set_globals
 
 DESCRIPTION="Docker CLI plugin for extended build capabilities with BuildKit"
 HOMEPAGE="https://github.com/docker/buildx"
-SRC_URI="https://github.com/docker/buildx/tarball/b7db3abc5a9c3bec77df9e61b1f83a4d8f884828 -> buildx-0.34.0-b7db3ab.tar.gz"
+SRC_URI="https://github.com/docker/buildx/tarball/0f1e431fbb8ebe7fa5f6b39f34e4ad2ff1889793 -> buildx-0.34.1-0f1e431.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="2"
@@ -34,8 +34,8 @@ src_compile() {
 	local _buildx_r='github.com/docker/buildx'
 	go build -o docker-buildx \
 		-ldflags "-linkmode=external
-		-X $_buildx_r/version.Version=0.34.0
-		-X $_buildx_r/version.Revision=b7db3abc5a9c3bec77df9e61b1f83a4d8f884828
+		-X $_buildx_r/version.Version=0.34.1
+		-X $_buildx_r/version.Revision=0f1e431fbb8ebe7fa5f6b39f34e4ad2ff1889793
 		-X $_buildx_r/version.Package=$_buildx_r" \
 		./cmd/buildx
 }

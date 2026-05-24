@@ -6,7 +6,7 @@ inherit autotools usr-ldscript multilib-minimal
 
 DESCRIPTION="Userspace access to USB devices (libusb-0.1 compat wrapper)"
 HOMEPAGE="https://libusb.info"
-SRC_URI="https://github.com/libusb/libusb-compat-0.1/tarball/3e8a88d296b5405902c22d2ada61937bd9a89415 -> libusb-compat-0.1-0.1.8-3e8a88d.tar.gz"
+SRC_URI="https://github.com/libusb/libusb-compat-0.1/tarball/4831748a1439aec81e9cbb9984b1b0289c1c7051 -> libusb-compat-0.1-0.1.9-4831748.tar.gz"
 LICENSE="LGPL-2.1"
 
 SLOT="0"

@@ -6,7 +6,7 @@ inherit autotools multilib-minimal usr-ldscript
 
 DESCRIPTION="A cross-platform library to access USB devices "
 HOMEPAGE="https://libusb.info/ https://github.com/libusb/libusb"
-SRC_URI="https://github.com/libusb/libusb/tarball/15a7ebb4d426c5ce196684347d2b7cafad862626 -> libusb-1.0.29-15a7ebb.tar.gz"
+SRC_URI="https://github.com/libusb/libusb/tarball/87a55632db62c9bdc58cd31d3ccfa673f1bb017f -> libusb-1.0.30-87a5563.tar.gz"
 KEYWORDS="*"
 
 LICENSE="LGPL-2.1"

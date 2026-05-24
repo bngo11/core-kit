@@ -6,7 +6,7 @@ inherit cmake
 
 DESCRIPTION="GnuPG Made Easy is a library for making GnuPG easier to use (c++ bindings)"
 HOMEPAGE="https://www.gnupg.org/related_software/gpgme"
-SRC_URI="https://gnupg.org/ftp/gcrypt/gpgmepp/gpgmepp-2.0.0.tar.xz -> gpgmepp-2.0.0.tar.xz"
+SRC_URI="https://gnupg.org/ftp/gcrypt/gpgmepp/gpgmepp-2.1.0.tar.xz -> gpgmepp-2.1.0.tar.xz"
 
 LICENSE="LGPL-2+ test? ( GPL-2 GPL-2+ LGPL-2.1+ )"
 SLOT="0/7"
