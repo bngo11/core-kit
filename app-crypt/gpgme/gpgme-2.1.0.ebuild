@@ -23,9 +23,6 @@ RDEPEND="app-crypt/gnupg
 "
 DEPEND="${RDEPEND}
 "
-PATCHES=(
-	"${FILESDIR}"/"${PN}-1.18.0-tests-start-stop-agent-use-command-v.patch"
-)
 
 src_prepare() {
 	default
