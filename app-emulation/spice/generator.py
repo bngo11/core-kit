@@ -18,11 +18,8 @@ async def generate(hub, **pkginfo):
 		if final_name and (final_name.endswith('tar.xz') or final_name.endswith('tar.bz2')):
 			try:
 				pkgname, parts = final_name.rsplit("-", 1)
-				print(name, pkgname, parts)
 				if pkgname == name:
 					version = parts.rsplit('.', 2)[0]
-
-					print(pkgname, version, parts)
 					list(map(int, version.split(".")))
 					break
 
