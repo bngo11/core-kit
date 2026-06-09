@@ -6,7 +6,7 @@ inherit systemd meson
 
 DESCRIPTION="Desktop integration portal"
 HOMEPAGE="https://flatpak.org/ https://github.com/flatpak/xdg-desktop-portal"
-SRC_URI="https://github.com/flatpak/xdg-desktop-portal/releases/download/1.20.4/xdg-desktop-portal-1.20.4.tar.xz -> xdg-desktop-portal-1.20.4.tar.xz"
+SRC_URI="https://github.com/flatpak/xdg-desktop-portal/releases/download/1.22.0/xdg-desktop-portal-1.22.0.tar.xz -> xdg-desktop-portal-1.22.0.tar.xz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
