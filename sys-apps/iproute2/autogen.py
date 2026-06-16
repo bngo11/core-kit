@@ -33,7 +33,7 @@ async def generate(hub, **pkginfo):
 		best_split = split_cmp(best_split, split)
 		if best_split == split:
 			version = cur_version
-	url = f"{src_url}iproute2-v{version}.tar.xz"
+	url = f"{src_url}iproute2-{version}.tar.xz"
 	ebuild = hub.pkgtools.ebuild.BreezyBuild(
 		**pkginfo,
 		version=version,
