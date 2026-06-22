@@ -250,6 +250,10 @@ src_prepare() {
 	tweak_config .config CONFIG_MODULE_COMPRESS_NONE y
 	tweak_config .config CONFIG_MODULE_COMPRESS_XZ n
 	tweak_config .config CONFIG_MODULE_COMPRESS n
+
+	tweak_config .config CONFIG_BRIDGE_EBT_T_NAT y
+	tweak_config .config CONFIG_MEMCG_SWAP y
+
 	# get config into good state:
 	yes "" | make oldconfig >/dev/null 2>&1 || die
 	cp .config "${T}"/config || die
