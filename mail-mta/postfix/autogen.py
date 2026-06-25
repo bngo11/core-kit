@@ -8,7 +8,7 @@ async def generate(hub, **pkginfo):
 	json_data = await hub.pkgtools.fetch.get_page(f"https://api.github.com/repos/{github_user}/{github_repo}/tags", is_json=True)
 	version = None
 	url = None
-	basever = "3.10"
+	basever = "3.11"
 
 	for item in json_data:
 		try:

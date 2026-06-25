@@ -8,7 +8,7 @@ RC_VER="2.7"
 
 DESCRIPTION="A fast and secure drop-in replacement for sendmail"
 HOMEPAGE="http://www.postfix.org/"
-SRC_URI="http://mirrors.loonybin.net/pub/postfix/official/postfix-3.10.11.tar.gz -> postfix-3.10.11.tar.gz"
+SRC_URI="http://mirrors.loonybin.net/pub/postfix/official/postfix-3.11.4.tar.gz -> postfix-3.11.4.tar.gz"
 
 LICENSE="|| ( IBM EPL-2.0 )"
 SLOT="0"
