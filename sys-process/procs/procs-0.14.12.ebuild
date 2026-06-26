@@ -6,8 +6,8 @@ inherit cargo
 
 DESCRIPTION="A modern replacement for ps written in Rust"
 HOMEPAGE="https://github.com/dalance/procs"
-SRC_URI="https://github.com/dalance/procs/tarball/049bd052e37e5382f10c04c913e64b4af375a7ea -> procs-0.14.11-049bd05.tar.gz
-https://direct.funtoo.org/d4/c4/61/d4c461f5699cf9f5da843cd0146eb35abae201f02fc952ca224f5f09fc11e3f7a92885eff5845a8ad1a8e92bfc8290ee6a37f651109ef704802f000f80b962e9 -> procs-0.14.11-funtoo-crates-bundle-ab11d5a5cd996300824c9308279caaefb2c9b9fa4078717a29907126b76a8291663f66e2a6d611cce1adb34d6f6a19792f125e100d48cf56c533f41805118810.tar.gz"
+SRC_URI="https://github.com/dalance/procs/tarball/9465f02499d02a05076856a09c5a96dffcce3298 -> procs-0.14.12-9465f02.tar.gz
+https://direct.funtoo.org/d6/09/87/d60987a3863eae4f4cde66bd18d6ec51f75062139bf264aecd88760819b387e5bac26098169b47f38bc2dd8d154d883d6480fe19ad19a7de62e13ed2df23d74f -> procs-0.14.12-funtoo-crates-bundle-db4bba4ce320c0a8d079179b7124b16035e8f305e2f71742483fb4eeaf6cf53337ec0b1b07782e787b1ff65332979d9091e26bf28265e1292c3b94fec00e682d.tar.gz"
 
 LICENSE="Apache-2.0 BSD BSD-2 CC0-1.0 MIT ZLIB"
 SLOT="0"
