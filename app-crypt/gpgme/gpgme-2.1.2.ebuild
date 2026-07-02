@@ -6,7 +6,7 @@ inherit libtool flag-o-matic qmake-utils toolchain-funcs
 
 DESCRIPTION="GnuPG Made Easy is a library for making GnuPG easier to use"
 HOMEPAGE="https://www.gnupg.org/related_software/gpgme"
-SRC_URI="https://gnupg.org/ftp/gcrypt/gpgme/gpgme-2.1.1.tar.bz2 -> gpgme-2.1.1.tar.bz2"
+SRC_URI="https://gnupg.org/ftp/gcrypt/gpgme/gpgme-2.1.2.tar.bz2 -> gpgme-2.1.2.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="1/45.0"
