@@ -33,7 +33,6 @@ RDEPEND="
 DOCS=( CHANGES README )
 
 PATCHES=(
-	"${FILESDIR}/${PN}-2.4-flags.patch"
 )
 
 post_src_unpack() {
