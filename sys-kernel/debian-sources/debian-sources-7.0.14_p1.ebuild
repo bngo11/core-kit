@@ -235,7 +235,13 @@ src_prepare() {
 		MARCH="$(python3 -c "import portage; print(portage.settings[\"CFLAGS\"])" | sed 's/ /\n/g' | grep "march")"
 		if [ -n "$MARCH" ]; then
 			CONFIG_MARCH="$(grep -E -m 1 -e "${MARCH}($|[[:space:]])" arch/x86/Makefile | grep -o "CONFIG_[^)]*")"
-			if [ -n "${CONFIG_MARCH}" ]; then
+			if [ "$MARCH" == "-march=znver5" ];then
+				CONFIG_MARCH="CONFIG_MZEN5"
+			elif [ "$MARCH" == "-march=znver3" ];then
+				CONFIG_MARCH="CONFIG_MZEN3"
+			fi
+
+			if [ -n "$CONFIG_MARCH" ];then
 				einfo "Optimizing kernel for ${CONFIG_MARCH}"
 				tweak_config .config CONFIG_GENERIC_CPU n
 				tweak_config .config "${CONFIG_MARCH}" y

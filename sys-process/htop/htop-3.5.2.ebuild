@@ -8,7 +8,7 @@ inherit autotools linux-info python-any-r1 xdg
 
 DESCRIPTION="interactive process viewer"
 HOMEPAGE="https://htop.dev/ https://github.com/htop-dev/htop"
-SRC_URI="https://github.com/htop-dev/htop/releases/download/3.5.1/htop-3.5.1.tar.xz -> htop-3.5.1.tar.xz"
+SRC_URI="https://github.com/htop-dev/htop/releases/download/3.5.2/htop-3.5.2.tar.xz -> htop-3.5.2.tar.xz"
 KEYWORDS="*"
 
 LICENSE="BSD GPL-2"
