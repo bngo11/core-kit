@@ -6,7 +6,7 @@ inherit linux-info toolchain-funcs udev tmpfiles
 
 DESCRIPTION="Device mapper target autoconfig"
 HOMEPAGE="http://christophe.varoqui.free.fr/"
-SRC_URI="https://github.com/opensvc/multipath-tools/tarball/c2fcdaf138260800d0cec4addf81ed27b5040bd8 -> multipath-tools-0.14.3-c2fcdaf.tar.gz"
+SRC_URI="https://github.com/opensvc/multipath-tools/tarball/5a60a67d9f48ddff0d63b6e5d04c3a22764a0670 -> multipath-tools-0.15.0-5a60a67.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

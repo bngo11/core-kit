@@ -8,6 +8,6 @@ LICENSE=Apache-2.0
 RDEPEND=>=app-emulation/docker-cli-23.0.0
 RESTRICT=test network-sandbox
 SLOT=2
-SRC_URI=https://github.com/docker/buildx/tarball/151a92201622eeb80e19bdd9681af2266772875f -> buildx-0.35.0-151a922.tar.gz
+SRC_URI=https://github.com/docker/buildx/tarball/9c312c9194a80a347b30024778bfc44526905136 -> buildx-0.36.0-9c312c9.tar.gz
 _eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	go-module	cb10a443c46556a15ed035d7a99128e8	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=27e968b690d690c884a69b5e930a099b
+_md5_=1a3deb2976768d9ef906e39c7b09bd09

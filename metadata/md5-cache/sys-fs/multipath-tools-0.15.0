@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND=dev-libs/json-c:= dev-libs/libaio dev-libs/userspace-rcu:= >=sys-fs/lvm2-2.02.45 >=virtual/libudev-232 sys-libs/readline:= virtual/tmpfiles
 SLOT=0
-SRC_URI=https://github.com/opensvc/multipath-tools/tarball/c2fcdaf138260800d0cec4addf81ed27b5040bd8 -> multipath-tools-0.14.3-c2fcdaf.tar.gz
+SRC_URI=https://github.com/opensvc/multipath-tools/tarball/5a60a67d9f48ddff0d63b6e5d04c3a22764a0670 -> multipath-tools-0.15.0-5a60a67.tar.gz
 _eclasses_=linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	tmpfiles	6f14f7c8fb6f63585daa89581247c82c	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	udev	7752f306eec7b286d00bdb47b763e7ac
-_md5_=8190047ccf78ccba93ea9fd6c1a9b25f
+_md5_=49fa1991efb0d1b3ea3533920bd01e99
