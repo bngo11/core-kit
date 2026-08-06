@@ -26,12 +26,12 @@ S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
 	local deb="${WORKDIR}"/debian/patches
-	rm "${deb}"/02-this-is-debian-unzip.patch || die
+	rm "${deb}"/can-2026-2034440.patch || die
+	rm "${deb}"/cve-2019-13232-do-not-raise-alert-for-misplaced-central-directory.patch || die
 	eapply "${deb}"/*.patch
 
 	eapply "${FILESDIR}"/${PN}-6.0-no-exec-stack.patch
 	eapply "${FILESDIR}"/${PN}-6.0-format-security.patch
-	eapply "${FILESDIR}"/${PN}-6.0-fix-false-overlap-detection-on-32bit-systems.patch
 	use natspec && eapply "${FILESDIR}/${PN}-6.0-natspec.patch" #275244
 	sed -i -r \
 		-e '/^CFLAGS/d' \
