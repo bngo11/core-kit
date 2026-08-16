@@ -7,7 +7,7 @@ inherit autotools
 
 DESCRIPTION=""
 HOMEPAGE="https://www.i-scream.org/libstatgrab/"
-SRC_URI="https://github.com/libstatgrab/libstatgrab/archive/refs/tags/LIBSTATGRAB_0_92_1.tar.gz -> libstatgrab-0.92.1.tar.gz"
+SRC_URI="https://github.com/libstatgrab/libstatgrab/releases/download/LIBSTATGRAB_0_92_1/libstatgrab-0.92.1.tar.gz -> libstatgrab-0.92.1.tar.gz"
 
 LICENSE="|| ( GPL-2 LGPL-2.1 )"
 SLOT=0
@@ -25,7 +25,7 @@ DOCS=( PLATFORMS NEWS AUTHORS README )
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
-		mv libstatgrab-LIBSTATGRAB_0_92_1* "${S}" || die
+		mv -* "${S}" || die
 	fi
 }
 

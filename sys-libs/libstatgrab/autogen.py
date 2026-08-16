@@ -1,33 +1,40 @@
 #!/usr/bin/env python3
 
-from packaging.version import Version
+import json
 
 async def generate(hub, **pkginfo):
-    github_api = "https://api.github.com/repos"
-    github_repo = github_user = pkginfo["name"]
-    github_page = f"{github_api}/{github_user}/{github_repo}"
+	github_user = github_repo = pkginfo.get("name")
+	json_data = await hub.pkgtools.fetch.get_page(f"https://api.github.com/repos/{github_user}/{github_repo}/releases", is_json=True)
+	version = None
+	url = None
 
-    pkgmetadata = await hub.pkgtools.fetch.get_page(github_page, is_json=True)
-    description = pkgmetadata["description"]
+	for item in json_data:
+		try:
+			if item["prerelease"] or item["draft"]:
+				continue
 
-    json_list = await hub.pkgtools.fetch.get_page(f"{github_page}/releases", is_json=True)
-    stable = max([Version(rel['name'][1:].split()[1]) for rel in json_list])
+			version = item["name"].split()[1]
+			list(map(int, version.split(".")))
 
-    tag = f"{github_repo.upper()}_{'_'.join(stable.public.split('.'))}"
+			for asset in item['assets']:
+				asset_name = asset["name"]
 
-    artifacts = [hub.pkgtools.ebuild.Artifact(
-        url=f"https://github.com/{github_user}/{github_repo}/archive/refs/tags/{tag}.tar.gz",
-        final_name=f"{github_repo}-{stable}.tar.gz",
-    )]
+				if asset_name.endswith("tar.gz"):
+					url = asset["browser_download_url"]
+					break
 
-    ebuild = hub.pkgtools.ebuild.BreezyBuild(
-        **pkginfo,
-        version=stable,
-        artifacts=artifacts,
-        github_user=github_user,
-        github_repo=tag,
-    )
-    ebuild.push()
+			if url:
+				break
 
-# vim:ts=4 sw=4
+		except (KeyError, IndexError, ValueError):
+			continue
 
+	if version and url:
+		ebuild = hub.pkgtools.ebuild.BreezyBuild(
+			**pkginfo,
+			version=version,
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=asset_name)]
+		)
+		ebuild.push()
+
+# vim: ts=4 sw=4 noet
