@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/openzfs/zfs"
 MODULES_KERNEL_MAX=7.0
 MODULES_KERNEL_MIN=3.10
 
-SRC_URI="https://github.com/openzfs/zfs/tarball/d88276e57da6e80d02a09ddb4c3aa5838be28443 -> zfs-2.4.3-d88276e.tar.gz"
+SRC_URI="https://github.com/openzfs/zfs/tarball/f75f3256a0916c5ba090b088e6ea5a9528f6f956 -> zfs-2.4.4-f75f325.tar.gz"
 S="${WORKDIR}/zfs-${PV}"
 
 ZFS_KERNEL_COMPAT="${MODULES_KERNEL_MAX}"
