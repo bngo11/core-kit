@@ -11,7 +11,7 @@ SRC_URI="{{src_uri}}"
 LICENSE="curl"
 SLOT="0"
 KEYWORDS="*"
-IUSE="adns alt-svc brotli +ftp gnutls gopher hsts +http2 idn +imap ipv6 kerberos ldap mbedtls +openssl +pop3 +progress-meter rtmp samba +smtp ssh ssl sslv3 static-libs test telnet +tftp threads zstd"
+IUSE="adns alt-svc brotli +ftp gnutls gopher hsts +http2 idn +imap ipv6 kerberos ldap mbedtls +openssl +pop3 +progress-meter samba +smtp ssh ssl sslv3 static-libs test telnet +tftp threads zstd"
 IUSE+=" curl_ssl_gnutls curl_ssl_mbedtls +curl_ssl_openssl"
 IUSE+=" nghttp3 quiche"
 
@@ -55,7 +55,6 @@ RDEPEND="ldap? ( net-nds/openldap[${MULTILIB_USEDEP}] )
 	idn? ( net-dns/libidn2:0=[static-libs?,${MULTILIB_USEDEP}] )
 	adns? ( net-dns/c-ares:0=[${MULTILIB_USEDEP}] )
 	kerberos? ( >=virtual/krb5-0-r1[${MULTILIB_USEDEP}] )
-	rtmp? ( media-video/rtmpdump[${MULTILIB_USEDEP}] )
 	ssh? ( net-libs/libssh2[${MULTILIB_USEDEP}] )
 	sys-libs/zlib[${MULTILIB_USEDEP}]
 	zstd? ( app-arch/zstd:=[${MULTILIB_USEDEP}] )"
@@ -67,7 +66,7 @@ BDEPEND="dev-lang/perl
 		sys-apps/diffutils
 	)"
 
-DOCS=( README docs/{FEATURES.md,INTERNALS.md,FAQ.md,BUGS.md,CONTRIBUTE.md} )
+DOCS=( README docs/{FEATURES.md,FAQ.md,BUGS.md,CONTRIBUTE.md} )
 
 MULTILIB_WRAPPED_HEADERS=(
 	/usr/include/curl/curlbuild.h
@@ -166,7 +165,6 @@ multilib_src_configure() {
 		$(use_enable smtp)
 		$(use_enable telnet)
 		$(use_enable tftp)
-		--enable-tls-srp
 		$(use_enable adns ares)
 		--enable-cookies
 		--enable-dateparse
@@ -184,14 +182,11 @@ multilib_src_configure() {
 		--disable-sspi
 		$(use_enable static-libs static)
 		$(use_enable threads threaded-resolver)
-		$(use_enable threads pthreads)
 		--disable-versioned-symbols
 		--without-amissl
-		--without-bearssl
 		$(use_with brotli)
 		--without-fish-functions-dir
 		$(use_with http2 nghttp2)
-		--without-hyper
 		$(use_with idn libidn2)
 		$(use_with kerberos gssapi "${EPREFIX}"/usr)
 		--without-libgsasl
@@ -199,10 +194,8 @@ multilib_src_configure() {
 		$(use_with nghttp3)
 		$(use_with nghttp3 ngtcp2)
 		$(use_with quiche)
-		$(use_with rtmp librtmp)
 		--without-rustls
 		--without-schannel
-		--without-secure-transport
 		--without-winidn
 		--without-wolfssl
 		--with-zlib
