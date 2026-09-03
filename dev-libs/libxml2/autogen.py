@@ -40,6 +40,7 @@ async def generate(hub, **pkginfo):
 		)
 		libxml2.push()
 
+		"""
 		ebuild = hub.pkgtools.ebuild.BreezyBuild(
 			cat='dev-python',
 			name='libxml2-python',
@@ -49,4 +50,5 @@ async def generate(hub, **pkginfo):
 			artifacts=[],
 		)
 		ebuild.push()
+		"""
 # vim: ts=4 sw=4 noet
