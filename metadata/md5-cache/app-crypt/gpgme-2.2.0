@@ -1,0 +1,15 @@
+BDEPEND=>=app-portage/elt-patches-20170815
+DEFINED_PHASES=configure install prepare
+DEPEND=app-crypt/gnupg dev-libs/libassuan >=dev-libs/libgpg-error-1.47
+DESCRIPTION=GnuPG Made Easy is a library for making GnuPG easier to use
+EAPI=7
+HOMEPAGE=https://www.gnupg.org/related_software/gpgme
+IUSE=common-lisp static-libs test
+KEYWORDS=*
+LICENSE=GPL-2 LGPL-2.1
+RDEPEND=app-crypt/gnupg dev-libs/libassuan >=dev-libs/libgpg-error-1.47
+RESTRICT=!test? ( test )
+SLOT=1/45.0
+SRC_URI=https://gnupg.org/ftp/gcrypt/gpgme/gpgme-2.2.0.tar.bz2 -> gpgme-2.2.0.tar.bz2
+_eclasses_=estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	qmake-utils	bdf97e69a34b864d6d545f4ec3143ff7	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=e9397bde57697b4e9e4bdfd8d4749865

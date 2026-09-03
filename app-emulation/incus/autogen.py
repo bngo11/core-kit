@@ -26,7 +26,7 @@ async def generate(hub, **pkginfo):
 			for asset in item['assets']:
 				asset_name = asset["name"]
 
-				if asset_name.endswith("tar.xz"):
+				if asset_name.endswith("tar.gz"):
 					url = asset["browser_download_url"]
 					break
 

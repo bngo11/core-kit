@@ -1,0 +1,13 @@
+BDEPEND=>=dev-lang/go-1.12 app-arch/unzip
+DEFINED_PHASES=compile install postinst prepare test unpack
+DESCRIPTION=Docker CLI plugin for extended build capabilities with BuildKit
+EAPI=7
+HOMEPAGE=https://github.com/docker/buildx
+KEYWORDS=*
+LICENSE=Apache-2.0
+RDEPEND=>=app-emulation/docker-cli-23.0.0
+RESTRICT=test network-sandbox
+SLOT=2
+SRC_URI=https://github.com/docker/buildx/tarball/7ff049cffd94bbd4bcbbda7a8960cec0aa117411 -> buildx-0.37.0-7ff049c.tar.gz
+_eclasses_=bash-completion-r1	47a7402d95930413ce25ba8d857339bb	go-module	cb10a443c46556a15ed035d7a99128e8	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
+_md5_=9647d6f4e88447f8da82dfff5f681769
