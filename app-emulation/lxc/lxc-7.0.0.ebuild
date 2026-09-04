@@ -6,7 +6,7 @@ inherit bash-completion-r1 linux-info meson optfeature systemd
 
 DESCRIPTION="A userspace interface for the Linux kernel containment features"
 HOMEPAGE="https://linuxcontainers.org/ https://github.com/lxc/lxc"
-SRC_URI="https://github.com/lxc/lxc/tarball/cb8e38aca27a23964941f0f011a8919aab8bebab -> lxc-5.0.3-cb8e38a.tar.gz"
+SRC_URI="https://github.com/lxc/lxc/releases/download/v7.0.0/lxc-7.0.0.tar.gz -> lxc-7.0.0.tar.gz"
 
 KEYWORDS="*"
 
@@ -72,21 +72,14 @@ ERROR_POSIX_MQUEUE="CONFIG_POSIX_MQUEUE: needed for lxc-execute command"
 ERROR_UTS_NS="CONFIG_UTS_NS: needed to unshare hostnames and uname info"
 ERROR_VETH="CONFIG_VETH: needed for internal (host-to-container) networking"
 
-DOCS=( AUTHORS CONTRIBUTING MAINTAINERS README.md doc/FAQ.txt )
+DOCS=( AUTHORS CONTRIBUTING.md MAINTAINERS README.md doc/FAQ.txt )
 
 pkg_setup() {
 	linux-info_pkg_setup
 }
 
-src_unpack() {
-	unpack ${A}
-	mv "${WORKDIR}"/lxc-* "${S}"
-	python3 -m venv ${WORKDIR}/venv
-}
-
 src_configure() {
 	. ${WORKDIR}/venv/bin/activate
-	pip install meson
 	local emesonargs=(
 		-Dcoverity-build=false
 		-Doss-fuzz=false
@@ -115,10 +108,8 @@ src_configure() {
 
 	if use systemd; then
 		emesonargs+=( -Dinit-script="systemd" )
-		emesonargs+=( -Dsd-bus=enabled )
 	else
 		emesonargs+=( -Dinit-script="sysvinit" )
-		emesonargs+=( -Dsd-bus=disabled )
 	fi
 
 	if ! use static ; then
@@ -163,10 +154,10 @@ src_install() {
 	newinitd "${FILESDIR}/${PN}.initd" ${PN}
 
 	if use systemd ; then
-		systemd_newunit "${FILESDIR}"/5/lxc-monitord.service lxc-monitord.service
-		systemd_newunit "${FILESDIR}"/5/lxc-net.service lxc-net.service
-		systemd_newunit "${FILESDIR}"/5/lxc.service lxc.service
-		systemd_newunit "${FILESDIR}"/5/lxc_at.service "lxc@.service"
+		systemd_newunit "${FILESDIR}"/lxc-monitord.service lxc-monitord.service
+		systemd_newunit "${FILESDIR}"/lxc-net.service lxc-net.service
+		systemd_newunit "${FILESDIR}"/lxc.service lxc.service
+		systemd_newunit "${FILESDIR}"/lxc_at.service "lxc@.service"
 
 		if ! use apparmor ; then
 			sed -i '/lxc-apparmor-load/d' "${D}$(systemd_get_systemunitdir)/lxc.service" || die "Failed to remove apparmor references from lxc.service systemd unit."

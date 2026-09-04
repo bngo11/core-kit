@@ -6,7 +6,7 @@ inherit meson
 
 DESCRIPTION="FUSE filesystem for LXC"
 HOMEPAGE="https://linuxcontainers.org/lxcfs/introduction/ https://github.com/lxc/lxcfs/"
-SRC_URI="https://linuxcontainers.org/downloads/lxcfs/${P}.tar.gz"
+SRC_URI="https://github.com/lxc/lxcfs/releases/download/v7.0.0/lxcfs-7.0.0.tar.gz -> lxcfs-7.0.0.tar.gz"
 
 LICENSE="Apache-2.0 LGPL-2+"
 SLOT="0"
@@ -39,8 +39,8 @@ src_configure() {
 src_install() {
 	meson_src_install
 
-	newinitd "${FILESDIR}"/5.0.0/lxcfs.initd lxcfs
-	newconfd "${FILESDIR}"/5.0.0/lxcfs.confd lxcfs
+	newinitd "${FILESDIR}"/lxcfs.initd lxcfs
+	newconfd "${FILESDIR}"/lxcfs.confd lxcfs
 
 	find "${ED}" -name '*.la' -delete || die
 
