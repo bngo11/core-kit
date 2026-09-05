@@ -6,7 +6,7 @@ inherit autotools golang-base bash-completion-r1 linux-info user
 
 DESCRIPTION="Fast, dense and secure container management"
 HOMEPAGE="https://linuxcontainers.org/incus/introduction/ https://github.com/lxc/incus"
-SRC_URI="https://github.com/lxc/incus/releases/download/v7.4.0/incus-7.4.0.tar.gz -> incus-7.4.0.tar.gz"
+SRC_URI="https://linuxcontainers.org/downloads/incus/incus-7.4.tar.xz -> incus-7.4.tar.xz"
 
 # Needs to include licenses for all bundled programs and libraries.
 LICENSE="Apache-2.0 BSD BSD-2 LGPL-3 MIT MPL-2.0"
@@ -61,7 +61,7 @@ QA_PREBUILT="/usr/lib/incus/libcowsql.so.0.0.1
 	/usr/bin/incus-user
 	/usr/sbin/incusd"
 
-S="${WORKDIR}/incus-7.4.0"
+S="${WORKDIR}/incus-7.4"
 RESTRICT="test"
 VDIR="${S}/vendor"
 
@@ -136,8 +136,8 @@ src_compile() {
 
 	CGO_ENABLED=0 CGO_LDFLAGS="$CGO_LDFLAGS -static" go build -v -x -tags "agent,netgo" -o bin/ ./cmd/incus-agent/... || die "Failed to build incus-agent"
 
-	pushd "${S}"/cmd/lxd-to-incus || die
-	CGO_ENABLED=0 CGO_LDFLAGS="$CGO_LDFLAGS -static" go build -v -x -o ../../bin/ ./ || die "Failed to build lxd-to-incus"
+	pushd "${S}/cmd/lxc-to-incus" || die
+	CGO_ENABLED=1 CGO_LDFLAGS="$CGO_LDFLAGS -static -lcap -lseccomp -lcrypto -ldbus-1 " go build -v -x -o ../../bin/ ./ || die "Failed to build lxd-to-incus"
 	popd
 
 	use nls && emake build-mo
@@ -149,7 +149,7 @@ src_install() {
 
 	dosbin ${bindir}/incusd
 	dosbin ${bindir}/incus-user
-	dosbin ${bindir}/lxd-to-incus
+	dosbin ${bindir}/lxc-to-incus
 
 	for l in incus-agent incus-benchmark incus-migrate incus lxc-to-incus; do
 		dobin ${bindir}/${l}

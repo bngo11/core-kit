@@ -10,38 +10,22 @@ async def generate(hub, **pkginfo):
 	for item in json_data:
 		try:
 			version = item["name"].strip('v')
-			list(map(int, version.split(".")))
+			ver_split = version.split(".")
+			list(map(int, ver_split))
+			if ver_split[-1] == "0":
+				version = ".".join(ver_split[:-1])
 			break
 
 		except (KeyError, IndexError, ValueError):
 			continue
 
-	json_data = await hub.pkgtools.fetch.get_page("https://api.github.com/repos/lxc/incus/releases", is_json=True)
-
-	for item in json_data:
-		try:
-			if item["tag_name"].strip('v') != version:
-				continue
-
-			for asset in item['assets']:
-				asset_name = asset["name"]
-
-				if asset_name.endswith("tar.gz"):
-					url = asset["browser_download_url"]
-					break
-
-			if url:
-				break
-
-		except (KeyError, IndexError, ValueError):
-			continue
-
-	if version and url:
+	if version:
+		final_name = f"incus-{version}.tar.xz"
+		url = f"https://linuxcontainers.org/downloads/incus/{final_name}"
 		ebuild = hub.pkgtools.ebuild.BreezyBuild(
 			**pkginfo,
 			version=version,
-			tar_version=asset_name.split('-')[-1].rsplit('.', 2)[0],
-			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=asset_name)]
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=final_name)]
 		)
 		ebuild.push()
 

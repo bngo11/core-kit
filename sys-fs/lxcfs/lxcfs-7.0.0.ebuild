@@ -42,8 +42,6 @@ src_install() {
 	newinitd "${FILESDIR}"/lxcfs.initd lxcfs
 	newconfd "${FILESDIR}"/lxcfs.confd lxcfs
 
-	find "${ED}" -name '*.la' -delete || die
-
 	# we are using own init scripts, so do not need included
 	rm -rf "${ED}"/etc/rc.d
 }

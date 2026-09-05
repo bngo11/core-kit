@@ -142,8 +142,6 @@ src_install() {
 
 	keepdir /var/lib/cache/lxc /var/lib/lib/lxc
 
-	find "${ED}" -name '*.la' -delete -o -name '*.a' -delete || die
-
 	# Replace upstream sysvinit/systemd files.
 	if use systemd; then
 		rm -r "${D}$(systemd_get_systemunitdir)" || die "Failed to remove systemd lib dir"

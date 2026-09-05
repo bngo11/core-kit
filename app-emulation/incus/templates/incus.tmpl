@@ -61,7 +61,7 @@ QA_PREBUILT="/usr/lib/incus/libcowsql.so.0.0.1
 	/usr/bin/incus-user
 	/usr/sbin/incusd"
 
-S="${WORKDIR}/incus-{{ tar_version }}"
+S="${WORKDIR}/incus-{{ version }}"
 RESTRICT="test"
 VDIR="${S}/vendor"
 
@@ -136,8 +136,8 @@ src_compile() {
 
 	CGO_ENABLED=0 CGO_LDFLAGS="$CGO_LDFLAGS -static" go build -v -x -tags "agent,netgo" -o bin/ ./cmd/incus-agent/... || die "Failed to build incus-agent"
 
-	pushd "${S}"/cmd/lxd-to-incus || die
-	CGO_ENABLED=0 CGO_LDFLAGS="$CGO_LDFLAGS -static" go build -v -x -o ../../bin/ ./ || die "Failed to build lxd-to-incus"
+	pushd "${S}/cmd/lxc-to-incus" || die
+	CGO_ENABLED=1 CGO_LDFLAGS="$CGO_LDFLAGS -static -lcap -lseccomp -lcrypto -ldbus-1 " go build -v -x -o ../../bin/ ./ || die "Failed to build lxd-to-incus"
 	popd
 
 	use nls && emake build-mo
@@ -149,7 +149,7 @@ src_install() {
 
 	dosbin ${bindir}/incusd
 	dosbin ${bindir}/incus-user
-	dosbin ${bindir}/lxd-to-incus
+	dosbin ${bindir}/lxc-to-incus
 
 	for l in incus-agent incus-benchmark incus-migrate incus lxc-to-incus; do
 		dobin ${bindir}/${l}
