@@ -6,7 +6,7 @@ inherit cmake-multilib
 
 DESCRIPTION="mimalloc is a compact general purpose allocator with excellent performance."
 HOMEPAGE="https://github.com/microsoft/mimalloc"
-SRC_URI="https://github.com/microsoft/mimalloc/tarball/34fbd7e7cd4627424490afe19b20f8066bfc537d -> mimalloc-3.5.1-34fbd7e.tar.gz"
+SRC_URI="https://github.com/microsoft/mimalloc/tarball/636510a36ab743f76a582067142f29d15b024c90 -> mimalloc-3.5.2-636510a.tar.gz"
 
 LICENSE="MIT"
 SLOT="0/2"
