@@ -50,8 +50,7 @@ src_configure() {
 		$(use_enable remote) \
 		$(use_enable usb) \
 		$(use_enable yydebug) \
-		$(use_with netlink libnl) \
-		--enable-ipv6
+		$(use_with netlink libnl)
 }
 
 src_compile() {
@@ -60,7 +59,7 @@ src_compile() {
 
 src_install() {
 	default
-	dodoc CREDITS CHANGES VERSION TODO README.* doc/README.*
+	dodoc CREDITS CHANGES VERSION README.* doc/README.*
 	# remove static libraries (--disable-static does not work)
 	if ! use static-libs; then
 		find "${ED}" -name '*.a' -exec rm {} + || die

@@ -10,4 +10,4 @@ RDEPEND=bluetooth? ( net-wireless/bluez:= ) dbus? ( sys-apps/dbus ) netlink? ( d
 SLOT=0
 SRC_URI=https://github.com/the-tcpdump-group/libpcap/tarball/87b6a456dd7ac9e34231f8a0a3f99a13a59b4419 -> libpcap-1.11.0-87b6a45.tar.gz
 _eclasses_=autotools	619846d0d85ed5d3334692c0215a603e	libtool	f143db5a74ccd9ca28c1234deffede96	ltprune	22f9f14d105434e9c400ccac3bbb64ae	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=f0d1e248923e8a212a6a2091b9558ce3
+_md5_=338e9bb5ac98391a8f41c8e919fd2c42
