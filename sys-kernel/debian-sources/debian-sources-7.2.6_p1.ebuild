@@ -260,6 +260,8 @@ src_prepare() {
 	tweak_config .config CONFIG_BRIDGE_EBT_T_NAT y
 	tweak_config .config CONFIG_MEMCG_SWAP y
 
+	tweak_config .config CONFIG_CONFIG_CRYPTO_CRYPTD m
+
 	# get config into good state:
 	yes "" | make oldconfig >/dev/null 2>&1 || die
 	cp .config "${T}"/config || die
