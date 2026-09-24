@@ -40,7 +40,8 @@ inherit toolchain-funcs
 # All supported Python implementations, most preferred last.
 _PYTHON_ALL_IMPLS=(
 	pypy3
-	python3_{12,14}
+	python2_7
+	python3_{7,8,9,10,12,14}
 )
 readonly _PYTHON_ALL_IMPLS
 
@@ -51,8 +52,8 @@ readonly _PYTHON_ALL_IMPLS
 _PYTHON_HISTORICAL_IMPLS=(
 	jython2_7
 	pypy pypy1_{8,9} pypy2_0
-	python2_{5,6,7}
-	python3_{1,2,3,4,5,6,7,8,9,10}
+	python2_{5,6}
+	python3_{1,2,3,4,5}
 )
 readonly _PYTHON_HISTORICAL_IMPLS
 
