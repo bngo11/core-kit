@@ -40,8 +40,7 @@ inherit toolchain-funcs
 # All supported Python implementations, most preferred last.
 _PYTHON_ALL_IMPLS=(
 	pypy3
-	python2_7
-	python3_{7,8,9,10,12}
+	python3_{12,14}
 )
 readonly _PYTHON_ALL_IMPLS
 
@@ -52,8 +51,8 @@ readonly _PYTHON_ALL_IMPLS
 _PYTHON_HISTORICAL_IMPLS=(
 	jython2_7
 	pypy pypy1_{8,9} pypy2_0
-	python2_{5,6}
-	python3_{1,2,3,4,5}
+	python2_{5,6,7}
+	python3_{1,2,3,4,5,6,7,8,9,10}
 )
 readonly _PYTHON_HISTORICAL_IMPLS
 
@@ -89,7 +88,7 @@ _python_impl_supported() {
 	# keep in sync with _PYTHON_ALL_IMPLS!
 	# (not using that list because inline patterns shall be faster)
 	case "${impl}" in
-		python2_7|python3_[56789]|python3_10|python3_12|jython2_7|python2+|python3+|python3_[789]+|python3_10+|python3_12+)
+		python2_7|python3_[56789]|python3_10|python3_12|python3_14|jython2_7|python2+|python3+|python3_[789]+|python3_10+|python3_12+|python3_14+)
 			return 0
 			;;
 		pypy1_[89]|pypy2_0|python2_[56]|python3_[1234])
@@ -169,24 +168,32 @@ _python_set_impls() {
 				supp['python3_9']=1
 				supp['python3_10']=1
 				supp['python3_12']=1
+				supp['python3_14']=1
 				;;
 			python3_8+)
 				supp['python3_8']=1
 				supp['python3_9']=1
 				supp['python3_10']=1
 				supp['python3_12']=1
+				supp['python3_14']=1
 				;;
 			python3_9+)
 				supp['python3_9']=1
 				supp['python3_10']=1
 				supp['python3_12']=1
+				supp['python3_14']=1
 				;;
 			python3_10+)
 				supp['python3_10']=1
 				supp['python3_12']=1
+				supp['python3_14']=1
 				;;
 			python3_12+)
 				supp['python3_12']=1
+				supp['python3_14']=1
+				;;
+			python3_14+)
+				supp['python3_14']=1
 				;;
 
 			# Below, new special setting that will enable python2 and
@@ -199,6 +206,7 @@ _python_set_impls() {
 				supp['python3_9']=1
 				supp['python3_10']=1
 				supp['python3_12']=1
+				supp['python3_14']=1
 				;;
 			*)
 				# Anything else valid in the list is also supported as-is
