@@ -28,6 +28,8 @@ BDEPEND="sys-devel/bison
 	${PYTHON_DEPS}
 "
 RDEPEND="app-text/ghostscript-gpl
+	dev-libs/spdlog
+	dev-libs/libfmt
 	dev-lang/perl
 	media-libs/libpng:0=
 	virtual/libiconv
@@ -93,6 +95,8 @@ src_configure() {
 	filter-lto
 
 	local mycmakeargs=(
+		-Duse_sys_spdlog=ON
+		-Duse_sys_fmt=ON
 		-Duse_libclang=$(usex clang)
 		-Dbuild_doc=$(usex doc)
 		-Dbuild_search=$(usex doxysearch)
