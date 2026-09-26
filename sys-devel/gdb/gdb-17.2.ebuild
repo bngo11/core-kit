@@ -72,8 +72,6 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-8.3.1-verbose-build.patch
-	"${FILESDIR}"/${PN}-12.1-readline-8.2-build.patch
 )
 
 pkg_setup() {
@@ -217,13 +215,13 @@ src_install() {
 
 	docinto gdb
 	dodoc gdb/CONTRIBUTE gdb/README gdb/MAINTAINERS \
-		gdb/NEWS gdb/ChangeLog gdb/PROBLEMS
+		gdb/NEWS gdb/PROBLEMS
 	docinto sim
-	dodoc sim/{ChangeLog,MAINTAINERS,README-HACKING}
+	dodoc sim/{MAINTAINERS,README-HACKING}
 
 	if use server ; then
 		docinto gdbserver
-		dodoc gdbserver/{ChangeLog,README}
+		dodoc gdbserver/README
 	fi
 
 	if [[ -n ${PATCH_VER} ]] ; then
@@ -231,7 +229,7 @@ src_install() {
 	fi
 
 	# Remove shared info pages
-	rm -f "${ED}"/usr/share/info/{annotate,bfd,configure,standards}.info*
+	rm -f "${ED}"/usr/share/info/{annotate,bfd,configure,ctf-spec,sframe-spec,standards}.info*
 
 	if use python; then
 		python_optimize "${ED}"/usr/share/gdb/python/gdb

@@ -7,7 +7,7 @@ inherit go-module linux-info
 DESCRIPTION="runc container cli tools"
 HOMEPAGE="http://github.com/opencontainers/runc/"
 MY_PV="${PV/_/-}"
-SRC_URI="https://github.com/opencontainers/runc/tarball/40c7c718c9431cd90ab0970ee52d47c4cb511e06 -> runc-1.5.1-40c7c71.tar.gz"
+SRC_URI="https://github.com/opencontainers/runc/tarball/b622a5992f0ba88fda05f2fd037d151b4fc5cc88 -> runc-1.5.2-b622a59.tar.gz"
 
 LICENSE="Apache-2.0 BSD-2 BSD MIT"
 SLOT="0"
@@ -32,7 +32,7 @@ BDEPEND="
 # majority of tests pass
 RESTRICT+=" test"
 
-S="${WORKDIR}/opencontainers-runc-40c7c71"
+S="${WORKDIR}/opencontainers-runc-b622a59"
 
 src_compile() {
 	# Taken from app-containers/docker-1.7.0-r1
