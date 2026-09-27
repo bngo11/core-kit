@@ -51,7 +51,9 @@ if [[ -z ${_MESON_ECLASS} ]]; then
 _MESON_ECLASS=1
 
 MESON_DEPEND=">=dev-util/meson-0.48.2
-	>=dev-util/ninja-1.7.2"
+	>=dev-util/ninja-1.7.2
+	dev-util/meson-format-array
+"
 
 if [[ ${EAPI:-0} == [6] ]]; then
 	DEPEND=${MESON_DEPEND}
@@ -86,22 +88,8 @@ fi
 # @VARIABLE: emesontestargs
 # @DEFAULT_UNSET
 # @DESCRIPTION:
-# Optional meson test arguments as Bash array; this should be defined before
-# calling meson_src_test.
-
-
-read -d '' __MESON_ARRAY_PARSER <<"EOF"
-import shlex
-import sys
-
-# See http://mesonbuild.com/Syntax.html#strings
-def quote(str):
-	escaped = str.replace("\\\\", "\\\\\\\\").replace("'", "\\\\'")
-	return "'{}'".format(escaped)
-
-print("[{}]".format(
-	", ".join([quote(x) for x in shlex.split(" ".join(sys.argv[1:]))])))
-EOF
+# User-controlled environment variable containing arguments to be passed to
+# meson in meson_src_configure.
 
 # @FUNCTION: _meson_env_array
 # @INTERNAL
@@ -122,7 +110,7 @@ EOF
 #          '--unicode-16=𐐷', '--unicode-32=𐤅']
 #
 _meson_env_array() {
-	python -c "${__MESON_ARRAY_PARSER}" "$@"
+	meson-format-array "$@"
 }
 
 # @FUNCTION: _meson_create_cross_file

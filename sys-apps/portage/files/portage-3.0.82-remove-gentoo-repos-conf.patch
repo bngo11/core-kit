@@ -1,0 +1,11 @@
+--- a/cnf/meson.build	2026-09-25 16:00:08.666491585 -0500
++++ b/cnf/meson.build	2026-09-25 16:13:46.977866884 -0500
+@@ -114,8 +114,6 @@
+     [
+         make_conf_example,
+         make_globals,
+-        repos_conf,
+-        binrepos_conf,
+     ],
+     install_dir : portage_datadir / 'config'
+ )

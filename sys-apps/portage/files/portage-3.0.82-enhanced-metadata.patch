@@ -1,0 +1,23 @@
+--- a/bin/ebuild.sh	2026-09-25 16:31:14.479818678 -0500
++++ b/bin/ebuild.sh	2026-09-25 16:35:22.247551422 -0500
+@@ -754,10 +754,11 @@
+ if [[ ${EBUILD_PHASE} = depend ]] ; then
+ 	set -f
+ 
++	_PY_COMPAT="${PYTHON_COMPAT[@]}"
+ 	metadata_keys=(
+ 		DEPEND RDEPEND SLOT SRC_URI RESTRICT HOMEPAGE LICENSE
+ 		DESCRIPTION KEYWORDS INHERITED IUSE REQUIRED_USE PDEPEND BDEPEND
+-		EAPI PROPERTIES DEFINED_PHASES IDEPEND INHERIT
++		EAPI PROPERTIES DEFINED_PHASES IDEPEND INHERIT _PY_COMPAT
+ 	)
+ 
+ 	if ! ___eapi_has_BDEPEND; then
+@@ -774,6 +775,7 @@
+ 		echo "${f}=$(echo ${!f})" >&${PORTAGE_PIPE_FD} || exit $?
+ 	done
+ 	exec {PORTAGE_PIPE_FD}>&-
++	unset _PY_COMPAT
+ 	set +f
+ 
+ 	[[ -s ${SANDBOX_LOG} ]] && die "Sandbox violations found, exiting"

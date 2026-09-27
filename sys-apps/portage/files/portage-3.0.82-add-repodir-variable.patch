@@ -1,0 +1,48 @@
+--- a/lib/_emerge/EbuildPhase.py	2026-09-25 16:43:43.873994439 -0500
++++ b/lib/_emerge/EbuildPhase.py	2026-09-25 16:46:45.280987865 -0500
+@@ -16,6 +16,7 @@
+ from portage.package.ebuild.prepare_build_dirs import (
+     _prepare_fake_distdir,
+     _prepare_fake_filesdir,
++    _prepare_fake_repodir,
+     _prepare_workdir,
+ )
+ from portage.util import ensure_dirs, writemsg
+@@ -329,6 +330,7 @@
+             alist = self.settings.configdict["pkg"].get("A", "").split()
+             _prepare_fake_distdir(self.settings, alist)
+             _prepare_fake_filesdir(self.settings)
++            _prepare_fake_repodir(self.settings)
+         elif self.phase == "install":
+             # Ensure FILESDIR symlink exists for install phase, which may
+             # reference files via DOCS or other declarative variables.
+--- a/lib/portage/package/ebuild/doebuild.py	2026-09-25 17:11:29.943907718 -0500
++++ b/lib/portage/package/ebuild/doebuild.py	2026-09-25 17:13:17.750966937 -0500
+@@ -525,6 +525,7 @@
+         # EbuildMetadataPhase handles it for the depend phase
+         mysettings["SANDBOX_LOG"] = os.path.join(mysettings["T"], "sandbox.log")
+     mysettings["FILESDIR"] = os.path.join(settings["PORTAGE_BUILDDIR"], "files")
++    mysettings["REPODIR"] = os.path.join(settings["PORTAGE_BUILDDIR"], "repo")
+ 
+     # Prefix forward compatibility
+     eprefix_lstrip = mysettings["EPREFIX"].lstrip(os.sep)
+--- a/lib/portage/package/ebuild/prepare_build_dirs.py	2026-09-25 17:13:32.075716388 -0500
++++ b/lib/portage/package/ebuild/prepare_build_dirs.py	2026-09-25 17:38:48.964170309 -0500
+@@ -514,6 +514,17 @@
+             os.unlink(symlink_path)
+             os.symlink(real_filesdir, symlink_path)
+ 
++def _prepare_fake_repodir(settings):
++    real_repodir = os.path.normpath(os.path.join(os.path.dirname(settings["EBUILD"]), "../.."))
++    symlink_path = os.path.dirname(settings["FILESDIR"]) + "/repo"
++    try:
++        link_target = os.readlink(symlink_path)
++    except OSError:
++        os.symlink(real_repodir, symlink_path)
++    else:
++        if link_target != real_repodir:
++            os.unlink(symlink_path)
++            os.symlink(real_repodir, symlink_path)
+ 
+ def _prepare_fake_distdir(settings, alist):
+     orig_distdir = settings["DISTDIR"]

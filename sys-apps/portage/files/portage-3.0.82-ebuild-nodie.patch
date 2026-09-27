@@ -1,0 +1,36 @@
+--- a/bin/ebuild.sh	2026-09-25 16:23:13.308719798 -0500
++++ b/bin/ebuild.sh	2026-09-25 16:24:16.098375520 -0500
+@@ -79,33 +79,6 @@
+ 	source "${PORTAGE_BIN_PATH}/save-ebuild-env.sh" || die
+ 	source "${PORTAGE_BIN_PATH}/phase-helpers.sh" || die
+ 	source "${PORTAGE_BIN_PATH}/bashrc-functions.sh" || die
+-else
+-	# These dummy functions are for things that are likely to be called
+-	# in global scope, even though they are completely useless during
+-	# the "depend" phase.
+-	funcs="diropts docompress dostrip exeopts get_KV insopts
+-		KV_major KV_micro KV_minor KV_to_int
+-		libopts register_die_hook register_success_hook
+-		__strip_duplicate_slashes
+-		use useq usev use_with use_enable"
+-	___eapi_has_usex && funcs+=" usex"
+-	___eapi_has_in_iuse && funcs+=" in_iuse"
+-	___eapi_has_get_libdir && funcs+=" get_libdir"
+-	# These functions die because calls to them during the "depend" phase
+-	# are considered to be severe QA violations.
+-	funcs+=" best_version has_version portageq"
+-	for x in ${funcs} ; do
+-		eval "${x} () { die \"\${FUNCNAME}() calls are not allowed in global scope\"; }"
+-	done
+-	unset funcs x
+-
+-	# prevent the shell from finding external executables
+-	# note: we can't use empty because it implies current directory
+-	_PORTAGE_ORIG_PATH=${PATH}
+-	export PATH=/dev/null
+-	command_not_found_handle() {
+-		die "External commands disallowed while sourcing ebuild: ${*}"
+-	}
+ fi
+ 
+ # Don't use sandbox's BASH_ENV for new shells because it does
