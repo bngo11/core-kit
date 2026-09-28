@@ -70,13 +70,7 @@ src_install() {
 		doexe "${T}"/rmt
 	fi
 
-	# autoconf looks for gtar before tar (in configure scripts), hence
-	# in Prefix it is important that it is there, otherwise, a gtar from
-	# the host system (FreeBSD, Solaris, Darwin) will be found instead
-	# of the Prefix provided (GNU) tar
-	if use prefix ; then
-		dosym tar /bin/gtar
-	fi
+	dosym tar /bin/gtar
 
 	mv "${ED}"/usr/sbin/${p}backup{,-tar} || die
 	mv "${ED}"/usr/sbin/${p}restore{,-tar} || die
