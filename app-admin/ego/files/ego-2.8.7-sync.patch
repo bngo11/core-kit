@@ -1,0 +1,11 @@
+--- a/modules/sync.ego	2026-09-27 20:33:58.088416534 -0500
++++ b/modules/sync.ego	2026-09-27 20:34:28.436700113 -0500
+@@ -56,7 +56,7 @@
+ 		portage.proxy.lazyimport.lazyimport(globals(), '_emerge.actions:adjust_configs,load_emerge_config', )
+ 		try:
+ 			emerge_config = load_emerge_config(action='sync')
+-			_global_updates(emerge_config.trees, emerge_config.target_config.mtimedb["updates"], quiet=False)
++			_global_updates(emerge_config.target_config.settings["ROOT"], emerge_config.trees, emerge_config.target_config.mtimedb["updates"], quiet=False)
+ 			emerge_config.target_config.mtimedb.commit()
+ 		except portage.exception.ParseError as e:
+ 			Output.warning("Unable to perform package moves due to the following parse error: " + str(e))

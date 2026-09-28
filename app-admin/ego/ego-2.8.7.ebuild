@@ -23,7 +23,10 @@ PDEPEND=">=dev-python/appi-0.2[${PYTHON_USEDEP}]
 dev-python/mwparserfromhell[${PYTHON_USEDEP}]
 dev-python/requests[${PYTHON_USEDEP}]"
 
-PATCHES=( "${FILESDIR}/ego-2.8.6-python3.10-fix.patch" )
+PATCHES=(
+	"${FILESDIR}/ego-2.8.6-python3.10-fix.patch"
+	"${FILESDIR}/ego-2.8.7-sync.patch"
+)
 
 src_unpack() {
 	unpack ${A}
