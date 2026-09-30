@@ -1,0 +1,10 @@
+--- a/sh/supervise-daemon.sh	2026-09-30 12:56:20.837634971 -0500
++++ b/sh/supervise-daemon.sh	2026-09-30 12:57:24.066318018 -0500
+@@ -33,6 +33,7 @@
+ 		notify="$ready"
+ 	fi
+ 
++	export PATH=/usr/libexec/rc/sbin:/usr/libexec/rc/bin:${PATH}
+ 	ebegin "Starting ${name:-$RC_SVCNAME}"
+ 	# The eval call is necessary for cases like:
+ 	# command_args="this \"is a\" test"
