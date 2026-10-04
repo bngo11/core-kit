@@ -14,9 +14,9 @@ detect_arch
 
 RDEPEND="virtual/linux-sources"
 
-DESCRIPTION="Linux 7.2.8"
+DESCRIPTION="Linux 7.2.9"
 
-SRC_URI="https://mirrors.edge.kernel.org/pub/linux/kernel/v7.x/linux-7.2.tar.xz -> linux-7.2.tar.xz https://mirrors.edge.kernel.org/pub/linux/kernel/v7.x/patch-7.2.8.xz -> patch-7.2.8.xz"
+SRC_URI="https://mirrors.edge.kernel.org/pub/linux/kernel/v7.x/linux-7.2.tar.xz -> linux-7.2.tar.xz https://mirrors.edge.kernel.org/pub/linux/kernel/v7.x/patch-7.2.9.xz -> patch-7.2.9.xz"
 
 pkg_postinst() {
 	kernel-2_pkg_postinst
