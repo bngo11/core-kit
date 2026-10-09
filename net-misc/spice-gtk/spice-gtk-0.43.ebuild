@@ -9,7 +9,7 @@ inherit desktop meson optfeature python-any-r1 readme.gentoo-r1 vala xdg
 
 DESCRIPTION="Set of GObject and Gtk objects for connecting to Spice servers and a client GUI"
 HOMEPAGE="https://www.spice-space.org https://cgit.freedesktop.org/spice/spice-gtk/"
-SRC_URI="https://www.spice-space.org/download/gtk/spice-gtk-0.42.tar.xz -> spice-gtk-0.42.tar.xz"
+SRC_URI="https://www.spice-space.org/download/gtk/spice-gtk-0.43.tar.xz -> spice-gtk-0.43.tar.xz"
 KEYWORDS="*"
 
 LICENSE="LGPL-2.1"
