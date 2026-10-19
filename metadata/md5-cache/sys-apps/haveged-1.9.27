@@ -7,5 +7,5 @@ KEYWORDS=*
 LICENSE=GPL-3+
 RDEPEND=!<sys-apps/openrc-0.11.8 selinux? ( sec-policy/selinux-entropyd )
 SLOT=0
-SRC_URI=https://github.com/jirka-h/haveged/archive/refs/tags/v1.9.26.tar.gz -> haveged-1.9.26.tar.gz
-_md5_=8287625a661ccaaa29edbdc247842cb2
+SRC_URI=https://github.com/jirka-h/haveged/archive/refs/tags/v1.9.27.tar.gz -> haveged-1.9.27.tar.gz
+_md5_=3fbe386e294ddf142aa663c607d3b500
