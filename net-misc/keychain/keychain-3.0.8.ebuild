@@ -3,25 +3,25 @@
 EAPI=7
 
 DESCRIPTION="manage ssh and GPG keys in a convenient and secure manner. Frontend for ssh-agent/ssh-add"
-HOMEPAGE="http://www.funtoo.org/Keychain"
-SRC_URI="https://github.com/funtoo/keychain/archive/${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://kernel-seeds.org/projects/keychain/"
+SRC_URI=" https://github.com/danielrobbins/keychain/releases/download/3.0.8/keychain-3.0.8.pyz -> keychain-3.0.8.pyz "
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="*"
 IUSE=""
+S="${WORKDIR}"
 
 DEPEND=""
 RDEPEND="app-shells/bash || ( net-misc/openssh net-misc/ssh )"
 
-src_compile() {
-	make
+src_unpack() {
+	cp ${DISTDIR}/keychain-${PV}.pyz keychain
+	default
 }
 
 src_install() {
 	dobin keychain || die "dobin failed"
-	doman keychain.1 || die "doman failed"
-	dodoc ChangeLog.md README.md || die
 }
 
 pkg_postinst() {
