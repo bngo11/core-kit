@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="manage ssh and GPG keys in a convenient and secure manner. Frontend for ssh-agent/ssh-add"
 HOMEPAGE="https://kernel-seeds.org/projects/keychain/"
-SRC_URI=" https://github.com/danielrobbins/keychain/releases/download/3.0.8/keychain-3.0.8.pyz -> keychain-3.0.8.pyz "
+SRC_URI=" https://github.com/danielrobbins/keychain/releases/download/3.0.10/keychain-3.0.10.pyz -> keychain-3.0.10.pyz "
 
 LICENSE="GPL-2"
 SLOT="0"

@@ -6,5 +6,5 @@ KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND=app-shells/bash || ( net-misc/openssh net-misc/ssh )
 SLOT=0
-SRC_URI=https://github.com/danielrobbins/keychain/releases/download/3.0.8/keychain-3.0.8.pyz -> keychain-3.0.8.pyz
-_md5_=5ab702b4d62eb2cb381f6de0669cd7b0
+SRC_URI=https://github.com/danielrobbins/keychain/releases/download/3.0.10/keychain-3.0.10.pyz -> keychain-3.0.10.pyz
+_md5_=565717bb417bcf6c8efd8f63de9764ca
