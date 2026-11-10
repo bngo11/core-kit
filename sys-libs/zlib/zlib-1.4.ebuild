@@ -17,7 +17,6 @@ IUSE="minizip static-libs"
 DEPEND="minizip? ( ${AUTOTOOLS_DEPEND} )"
 RDEPEND=""
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.2.11-minizip-drop-crypt-header.patch
 )
 src_prepare() {
 	default
